@@ -4,3 +4,82 @@ public class HaloDunia {
 System.out.println("Mwehehehehe");
     }
 }
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class KalkulatorSederhana extends JFrame implements ActionListener {
+    JTextField angka1Field, angka2Field, hasilField;
+    JButton tambahBtn, kurangBtn, kaliBtn, bagiBtn;
+
+    public KalkulatorSederhana() {
+        setTitle("Kalkulator Sederhana");
+        setSize(350, 250);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(5, 2, 10, 10));
+
+        // Komponen
+        add(new JLabel("Angka Pertama:"));
+        angka1Field = new JTextField();
+        add(angka1Field);
+
+        add(new JLabel("Angka Kedua:"));
+        angka2Field = new JTextField();
+        add(angka2Field);
+
+        tambahBtn = new JButton("Tambah (+)");
+        kurangBtn = new JButton("Kurang (-)");
+        kaliBtn = new JButton("Kali (×)");
+        bagiBtn = new JButton("Bagi (÷)");
+
+        tambahBtn.addActionListener(this);
+        kurangBtn.addActionListener(this);
+        kaliBtn.addActionListener(this);
+        bagiBtn.addActionListener(this);
+
+        add(tambahBtn);
+        add(kurangBtn);
+        add(kaliBtn);
+        add(bagiBtn);
+
+        add(new JLabel("Hasil:"));
+        hasilField = new JTextField();
+        hasilField.setEditable(false);
+        add(hasilField);
+
+        setLocationRelativeTo(null); // agar berada di tengah
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            double angka1 = Double.parseDouble(angka1Field.getText());
+            double angka2 = Double.parseDouble(angka2Field.getText());
+            double hasil = 0;
+
+            if (e.getSource() == tambahBtn) {
+                hasil = angka1 + angka2;
+            } else if (e.getSource() == kurangBtn) {
+                hasil = angka1 - angka2;
+            } else if (e.getSource() == kaliBtn) {
+                hasil = angka1 * angka2;
+            } else if (e.getSource() == bagiBtn) {
+                if (angka2 != 0) {
+                    hasil = angka1 / angka2;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tidak bisa dibagi nol!");
+                    return;
+                }
+            }
+
+            hasilField.setText(String.valueOf(hasil));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Masukkan angka yang valid!");
+        }
+    }
+
+    public static void main(String[] args) {
+        new KalkulatorSederhana();
+    }
+}
