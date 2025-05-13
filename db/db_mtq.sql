@@ -46,7 +46,9 @@ CREATE TABLE nilai (
 INSERT INTO users (username, password, nama, role) VALUES
 ('panitia1', 'belanegara', 'Panitia', 'panitia'),
 ('juri1', 'mtqupnyjt', 'Juri1', 'juri'),
-('juri2', 'mhqupnyjt', 'Juri2', 'juri');
+('juri2', 'mhqupnyjt', 'Juri2', 'juri'),
+('juri2', 'mtqupnyjt', 'Juri3', 'juri'),
+('juri2', 'mhqupnyjt', 'Juri4', 'juri');
 
 
 INSERT INTO lomba (nama_lomba) VALUES
