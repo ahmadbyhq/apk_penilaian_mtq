@@ -51,7 +51,7 @@ INSERT INTO users (username, password, nama, role) VALUES
 
 INSERT INTO lomba (nama_lomba) VALUES
 ('MTQ Tartil'),
-('MHQ 2 Juz);
+('MHQ 2 Juz');
 
 INSERT INTO peserta (nama_peserta, asal, id_lomba) VALUES
 ('Ahmad','UPN Veteran Jawa Timur', 1),
