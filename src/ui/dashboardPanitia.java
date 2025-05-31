@@ -1,5 +1,5 @@
 
-import view.dashboard_utama;
+package ui;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -10,12 +10,12 @@ import view.dashboard_utama;
  *
  * @author A S U S
  */
-public class dashboard_percobaan_panitia extends javax.swing.JFrame {
+public class dashboardPanitia extends javax.swing.JFrame {
 
     /**
-     * Creates new form dashboard_percobaan_panitia
+     * Creates new form dashboardPanitia
      */
-    public dashboard_percobaan_panitia() {
+    public dashboardPanitia() {
         initComponents();
     }
 
@@ -282,7 +282,7 @@ public class dashboard_percobaan_panitia extends javax.swing.JFrame {
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         jPanel7.removeAll();
-        jPanel7.add(new dashboard_utama());
+//        jPanel7.add(new dashboard_utama());
         jPanel7.repaint();
         jPanel7.revalidate();
     }//GEN-LAST:event_jPanel1MouseClicked
@@ -304,20 +304,20 @@ public class dashboard_percobaan_panitia extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dashboard_percobaan_panitia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dashboardPanitia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dashboard_percobaan_panitia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dashboardPanitia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dashboard_percobaan_panitia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dashboardPanitia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dashboard_percobaan_panitia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dashboardPanitia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dashboard_percobaan_panitia().setVisible(true);
+                new dashboardPanitia().setVisible(true);
             }
         });
     }

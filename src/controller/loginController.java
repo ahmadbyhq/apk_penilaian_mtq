@@ -34,9 +34,9 @@ public class loginController {
 
             switch (role.toLowerCase()) {
                 case "panitia":
-                    return new Panitia(id, username, password, nama);
+                    return new Panitia(id, username, password, nama, role);
                 case "juri":
-                    return new Juri(id, username, password, nama);
+                    return new Juri(id, username, password, nama, role);
                 default:
                     System.out.println("Role tidak dikenali: " + role);
                     return null;

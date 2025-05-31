@@ -1,5 +1,10 @@
+package controller;
+
 import java.sql.*;
 import java.util.*;
+import model.*;
+
+
 public class database {
     private static final String URL = "jdbc:mysql://auth-db1410.hstgr.io:3306/u725894752_app_mtq";
     private static final String USER = "u725894752_appmtqpbo";

@@ -1,5 +1,7 @@
 package model;
+
 import java.sql.*;
+import controller.*;
 
 public class Lomba {
     private int id_lomba;

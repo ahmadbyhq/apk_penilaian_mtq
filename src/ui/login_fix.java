@@ -5,10 +5,8 @@
 package ui;
 
 
-import config.dbConnection;
-import model.User;
 import controller.loginController;
-import model.User;
+import model.*;
 /**
  *
  * @author baiha

@@ -1,3 +1,5 @@
+package model;
+
 import java.sql.*;
 public class Peserta {
     private int id_peserta;
