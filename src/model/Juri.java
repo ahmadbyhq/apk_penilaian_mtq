@@ -3,6 +3,11 @@ package model;
 import java.util.*;
 
 public class Juri extends User {
+    
+    public Juri(){
+        super();
+    }
+    
     public Juri(int id, String username, String password, String nama, String role) {
         super(id, username, password, nama, role);
     }

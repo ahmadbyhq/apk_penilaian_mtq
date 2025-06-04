@@ -223,7 +223,7 @@ public class login_fix extends javax.swing.JFrame {
         // new dashboardPanitia().setVisible(true);
 
         if ("panitia".equalsIgnoreCase(user.getRole())) {
-            new dashboardPanitia().setVisible(true);
+            new DashboardPanitia().setVisible(true);
         } else if ("juri".equalsIgnoreCase(user.getRole())) {
             new dashboardJuri().setVisible(true);
         } else {

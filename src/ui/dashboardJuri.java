@@ -15,7 +15,7 @@ public class dashboardJuri extends javax.swing.JFrame {
     public dashboardJuri() {
         initComponents();
         
-        this.setLocationRelativeTo(null);
+//        this.setLocationRelativeTo(null);
     }
 
     /** This method is called from within the constructor to

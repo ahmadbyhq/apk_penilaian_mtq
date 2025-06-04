@@ -9,20 +9,12 @@ public class dbConnection {
     private static final String USERNAME = "u725894752_appmtqpbo";
     private static final String PASSWORD = "Appmtqpbo{07};";
 
-    private static Connection conn;
-
-    public static Connection getConnection() {
-        if (conn == null) {
-            try {
-                Class.forName(JDBC_DRIVER);
-                conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-//                System.out.println("Koneksi database berhasil.");
-            } catch (ClassNotFoundException e) {
-                System.err.println("JDBC Driver tidak ditemukan: " + e.getMessage());
-            } catch (SQLException e) {
-                System.err.println("Gagal koneksi ke database: " + e.getMessage());
-            }
+    public static Connection getConnection() throws SQLException {
+        try {
+            Class.forName(JDBC_DRIVER);
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("JDBC Driver tidak ditemukan: " + e.getMessage());
         }
-        return conn;
+        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 }
