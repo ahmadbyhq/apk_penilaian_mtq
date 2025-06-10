@@ -1,11 +1,6 @@
 package ui;
 
-
-
-
-
 import java.awt.Color;
-import model.*;
 import controller.*;
 import java.util.*;
 
@@ -13,15 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.*;
 import model.Juri;
 
-/**
- *
- * @author baiha
- */
 public class DashboardPanitia extends javax.swing.JFrame {
-
-    /**
-     * Creates new form dashboardPanitia_fix
-     */
+    
     public DashboardPanitia() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -32,11 +20,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // semua kolom tidak bisa diedit
+                return false;
             }
         };
         tabelJuri.setModel(model);
-
     }
 
     /**
@@ -64,6 +51,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         daftarLomba = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        aspekLomba = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         rekapNilai = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         daftarJuara = new javax.swing.JPanel();
@@ -125,7 +114,16 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPerkembanganpeserta6 = new javax.swing.JPanel();
         boxPaneltabel6 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        tabelPeserta = new javax.swing.JTable();
+        boxField_DaftarPeserta = new javax.swing.JPanel();
+        refreshDaftarPeserta = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        boxFieldDaftarPeserta = new javax.swing.JPanel();
+        boxCRUD_DaftarPeserta = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         rightPanelLomba = new javax.swing.JPanel();
         headerNavbar7 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -139,7 +137,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPerkembanganpeserta8 = new javax.swing.JPanel();
         boxPaneltabel8 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTable10 = new javax.swing.JTable();
+        tabelRekap = new javax.swing.JTable();
         rightPanelJuara = new javax.swing.JPanel();
         headerNavbar9 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -147,6 +145,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPaneltabel9 = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
         jTable11 = new javax.swing.JTable();
+        rightPanelAspek = new javax.swing.JPanel();
+        headerNavbar10 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        boxPerkembanganpeserta10 = new javax.swing.JPanel();
+        boxPaneltabel10 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        tabelAspek = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard Panitia");
@@ -186,9 +191,9 @@ public class DashboardPanitia extends javax.swing.JFrame {
         navbarBox.setOpaque(false);
         navbarBox.setLayout(new java.awt.BorderLayout());
 
-        menuNavbar.setMinimumSize(new java.awt.Dimension(250, 300));
+        menuNavbar.setMinimumSize(new java.awt.Dimension(250, 350));
         menuNavbar.setOpaque(false);
-        menuNavbar.setPreferredSize(new java.awt.Dimension(250, 300));
+        menuNavbar.setPreferredSize(new java.awt.Dimension(250, 350));
         menuNavbar.setLayout(new java.awt.GridBagLayout());
 
         statistikPeserta.setBackground(new java.awt.Color(0, 76, 6));
@@ -317,6 +322,38 @@ public class DashboardPanitia extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         menuNavbar.add(daftarLomba, gridBagConstraints);
 
+        aspekLomba.setBackground(new java.awt.Color(0, 102, 0));
+        aspekLomba.setMinimumSize(new java.awt.Dimension(250, 50));
+        aspekLomba.setPreferredSize(new java.awt.Dimension(250, 50));
+        aspekLomba.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                aspekLombaMousePressed(evt);
+            }
+        });
+        aspekLomba.setLayout(new java.awt.GridBagLayout());
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
+        jLabel7.setText("Aspek Penilaian");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setIconTextGap(16);
+        jLabel7.setMaximumSize(new java.awt.Dimension(225, 30));
+        jLabel7.setMinimumSize(new java.awt.Dimension(225, 30));
+        jLabel7.setPreferredSize(new java.awt.Dimension(225, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 25);
+        aspekLomba.add(jLabel7, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        menuNavbar.add(aspekLomba, gridBagConstraints);
+
         rekapNilai.setBackground(new java.awt.Color(0, 102, 0));
         rekapNilai.setMinimumSize(new java.awt.Dimension(250, 50));
         rekapNilai.setPreferredSize(new java.awt.Dimension(250, 50));
@@ -346,7 +383,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         menuNavbar.add(rekapNilai, gridBagConstraints);
 
         daftarJuara.setBackground(new java.awt.Color(0, 102, 0));
@@ -378,7 +415,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         menuNavbar.add(daftarJuara, gridBagConstraints);
 
         navbarBox.add(menuNavbar, java.awt.BorderLayout.NORTH);
@@ -558,7 +595,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         boxRefresh.setMinimumSize(new java.awt.Dimension(100, 100));
         boxRefresh.setOpaque(false);
-        boxRefresh.setLayout(new java.awt.CardLayout(0, 25));
+        boxRefresh.setLayout(new java.awt.CardLayout());
 
         refreshBtnStatistik.setBackground(new java.awt.Color(0, 102, 0));
         refreshBtnStatistik.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -585,16 +622,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         boxPerkembanganpeserta.setMinimumSize(new java.awt.Dimension(825, 275));
         boxPerkembanganpeserta.setOpaque(false);
-        boxPerkembanganpeserta.setPreferredSize(null);
         boxPerkembanganpeserta.setLayout(new java.awt.BorderLayout());
 
         boxPaneltabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 20, 20));
         boxPaneltabel.setOpaque(false);
-        boxPaneltabel.setPreferredSize(null);
         boxPaneltabel.setLayout(new java.awt.BorderLayout());
 
         jScrollPane3.setMinimumSize(new java.awt.Dimension(825, 275));
-        jScrollPane3.setPreferredSize(null);
 
         tabelStatistikLomba.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -773,6 +807,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
         editJuri.setForeground(new java.awt.Color(255, 255, 255));
         editJuri.setText("Edit");
         editJuri.setMargin(new java.awt.Insets(1, 15, 1, 15));
+        editJuri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editJuriActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -784,8 +823,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
         delJuri.setForeground(new java.awt.Color(255, 255, 255));
         delJuri.setText("Hapus");
         delJuri.setMargin(new java.awt.Insets(1, 15, 1, 15));
+        delJuri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delJuriActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
         boxBtnJuriAct.add(delJuri, gridBagConstraints);
@@ -811,6 +855,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         ));
         tabelJuri.setMinimumSize(new java.awt.Dimension(490, 375));
         tabelJuri.setRowHeight(25);
+        tabelJuri.setSelectionBackground(new java.awt.Color(51, 153, 0));
+        tabelJuri.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tabelJuri.setShowGrid(true);
         scrollTabeljuri.setViewportView(tabelJuri);
 
@@ -852,7 +898,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         jScrollPane9.setMinimumSize(new java.awt.Dimension(825, 275));
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        tabelPeserta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -871,16 +917,82 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable8.setMinimumSize(new java.awt.Dimension(825, 275));
-        jTable8.setPreferredSize(new java.awt.Dimension(825, 275));
-        jTable8.setShowGrid(true);
-        jScrollPane9.setViewportView(jTable8);
-        if (jTable8.getColumnModel().getColumnCount() > 0) {
-            jTable8.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable8.getColumnModel().getColumn(0).setMaxWidth(50);
+        tabelPeserta.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelPeserta.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelPeserta.setSelectionBackground(new java.awt.Color(0, 255, 0));
+        tabelPeserta.setShowGrid(true);
+        jScrollPane9.setViewportView(tabelPeserta);
+        if (tabelPeserta.getColumnModel().getColumnCount() > 0) {
+            tabelPeserta.getColumnModel().getColumn(0).setMinWidth(40);
+            tabelPeserta.getColumnModel().getColumn(0).setMaxWidth(40);
         }
 
-        boxPaneltabel6.add(jScrollPane9, java.awt.BorderLayout.CENTER);
+        boxPaneltabel6.add(jScrollPane9, java.awt.BorderLayout.LINE_START);
+
+        boxField_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
+        boxField_DaftarPeserta.setLayout(new java.awt.BorderLayout());
+
+        refreshDaftarPeserta.setBackground(new java.awt.Color(0, 153, 0));
+        refreshDaftarPeserta.setPreferredSize(new java.awt.Dimension(100, 35));
+        refreshDaftarPeserta.setLayout(new java.awt.CardLayout());
+
+        jButton4.setBackground(new java.awt.Color(0, 153, 0));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Refresh");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        refreshDaftarPeserta.add(jButton4, "card2");
+
+        boxField_DaftarPeserta.add(refreshDaftarPeserta, java.awt.BorderLayout.PAGE_START);
+
+        boxFieldDaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
+        boxFieldDaftarPeserta.setLayout(new java.awt.GridBagLayout());
+        boxField_DaftarPeserta.add(boxFieldDaftarPeserta, java.awt.BorderLayout.CENTER);
+
+        boxPaneltabel6.add(boxField_DaftarPeserta, java.awt.BorderLayout.CENTER);
+
+        boxCRUD_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
+        boxCRUD_DaftarPeserta.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Tambah");
+        boxCRUD_DaftarPeserta.add(jButton1);
+
+        jButton2.setBackground(new java.awt.Color(0, 102, 0));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Edit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        boxCRUD_DaftarPeserta.add(jButton2);
+
+        jButton3.setBackground(new java.awt.Color(0, 102, 0));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Hapus");
+        boxCRUD_DaftarPeserta.add(jButton3);
+
+        jButton5.setBackground(new java.awt.Color(0, 102, 51));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Import");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        boxCRUD_DaftarPeserta.add(jButton5);
+
+        boxPaneltabel6.add(boxCRUD_DaftarPeserta, java.awt.BorderLayout.PAGE_END);
 
         boxPerkembanganpeserta6.add(boxPaneltabel6, java.awt.BorderLayout.CENTER);
 
@@ -968,7 +1080,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         jScrollPane11.setMinimumSize(new java.awt.Dimension(825, 275));
 
-        jTable10.setModel(new javax.swing.table.DefaultTableModel(
+        tabelRekap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -976,13 +1088,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Nama Lomba", "Total Peserta", "Kuota"
+                "Nama Peserta", "Nama Lomba", "Total Nilai"
             }
         ));
-        jTable10.setMinimumSize(new java.awt.Dimension(825, 275));
-        jTable10.setPreferredSize(new java.awt.Dimension(825, 275));
-        jTable10.setShowGrid(true);
-        jScrollPane11.setViewportView(jTable10);
+        tabelRekap.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelRekap.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelRekap.setShowGrid(true);
+        jScrollPane11.setViewportView(tabelRekap);
 
         boxPaneltabel8.add(jScrollPane11, java.awt.BorderLayout.CENTER);
 
@@ -1022,19 +1134,27 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         jTable11.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nama Lomba", "Total Peserta", "Kuota"
+                "No.", "Nama Peserta", "Nama Lomba", "Total Nilai", "Juara"
             }
         ));
         jTable11.setMinimumSize(new java.awt.Dimension(825, 275));
         jTable11.setPreferredSize(new java.awt.Dimension(825, 275));
         jTable11.setShowGrid(true);
         jScrollPane12.setViewportView(jTable11);
+        if (jTable11.getColumnModel().getColumnCount() > 0) {
+            jTable11.getColumnModel().getColumn(0).setMinWidth(40);
+            jTable11.getColumnModel().getColumn(0).setMaxWidth(40);
+            jTable11.getColumnModel().getColumn(1).setMinWidth(350);
+            jTable11.getColumnModel().getColumn(1).setMaxWidth(350);
+            jTable11.getColumnModel().getColumn(4).setMinWidth(100);
+            jTable11.getColumnModel().getColumn(4).setMaxWidth(100);
+        }
 
         boxPaneltabel9.add(jScrollPane12, java.awt.BorderLayout.CENTER);
 
@@ -1043,6 +1163,66 @@ public class DashboardPanitia extends javax.swing.JFrame {
         rightPanelJuara.add(boxPerkembanganpeserta9, java.awt.BorderLayout.CENTER);
 
         kontenPanel.add(rightPanelJuara, "card4");
+
+        rightPanelAspek.setBackground(new java.awt.Color(255, 255, 255));
+        rightPanelAspek.setMinimumSize(new java.awt.Dimension(850, 475));
+        rightPanelAspek.setLayout(new java.awt.BorderLayout());
+
+        headerNavbar10.setBackground(new java.awt.Color(0, 102, 0));
+        headerNavbar10.setMinimumSize(new java.awt.Dimension(850, 50));
+        headerNavbar10.setPreferredSize(new java.awt.Dimension(850, 50));
+        headerNavbar10.setLayout(new java.awt.BorderLayout());
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Aspek Penilaian");
+        headerNavbar10.add(jLabel19, java.awt.BorderLayout.CENTER);
+
+        rightPanelAspek.add(headerNavbar10, java.awt.BorderLayout.NORTH);
+
+        boxPerkembanganpeserta10.setMinimumSize(new java.awt.Dimension(825, 275));
+        boxPerkembanganpeserta10.setOpaque(false);
+        boxPerkembanganpeserta10.setPreferredSize(new java.awt.Dimension(825, 275));
+        boxPerkembanganpeserta10.setLayout(new java.awt.BorderLayout());
+
+        boxPaneltabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        boxPaneltabel10.setOpaque(false);
+        boxPaneltabel10.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane13.setMinimumSize(new java.awt.Dimension(825, 275));
+
+        tabelAspek.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "No.", "Aspek Penilaian", "Nama Lomba", "Presentase"
+            }
+        ));
+        tabelAspek.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelAspek.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelAspek.setShowGrid(true);
+        jScrollPane13.setViewportView(tabelAspek);
+        if (tabelAspek.getColumnModel().getColumnCount() > 0) {
+            tabelAspek.getColumnModel().getColumn(0).setMinWidth(40);
+            tabelAspek.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelAspek.getColumnModel().getColumn(1).setMinWidth(400);
+            tabelAspek.getColumnModel().getColumn(1).setMaxWidth(400);
+            tabelAspek.getColumnModel().getColumn(3).setMinWidth(125);
+            tabelAspek.getColumnModel().getColumn(3).setMaxWidth(125);
+        }
+
+        boxPaneltabel10.add(jScrollPane13, java.awt.BorderLayout.CENTER);
+
+        boxPerkembanganpeserta10.add(boxPaneltabel10, java.awt.BorderLayout.CENTER);
+
+        rightPanelAspek.add(boxPerkembanganpeserta10, java.awt.BorderLayout.CENTER);
+
+        kontenPanel.add(rightPanelAspek, "card4");
 
         jSplitPanePanitia.setRightComponent(kontenPanel);
 
@@ -1063,6 +1243,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         rightpanelStatistik.setVisible(true);
         rightPanelJuri.setVisible(false);
         rightPanelPeserta.setVisible(false);
+        rightPanelAspek.setVisible(false);
         rightPanelLomba.setVisible(false);
         rightPanelRekap.setVisible(false);
         rightPanelJuara.setVisible(false);
@@ -1070,6 +1251,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         statistikPeserta.setBackground(new Color(0,76,6));
         daftarJuri.setBackground(new Color(0,102,0));
         daftarPeserta.setBackground(new Color(0,102,0));
+        aspekLomba.setBackground(new Color(0,102,0));
         daftarLomba.setBackground(new Color(0,102,0));
         rekapNilai.setBackground(new Color(0,102,0));
         daftarJuara.setBackground(new Color(0,102,0));
@@ -1082,6 +1264,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         rightPanelJuri.setVisible(true);
         rightpanelStatistik.setVisible(false);
         rightPanelPeserta.setVisible(false);
+        rightPanelAspek.setVisible(false);
         rightPanelLomba.setVisible(false);
         rightPanelRekap.setVisible(false);
         rightPanelJuara.setVisible(false);
@@ -1089,6 +1272,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         daftarJuri.setBackground(new Color(0,76,6));
         statistikPeserta.setBackground(new Color(0,102,0));
         daftarPeserta.setBackground(new Color(0,102,0));
+        aspekLomba.setBackground(new Color(0,102,0));
         daftarLomba.setBackground(new Color(0,102,0));
         rekapNilai.setBackground(new Color(0,102,0));
         daftarJuara.setBackground(new Color(0,102,0));
@@ -1100,10 +1284,12 @@ public class DashboardPanitia extends javax.swing.JFrame {
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
         rightPanelLomba.setVisible(false);
+        rightPanelAspek.setVisible(false);
         rightPanelRekap.setVisible(false);
         rightPanelJuara.setVisible(false);
         
         daftarPeserta.setBackground(new Color(0,76,6));
+        aspekLomba.setBackground(new Color(0,102,0));
         statistikPeserta.setBackground(new Color(0,102,0));
         daftarJuri.setBackground(new Color(0,102,0));
         daftarLomba.setBackground(new Color(0,102,0));
@@ -1118,6 +1304,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
         rightPanelPeserta.setVisible(false);
+        rightPanelAspek.setVisible(false);
         rightPanelRekap.setVisible(false);
         rightPanelJuara.setVisible(false);
         
@@ -1126,6 +1313,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         statistikPeserta.setBackground(new Color(0,102,0));
         daftarJuri.setBackground(new Color(0,102,0));
         daftarPeserta.setBackground(new Color(0,102,0));
+        aspekLomba.setBackground(new Color(0,102,0));
         rekapNilai.setBackground(new Color(0,102,0));
         daftarJuara.setBackground(new Color(0,102,0));
     }//GEN-LAST:event_daftarLombaMousePressed
@@ -1136,6 +1324,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
         rightPanelPeserta.setVisible(false);
+        rightPanelAspek.setVisible(false);
         rightPanelLomba.setVisible(false);
         rightPanelJuara.setVisible(false);
         
@@ -1143,6 +1332,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         statistikPeserta.setBackground(new Color(0,102,0));
         daftarJuri.setBackground(new Color(0,102,0));
         daftarPeserta.setBackground(new Color(0,102,0));
+        aspekLomba.setBackground(new Color(0,102,0));
         daftarLomba.setBackground(new Color(0,102,0));
         daftarJuara.setBackground(new Color(0,102,0));
         
@@ -1155,6 +1345,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
         rightPanelPeserta.setVisible(false);
+        rightPanelAspek.setVisible(false);
         rightPanelLomba.setVisible(false);
         rightPanelRekap.setVisible(false);
         
@@ -1162,6 +1353,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         statistikPeserta.setBackground(new Color(0,102,0));
         daftarJuri.setBackground(new Color(0,102,0));
         daftarPeserta.setBackground(new Color(0,102,0));
+        aspekLomba.setBackground(new Color(0,102,0));
         daftarLomba.setBackground(new Color(0,102,0));
         rekapNilai.setBackground(new Color(0,102,0));
     }//GEN-LAST:event_daftarJuaraMousePressed
@@ -1234,6 +1426,91 @@ public class DashboardPanitia extends javax.swing.JFrame {
         
     }//GEN-LAST:event_refreshBtnStatistikActionPerformed
 
+    private void editJuriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJuriActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tabelJuri.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih data juri yang ingin diedit.");
+            return;
+        }
+
+        String nama = (String) tabelJuri.getValueAt(selectedRow, 0);
+        String username = (String) tabelJuri.getValueAt(selectedRow, 1);
+        String password = (String) tabelJuri.getValueAt(selectedRow, 2);
+
+        String newNama = JOptionPane.showInputDialog(this, "Edit Nama Juri:", nama);
+        String newUsername = JOptionPane.showInputDialog(this, "Edit Username Juri:", username);
+        String newPassword = JOptionPane.showInputDialog(this, "Edit Password Juri:", password);
+
+        if (newNama == null || newUsername == null || newPassword == null) return;
+
+        juriController jc = new juriController();
+        List<Juri> listJuri = jc.getAllJuri();
+        int id = listJuri.get(selectedRow).getId();
+
+        Juri j = new Juri(id, newUsername, newPassword, newNama, "juri");
+        if (jc.updateJuri(j)) {
+            JOptionPane.showMessageDialog(this, "Data juri berhasil diupdate.");
+            tampilkanDataJuri();
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal mengupdate data juri.");
+        }
+    }//GEN-LAST:event_editJuriActionPerformed
+
+    private void delJuriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delJuriActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tabelJuri.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih data juri yang ingin dihapus.");
+            return;
+        }
+
+        int konfirmasi = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus data juri ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (konfirmasi == JOptionPane.YES_OPTION) {
+            juriController jc = new juriController();
+            List<Juri> listJuri = jc.getAllJuri();
+            int id = listJuri.get(selectedRow).getId();
+
+            if (jc.deleteJuri(id)) {
+                JOptionPane.showMessageDialog(this, "Data juri berhasil dihapus.");
+                tampilkanDataJuri();
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menghapus data juri.");
+            }
+        }
+    }//GEN-LAST:event_delJuriActionPerformed
+
+    private void aspekLombaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aspekLombaMousePressed
+        // TODO add your handling code here:
+        rightPanelAspek.setVisible(true);
+        rightpanelStatistik.setVisible(false);
+        rightPanelJuri.setVisible(false);
+        rightPanelPeserta.setVisible(false);
+        rightPanelLomba.setVisible(false);
+        rightPanelRekap.setVisible(false);
+        rightPanelJuara.setVisible(false);
+        
+        aspekLomba.setBackground(new Color(0,76,6));
+        statistikPeserta.setBackground(new Color(0,102,0));
+        daftarJuri.setBackground(new Color(0,102,0));
+        daftarPeserta.setBackground(new Color(0,102,0));
+        daftarLomba.setBackground(new Color(0,102,0));
+        rekapNilai.setBackground(new Color(0,102,0));
+        daftarJuara.setBackground(new Color(0,102,0));
+    }//GEN-LAST:event_aspekLombaMousePressed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     
     
     
@@ -1295,18 +1572,24 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addJuri;
+    private javax.swing.JPanel aspekLomba;
     private javax.swing.JPanel bgDashboardPanit;
     private javax.swing.JPanel boxActJuri;
     private javax.swing.JPanel boxBtnJuriAct;
+    private javax.swing.JPanel boxCRUD_DaftarPeserta;
     private javax.swing.JPanel boxCRUDjuri;
     private javax.swing.JPanel boxCard;
+    private javax.swing.JPanel boxFieldDaftarPeserta;
     private javax.swing.JPanel boxFieldJuri;
+    private javax.swing.JPanel boxField_DaftarPeserta;
     private javax.swing.JPanel boxPaneltabel;
+    private javax.swing.JPanel boxPaneltabel10;
     private javax.swing.JPanel boxPaneltabel6;
     private javax.swing.JPanel boxPaneltabel7;
     private javax.swing.JPanel boxPaneltabel8;
     private javax.swing.JPanel boxPaneltabel9;
     private javax.swing.JPanel boxPerkembanganpeserta;
+    private javax.swing.JPanel boxPerkembanganpeserta10;
     private javax.swing.JPanel boxPerkembanganpeserta6;
     private javax.swing.JPanel boxPerkembanganpeserta7;
     private javax.swing.JPanel boxPerkembanganpeserta8;
@@ -1328,12 +1611,18 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JTextField fieldUsername;
     private javax.swing.JPanel headerNavbar;
     private javax.swing.JPanel headerNavbar1;
+    private javax.swing.JPanel headerNavbar10;
     private javax.swing.JPanel headerNavbar6;
     private javax.swing.JPanel headerNavbar7;
     private javax.swing.JPanel headerNavbar8;
     private javax.swing.JPanel headerNavbar9;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel headerTxt;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -1342,11 +1631,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel10;
@@ -1358,12 +1649,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSplitPane jSplitPanePanitia;
-    private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable11;
-    private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
     private javax.swing.JPanel kontenPanel;
     private javax.swing.JPanel leftBoxtabeljuri;
@@ -1376,7 +1666,9 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPanel refreshBox;
     private javax.swing.JButton refreshBtnStatistik;
+    private javax.swing.JPanel refreshDaftarPeserta;
     private javax.swing.JPanel rekapNilai;
+    private javax.swing.JPanel rightPanelAspek;
     private javax.swing.JPanel rightPanelJuara;
     private javax.swing.JPanel rightPanelJuri;
     private javax.swing.JPanel rightPanelLomba;
@@ -1385,7 +1677,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JPanel rightpanelStatistik;
     private javax.swing.JScrollPane scrollTabeljuri;
     private javax.swing.JPanel statistikPeserta;
+    private javax.swing.JTable tabelAspek;
     private javax.swing.JTable tabelJuri;
+    private javax.swing.JTable tabelPeserta;
+    private javax.swing.JTable tabelRekap;
     private javax.swing.JTable tabelStatistikLomba;
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel totalJuritxt;
