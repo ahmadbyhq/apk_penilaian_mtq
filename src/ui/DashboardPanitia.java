@@ -124,6 +124,16 @@ public class DashboardPanitia extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        boxCRUD_DaftarPeserta = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel21 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel22 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
         rightPanelLomba = new javax.swing.JPanel();
         headerNavbar7 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -139,6 +149,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        boxCRUD_DaftarLomba = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
         rightPanelRekap = new javax.swing.JPanel();
         headerNavbar8 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -169,6 +186,12 @@ public class DashboardPanitia extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         boxField_AspekPenilaian = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jTextField9 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard Panitia");
@@ -991,6 +1014,95 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         boxField_DaftarPeserta.add(boxBtn_DaftarPeserta, java.awt.BorderLayout.PAGE_END);
 
+        boxCRUD_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
+        boxCRUD_DaftarPeserta.setLayout(new java.awt.GridBagLayout());
+
+        jTextField1.setBackground(new java.awt.Color(0, 102, 0));
+        jTextField1.setText("jTextField1");
+        jTextField1.setPreferredSize(new java.awt.Dimension(200, 35));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(jTextField1, gridBagConstraints);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel10.setText("Nama Peserta");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        boxCRUD_DaftarPeserta.add(jLabel10, gridBagConstraints);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        boxCRUD_DaftarPeserta.add(jComboBox1, gridBagConstraints);
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel21.setText("Asal");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(jLabel21, gridBagConstraints);
+
+        jComboBox2.setBackground(new java.awt.Color(0, 102, 0));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setMinimumSize(new java.awt.Dimension(200, 35));
+        jComboBox2.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(jComboBox2, gridBagConstraints);
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel22.setText("Lomba");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(jLabel22, gridBagConstraints);
+
+        jTextField4.setBackground(new java.awt.Color(0, 102, 51));
+        jTextField4.setText("jTextField4");
+        jTextField4.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(jTextField4, gridBagConstraints);
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel12.setText("Cari");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(jLabel12, gridBagConstraints);
+
+        jTextField2.setBackground(new java.awt.Color(0, 102, 51));
+        jTextField2.setText("jTextField2");
+        jTextField2.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(jTextField2, gridBagConstraints);
+
+        boxField_DaftarPeserta.add(boxCRUD_DaftarPeserta, java.awt.BorderLayout.CENTER);
+
         boxPaneltabel6.add(boxField_DaftarPeserta, java.awt.BorderLayout.CENTER);
 
         boxPerkembanganpeserta6.add(boxPaneltabel6, java.awt.BorderLayout.CENTER);
@@ -1087,6 +1199,68 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxBtn_DaftarLomba.add(jButton8);
 
         boxField_DaftarLomba.add(boxBtn_DaftarLomba, java.awt.BorderLayout.PAGE_END);
+
+        boxCRUD_DaftarLomba.setBackground(new java.awt.Color(255, 255, 255));
+        boxCRUD_DaftarLomba.setLayout(new java.awt.GridBagLayout());
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel20.setText("Nama Lomba");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarLomba.add(jLabel20, gridBagConstraints);
+
+        jTextField3.setBackground(new java.awt.Color(0, 102, 0));
+        jTextField3.setText("jTextField3");
+        jTextField3.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarLomba.add(jTextField3, gridBagConstraints);
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel23.setText("Total Peserta");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarLomba.add(jLabel23, gridBagConstraints);
+
+        jTextField5.setBackground(new java.awt.Color(0, 102, 0));
+        jTextField5.setText("jTextField5");
+        jTextField5.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarLomba.add(jTextField5, gridBagConstraints);
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel24.setText("Kouta");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarLomba.add(jLabel24, gridBagConstraints);
+
+        jTextField6.setBackground(new java.awt.Color(0, 102, 0));
+        jTextField6.setText("jTextField6");
+        jTextField6.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarLomba.add(jTextField6, gridBagConstraints);
+
+        boxField_DaftarLomba.add(boxCRUD_DaftarLomba, java.awt.BorderLayout.CENTER);
 
         boxPaneltabel7.add(boxField_DaftarLomba, java.awt.BorderLayout.CENTER);
 
@@ -1307,7 +1481,67 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         box_AspekPenilaian.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
+        boxField_AspekPenilaian.setBackground(new java.awt.Color(255, 255, 255));
         boxField_AspekPenilaian.setLayout(new java.awt.GridBagLayout());
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel25.setText("Aspek Penilaian");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxField_AspekPenilaian.add(jLabel25, gridBagConstraints);
+
+        jTextField7.setBackground(new java.awt.Color(0, 102, 0));
+        jTextField7.setText("jTextField7");
+        jTextField7.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxField_AspekPenilaian.add(jTextField7, gridBagConstraints);
+
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 102, 51));
+        jLabel26.setText("Nama Lomba");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxField_AspekPenilaian.add(jLabel26, gridBagConstraints);
+
+        jTextField8.setBackground(new java.awt.Color(0, 102, 0));
+        jTextField8.setText("jTextField8");
+        jTextField8.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxField_AspekPenilaian.add(jTextField8, gridBagConstraints);
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel27.setText("Presentase");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxField_AspekPenilaian.add(jLabel27, gridBagConstraints);
+
+        jTextField9.setBackground(new java.awt.Color(0, 102, 0));
+        jTextField9.setText("jTextField9");
+        jTextField9.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxField_AspekPenilaian.add(jTextField9, gridBagConstraints);
+
         box_AspekPenilaian.add(boxField_AspekPenilaian, java.awt.BorderLayout.CENTER);
 
         boxPaneltabel10.add(box_AspekPenilaian, java.awt.BorderLayout.CENTER);
@@ -1621,6 +1855,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     
     
     
@@ -1688,6 +1926,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JPanel boxBtnJuriAct;
     private javax.swing.JPanel boxBtn_DaftarLomba;
     private javax.swing.JPanel boxBtn_DaftarPeserta;
+    private javax.swing.JPanel boxCRUD_DaftarLomba;
+    private javax.swing.JPanel boxCRUD_DaftarPeserta;
     private javax.swing.JPanel boxCRUDjuri;
     private javax.swing.JPanel boxCard;
     private javax.swing.JPanel boxFieldJuri;
@@ -1750,8 +1990,12 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1760,6 +2004,14 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1785,6 +2037,15 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JTable jTable11;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel kontenPanel;
     private javax.swing.JPanel leftBoxtabeljuri;
     private javax.swing.JPanel leftPanelside;
