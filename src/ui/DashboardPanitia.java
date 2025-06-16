@@ -115,25 +115,24 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPaneltabel6 = new javax.swing.JPanel();
         boxTabel_DaftarPeserta = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelPeserta = new javax.swing.JTable();
         boxField_DaftarPeserta = new javax.swing.JPanel();
         boxRefresh_DaftarPeserta = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        boxBtn_DaftarPeserta = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnRefreshPeserta = new javax.swing.JButton();
+        btnImportPeserta = new javax.swing.JButton();
         boxCRUD_DaftarPeserta = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel21 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel22 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        labelCariPeserta = new javax.swing.JLabel();
+        fieldCariPeserta = new javax.swing.JTextField();
+        labelNamaPeserta = new javax.swing.JLabel();
+        fieldNamaPeserta = new javax.swing.JTextField();
+        labelAsalPeserta = new javax.swing.JLabel();
+        fieldAsalPeserta = new javax.swing.JTextField();
+        labelLombaPeserta = new javax.swing.JLabel();
+        comboboxLombaPeserta = new javax.swing.JComboBox<>();
+        boxBtn_DaftarPeserta = new javax.swing.JPanel();
+        btnAddPeserta = new javax.swing.JButton();
+        btnEditPeserta = new javax.swing.JButton();
+        btnHapusPeserta = new javax.swing.JButton();
         rightPanelLomba = new javax.swing.JPanel();
         headerNavbar7 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -141,21 +140,19 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPaneltabel7 = new javax.swing.JPanel();
         boxTabel_DaftarLomba = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tabelLomba = new javax.swing.JTable();
         boxField_DaftarLomba = new javax.swing.JPanel();
         boxRefresh_DaftarLomba = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnRefreshLomba = new javax.swing.JButton();
         boxBtn_DaftarLomba = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnAddLomba = new javax.swing.JButton();
+        btnEditLomba = new javax.swing.JButton();
+        btnHapusLomba = new javax.swing.JButton();
         boxCRUD_DaftarLomba = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        namaLombalabelLomba = new javax.swing.JLabel();
+        namaLombaField = new javax.swing.JTextField();
+        kuotaLabel = new javax.swing.JLabel();
+        koutaField = new javax.swing.JTextField();
         rightPanelRekap = new javax.swing.JPanel();
         headerNavbar8 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -177,21 +174,21 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPaneltabel10 = new javax.swing.JPanel();
         boxTabel_AspekPenilaian = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelAspek = new javax.swing.JTable();
         box_AspekPenilaian = new javax.swing.JPanel();
         boxRefresh_AspekPenilaian = new javax.swing.JPanel();
-        jButton13 = new javax.swing.JButton();
+        btnRefreshAspek = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        btnAddAspek = new javax.swing.JButton();
+        btnEditAspek = new javax.swing.JButton();
+        btnDeleteAspek = new javax.swing.JButton();
         boxField_AspekPenilaian = new javax.swing.JPanel();
-        jLabel25 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        labelAspek = new javax.swing.JLabel();
+        namaAspekfield = new javax.swing.JTextField();
+        lombaLabelAspek = new javax.swing.JLabel();
+        presentaseLabel = new javax.swing.JLabel();
+        presentaseField = new javax.swing.JTextField();
+        comboboxLombaAspek = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard Panitia");
@@ -680,9 +677,18 @@ public class DashboardPanitia extends javax.swing.JFrame {
             new String [] {
                 "Nama Lomba", "Total Peserta", "Kuota"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelStatistikLomba.setMinimumSize(new java.awt.Dimension(825, 275));
         tabelStatistikLomba.setRowHeight(25);
+        tabelStatistikLomba.setSelectionBackground(new java.awt.Color(51, 153, 0));
         tabelStatistikLomba.setShowGrid(true);
         jScrollPane3.setViewportView(tabelStatistikLomba);
 
@@ -728,6 +734,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxActJuri.setPreferredSize(new java.awt.Dimension(300, 375));
         boxActJuri.setLayout(new java.awt.BorderLayout());
 
+        refreshBox.setOpaque(false);
         refreshBox.setLayout(new java.awt.CardLayout());
 
         btnRefresh.setBackground(new java.awt.Color(0, 102, 0));
@@ -876,7 +883,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         boxActJuri.add(boxBtnJuriAct, java.awt.BorderLayout.PAGE_END);
 
-        boxTabel.add(boxActJuri, java.awt.BorderLayout.CENTER);
+        boxTabel.add(boxActJuri, java.awt.BorderLayout.EAST);
 
         leftBoxtabeljuri.setLayout(new java.awt.BorderLayout());
 
@@ -902,7 +909,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         leftBoxtabeljuri.add(scrollTabeljuri, java.awt.BorderLayout.CENTER);
 
-        boxTabel.add(leftBoxtabeljuri, java.awt.BorderLayout.WEST);
+        boxTabel.add(leftBoxtabeljuri, java.awt.BorderLayout.CENTER);
 
         boxCRUDjuri.add(boxTabel, java.awt.BorderLayout.CENTER);
 
@@ -937,9 +944,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPaneltabel6.setLayout(new java.awt.BorderLayout());
 
         boxTabel_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
-        boxTabel_DaftarPeserta.setPreferredSize(new java.awt.Dimension(500, 100));
+        boxTabel_DaftarPeserta.setMinimumSize(new java.awt.Dimension(450, 100));
+        boxTabel_DaftarPeserta.setPreferredSize(new java.awt.Dimension(450, 100));
+        boxTabel_DaftarPeserta.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelPeserta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -949,161 +958,177 @@ public class DashboardPanitia extends javax.swing.JFrame {
             new String [] {
                 "No", "Nama Peserta", "Asal", "Lomba"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        boxTabel_DaftarPeserta.add(jScrollPane2);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelPeserta.setMinimumSize(new java.awt.Dimension(450, 100));
+        tabelPeserta.setPreferredSize(new java.awt.Dimension(450, 100));
+        tabelPeserta.setSelectionBackground(new java.awt.Color(51, 153, 0));
+        tabelPeserta.setShowGrid(true);
+        jScrollPane2.setViewportView(tabelPeserta);
+        if (tabelPeserta.getColumnModel().getColumnCount() > 0) {
+            tabelPeserta.getColumnModel().getColumn(0).setMinWidth(40);
+            tabelPeserta.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelPeserta.getColumnModel().getColumn(3).setMinWidth(200);
+            tabelPeserta.getColumnModel().getColumn(3).setMaxWidth(200);
+        }
 
-        boxPaneltabel6.add(boxTabel_DaftarPeserta, java.awt.BorderLayout.LINE_START);
+        boxTabel_DaftarPeserta.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        boxPaneltabel6.add(boxTabel_DaftarPeserta, java.awt.BorderLayout.CENTER);
 
         boxField_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
+        boxField_DaftarPeserta.setPreferredSize(new java.awt.Dimension(275, 385));
         boxField_DaftarPeserta.setLayout(new java.awt.BorderLayout());
 
         boxRefresh_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
         boxRefresh_DaftarPeserta.setPreferredSize(new java.awt.Dimension(100, 35));
 
-        jButton5.setBackground(new java.awt.Color(0, 102, 0));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Refresh");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnRefreshPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        btnRefreshPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRefreshPeserta.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefreshPeserta.setText("Refresh");
+        btnRefreshPeserta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnRefreshPesertaActionPerformed(evt);
             }
         });
-        boxRefresh_DaftarPeserta.add(jButton5);
+        boxRefresh_DaftarPeserta.add(btnRefreshPeserta);
 
-        jButton14.setBackground(new java.awt.Color(0, 102, 0));
-        jButton14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("Import");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        btnImportPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        btnImportPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnImportPeserta.setForeground(new java.awt.Color(255, 255, 255));
+        btnImportPeserta.setText("Import");
+        btnImportPeserta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                btnImportPesertaActionPerformed(evt);
             }
         });
-        boxRefresh_DaftarPeserta.add(jButton14);
+        boxRefresh_DaftarPeserta.add(btnImportPeserta);
 
         boxField_DaftarPeserta.add(boxRefresh_DaftarPeserta, java.awt.BorderLayout.PAGE_START);
-
-        boxBtn_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
-        boxBtn_DaftarPeserta.setPreferredSize(new java.awt.Dimension(100, 35));
-
-        jButton2.setBackground(new java.awt.Color(0, 102, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Tambah");
-        boxBtn_DaftarPeserta.add(jButton2);
-
-        jButton3.setBackground(new java.awt.Color(0, 102, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Edit");
-        boxBtn_DaftarPeserta.add(jButton3);
-
-        jButton4.setBackground(new java.awt.Color(0, 102, 0));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Hapus");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        boxBtn_DaftarPeserta.add(jButton4);
-
-        boxField_DaftarPeserta.add(boxBtn_DaftarPeserta, java.awt.BorderLayout.PAGE_END);
 
         boxCRUD_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
         boxCRUD_DaftarPeserta.setLayout(new java.awt.GridBagLayout());
 
-        jTextField1.setBackground(new java.awt.Color(0, 102, 0));
-        jTextField1.setText("jTextField1");
-        jTextField1.setPreferredSize(new java.awt.Dimension(200, 35));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        labelCariPeserta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelCariPeserta.setForeground(new java.awt.Color(0, 102, 0));
+        labelCariPeserta.setText("Cari");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(labelCariPeserta, gridBagConstraints);
+
+        fieldCariPeserta.setBackground(new java.awt.Color(0, 102, 51));
+        fieldCariPeserta.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarPeserta.add(jTextField1, gridBagConstraints);
+        boxCRUD_DaftarPeserta.add(fieldCariPeserta, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel10.setText("Nama Peserta");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        boxCRUD_DaftarPeserta.add(jLabel10, gridBagConstraints);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        labelNamaPeserta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelNamaPeserta.setForeground(new java.awt.Color(0, 102, 0));
+        labelNamaPeserta.setText("Nama Peserta");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        boxCRUD_DaftarPeserta.add(jComboBox1, gridBagConstraints);
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxCRUD_DaftarPeserta.add(labelNamaPeserta, gridBagConstraints);
 
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel21.setText("Asal");
+        fieldNamaPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        fieldNamaPeserta.setPreferredSize(new java.awt.Dimension(200, 35));
+        fieldNamaPeserta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldNamaPesertaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarPeserta.add(jLabel21, gridBagConstraints);
+        boxCRUD_DaftarPeserta.add(fieldNamaPeserta, gridBagConstraints);
 
-        jComboBox2.setBackground(new java.awt.Color(0, 102, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.setMinimumSize(new java.awt.Dimension(200, 35));
-        jComboBox2.setPreferredSize(new java.awt.Dimension(200, 35));
+        labelAsalPeserta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelAsalPeserta.setForeground(new java.awt.Color(0, 102, 0));
+        labelAsalPeserta.setText("Asal");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarPeserta.add(jComboBox2, gridBagConstraints);
+        boxCRUD_DaftarPeserta.add(labelAsalPeserta, gridBagConstraints);
 
-        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel22.setText("Lomba");
+        fieldAsalPeserta.setBackground(new java.awt.Color(0, 102, 51));
+        fieldAsalPeserta.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarPeserta.add(jLabel22, gridBagConstraints);
+        boxCRUD_DaftarPeserta.add(fieldAsalPeserta, gridBagConstraints);
 
-        jTextField4.setBackground(new java.awt.Color(0, 102, 51));
-        jTextField4.setText("jTextField4");
-        jTextField4.setPreferredSize(new java.awt.Dimension(200, 35));
+        labelLombaPeserta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelLombaPeserta.setForeground(new java.awt.Color(0, 102, 0));
+        labelLombaPeserta.setText("Lomba");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarPeserta.add(jTextField4, gridBagConstraints);
+        boxCRUD_DaftarPeserta.add(labelLombaPeserta, gridBagConstraints);
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel12.setText("Cari");
+        comboboxLombaPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        comboboxLombaPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboboxLombaPeserta.setForeground(new java.awt.Color(255, 255, 255));
+        comboboxLombaPeserta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboboxLombaPeserta.setMinimumSize(new java.awt.Dimension(200, 35));
+        comboboxLombaPeserta.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarPeserta.add(jLabel12, gridBagConstraints);
-
-        jTextField2.setBackground(new java.awt.Color(0, 102, 51));
-        jTextField2.setText("jTextField2");
-        jTextField2.setPreferredSize(new java.awt.Dimension(200, 35));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarPeserta.add(jTextField2, gridBagConstraints);
+        boxCRUD_DaftarPeserta.add(comboboxLombaPeserta, gridBagConstraints);
 
         boxField_DaftarPeserta.add(boxCRUD_DaftarPeserta, java.awt.BorderLayout.CENTER);
 
-        boxPaneltabel6.add(boxField_DaftarPeserta, java.awt.BorderLayout.CENTER);
+        boxBtn_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
+        boxBtn_DaftarPeserta.setPreferredSize(new java.awt.Dimension(100, 35));
+
+        btnAddPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        btnAddPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAddPeserta.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddPeserta.setText("Tambah");
+        boxBtn_DaftarPeserta.add(btnAddPeserta);
+
+        btnEditPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        btnEditPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditPeserta.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditPeserta.setText("Edit");
+        boxBtn_DaftarPeserta.add(btnEditPeserta);
+
+        btnHapusPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        btnHapusPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHapusPeserta.setForeground(new java.awt.Color(255, 255, 255));
+        btnHapusPeserta.setText("Hapus");
+        btnHapusPeserta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusPesertaActionPerformed(evt);
+            }
+        });
+        boxBtn_DaftarPeserta.add(btnHapusPeserta);
+
+        boxField_DaftarPeserta.add(boxBtn_DaftarPeserta, java.awt.BorderLayout.PAGE_END);
+
+        boxPaneltabel6.add(boxField_DaftarPeserta, java.awt.BorderLayout.EAST);
 
         boxPerkembanganpeserta6.add(boxPaneltabel6, java.awt.BorderLayout.CENTER);
 
@@ -1139,130 +1164,135 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         boxTabel_DaftarLomba.setBackground(new java.awt.Color(255, 255, 255));
         boxTabel_DaftarLomba.setPreferredSize(new java.awt.Dimension(500, 100));
+        boxTabel_DaftarLomba.setLayout(new java.awt.BorderLayout());
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tabelLomba.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Nama Lomba", "Total Peserta", "Kouta"
+                "Nama Lomba", "Kuota"
             }
-        ));
-        jScrollPane4.setViewportView(jTable3);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        boxTabel_DaftarLomba.add(jScrollPane4);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelLomba.setShowGrid(true);
+        jScrollPane4.setViewportView(tabelLomba);
 
-        boxPaneltabel7.add(boxTabel_DaftarLomba, java.awt.BorderLayout.LINE_START);
+        boxTabel_DaftarLomba.add(jScrollPane4, java.awt.BorderLayout.CENTER);
+
+        boxPaneltabel7.add(boxTabel_DaftarLomba, java.awt.BorderLayout.CENTER);
 
         boxField_DaftarLomba.setBackground(new java.awt.Color(255, 255, 255));
-        boxField_DaftarLomba.setPreferredSize(new java.awt.Dimension(100, 35));
+        boxField_DaftarLomba.setMinimumSize(new java.awt.Dimension(310, 385));
+        boxField_DaftarLomba.setPreferredSize(new java.awt.Dimension(310, 385));
         boxField_DaftarLomba.setLayout(new java.awt.BorderLayout());
 
         boxRefresh_DaftarLomba.setBackground(new java.awt.Color(255, 255, 255));
         boxRefresh_DaftarLomba.setPreferredSize(new java.awt.Dimension(100, 35));
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Refresh");
-        boxRefresh_DaftarLomba.add(jButton1);
+        btnRefreshLomba.setBackground(new java.awt.Color(0, 102, 0));
+        btnRefreshLomba.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRefreshLomba.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefreshLomba.setText("Refresh");
+        btnRefreshLomba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshLombaActionPerformed(evt);
+            }
+        });
+        boxRefresh_DaftarLomba.add(btnRefreshLomba);
 
         boxField_DaftarLomba.add(boxRefresh_DaftarLomba, java.awt.BorderLayout.PAGE_START);
 
         boxBtn_DaftarLomba.setBackground(new java.awt.Color(255, 255, 255));
         boxBtn_DaftarLomba.setPreferredSize(new java.awt.Dimension(100, 35));
 
-        jButton6.setBackground(new java.awt.Color(0, 102, 0));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Tambah");
-        boxBtn_DaftarLomba.add(jButton6);
+        btnAddLomba.setBackground(new java.awt.Color(0, 102, 0));
+        btnAddLomba.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAddLomba.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddLomba.setText("Tambah");
+        boxBtn_DaftarLomba.add(btnAddLomba);
 
-        jButton7.setBackground(new java.awt.Color(0, 102, 0));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Edit");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnEditLomba.setBackground(new java.awt.Color(0, 102, 0));
+        btnEditLomba.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditLomba.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditLomba.setText("Edit");
+        btnEditLomba.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnEditLombaActionPerformed(evt);
             }
         });
-        boxBtn_DaftarLomba.add(jButton7);
+        boxBtn_DaftarLomba.add(btnEditLomba);
 
-        jButton8.setBackground(new java.awt.Color(0, 102, 0));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Hapus");
-        boxBtn_DaftarLomba.add(jButton8);
+        btnHapusLomba.setBackground(new java.awt.Color(0, 102, 0));
+        btnHapusLomba.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHapusLomba.setForeground(new java.awt.Color(255, 255, 255));
+        btnHapusLomba.setText("Hapus");
+        boxBtn_DaftarLomba.add(btnHapusLomba);
 
         boxField_DaftarLomba.add(boxBtn_DaftarLomba, java.awt.BorderLayout.PAGE_END);
 
         boxCRUD_DaftarLomba.setBackground(new java.awt.Color(255, 255, 255));
         boxCRUD_DaftarLomba.setLayout(new java.awt.GridBagLayout());
 
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel20.setText("Nama Lomba");
+        namaLombalabelLomba.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        namaLombalabelLomba.setForeground(new java.awt.Color(0, 102, 0));
+        namaLombalabelLomba.setText("Nama Lomba");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarLomba.add(jLabel20, gridBagConstraints);
+        boxCRUD_DaftarLomba.add(namaLombalabelLomba, gridBagConstraints);
 
-        jTextField3.setBackground(new java.awt.Color(0, 102, 0));
-        jTextField3.setText("jTextField3");
-        jTextField3.setPreferredSize(new java.awt.Dimension(200, 35));
+        namaLombaField.setBackground(new java.awt.Color(0, 102, 0));
+        namaLombaField.setPreferredSize(new java.awt.Dimension(200, 35));
+        namaLombaField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaLombaFieldActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarLomba.add(jTextField3, gridBagConstraints);
+        boxCRUD_DaftarLomba.add(namaLombaField, gridBagConstraints);
 
-        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel23.setText("Total Peserta");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarLomba.add(jLabel23, gridBagConstraints);
-
-        jTextField5.setBackground(new java.awt.Color(0, 102, 0));
-        jTextField5.setText("jTextField5");
-        jTextField5.setPreferredSize(new java.awt.Dimension(200, 35));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarLomba.add(jTextField5, gridBagConstraints);
-
-        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel24.setText("Kouta");
+        kuotaLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        kuotaLabel.setForeground(new java.awt.Color(0, 102, 0));
+        kuotaLabel.setText("Kouta");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarLomba.add(jLabel24, gridBagConstraints);
+        boxCRUD_DaftarLomba.add(kuotaLabel, gridBagConstraints);
 
-        jTextField6.setBackground(new java.awt.Color(0, 102, 0));
-        jTextField6.setText("jTextField6");
-        jTextField6.setPreferredSize(new java.awt.Dimension(200, 35));
+        koutaField.setBackground(new java.awt.Color(0, 102, 0));
+        koutaField.setPreferredSize(new java.awt.Dimension(200, 35));
+        koutaField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                koutaFieldActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarLomba.add(jTextField6, gridBagConstraints);
+        boxCRUD_DaftarLomba.add(koutaField, gridBagConstraints);
 
         boxField_DaftarLomba.add(boxCRUD_DaftarLomba, java.awt.BorderLayout.CENTER);
 
-        boxPaneltabel7.add(boxField_DaftarLomba, java.awt.BorderLayout.CENTER);
+        boxPaneltabel7.add(boxField_DaftarLomba, java.awt.BorderLayout.EAST);
 
         boxPerkembanganpeserta7.add(boxPaneltabel7, java.awt.BorderLayout.CENTER);
 
@@ -1410,8 +1440,9 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         boxTabel_AspekPenilaian.setBackground(new java.awt.Color(255, 255, 255));
         boxTabel_AspekPenilaian.setPreferredSize(new java.awt.Dimension(500, 100));
+        boxTabel_AspekPenilaian.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelAspek.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1419,132 +1450,151 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "No", "Aspek Penilaian", "Nama Lomba", "Presentase"
+                "No", "Nama Aspek Penilaian", "Lomba", "Presentase"
             }
-        ));
-        jTable1.setPreferredSize(new java.awt.Dimension(300, 60));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        boxTabel_AspekPenilaian.add(jScrollPane1);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelAspek.setPreferredSize(new java.awt.Dimension(300, 60));
+        tabelAspek.setShowGrid(true);
+        jScrollPane1.setViewportView(tabelAspek);
+        if (tabelAspek.getColumnModel().getColumnCount() > 0) {
+            tabelAspek.getColumnModel().getColumn(0).setMinWidth(40);
+            tabelAspek.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelAspek.getColumnModel().getColumn(3).setMinWidth(75);
+            tabelAspek.getColumnModel().getColumn(3).setMaxWidth(75);
+        }
 
-        boxPaneltabel10.add(boxTabel_AspekPenilaian, java.awt.BorderLayout.LINE_START);
+        boxTabel_AspekPenilaian.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        boxPaneltabel10.add(boxTabel_AspekPenilaian, java.awt.BorderLayout.CENTER);
 
         box_AspekPenilaian.setBackground(new java.awt.Color(255, 255, 255));
+        box_AspekPenilaian.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 25, 1, 1));
+        box_AspekPenilaian.setMinimumSize(new java.awt.Dimension(310, 385));
+        box_AspekPenilaian.setPreferredSize(new java.awt.Dimension(310, 385));
         box_AspekPenilaian.setLayout(new java.awt.BorderLayout());
 
         boxRefresh_AspekPenilaian.setPreferredSize(new java.awt.Dimension(100, 35));
         boxRefresh_AspekPenilaian.setLayout(new java.awt.CardLayout());
 
-        jButton13.setBackground(new java.awt.Color(0, 153, 0));
-        jButton13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("Refresh");
-        boxRefresh_AspekPenilaian.add(jButton13, "card2");
+        btnRefreshAspek.setBackground(new java.awt.Color(0, 153, 0));
+        btnRefreshAspek.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRefreshAspek.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefreshAspek.setText("Refresh");
+        boxRefresh_AspekPenilaian.add(btnRefreshAspek, "card2");
 
         box_AspekPenilaian.add(boxRefresh_AspekPenilaian, java.awt.BorderLayout.PAGE_START);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(100, 35));
 
-        jButton10.setBackground(new java.awt.Color(0, 102, 0));
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Tambah");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btnAddAspek.setBackground(new java.awt.Color(0, 102, 0));
+        btnAddAspek.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAddAspek.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddAspek.setText("Tambah");
+        btnAddAspek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                btnAddAspekActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton10);
+        jPanel3.add(btnAddAspek);
 
-        jButton11.setBackground(new java.awt.Color(0, 102, 0));
-        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(255, 255, 255));
-        jButton11.setText("Edit");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btnEditAspek.setBackground(new java.awt.Color(0, 102, 0));
+        btnEditAspek.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditAspek.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditAspek.setText("Edit");
+        btnEditAspek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btnEditAspekActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton11);
+        jPanel3.add(btnEditAspek);
 
-        jButton12.setBackground(new java.awt.Color(0, 102, 0));
-        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton12.setForeground(new java.awt.Color(255, 255, 255));
-        jButton12.setText("Hapus");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        btnDeleteAspek.setBackground(new java.awt.Color(0, 102, 0));
+        btnDeleteAspek.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDeleteAspek.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteAspek.setText("Hapus");
+        btnDeleteAspek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                btnDeleteAspekActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton12);
+        jPanel3.add(btnDeleteAspek);
 
         box_AspekPenilaian.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
         boxField_AspekPenilaian.setBackground(new java.awt.Color(255, 255, 255));
         boxField_AspekPenilaian.setLayout(new java.awt.GridBagLayout());
 
-        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel25.setText("Aspek Penilaian");
+        labelAspek.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelAspek.setForeground(new java.awt.Color(0, 102, 0));
+        labelAspek.setText("Nama Aspek Penilaian");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxField_AspekPenilaian.add(jLabel25, gridBagConstraints);
+        boxField_AspekPenilaian.add(labelAspek, gridBagConstraints);
 
-        jTextField7.setBackground(new java.awt.Color(0, 102, 0));
-        jTextField7.setText("jTextField7");
-        jTextField7.setPreferredSize(new java.awt.Dimension(200, 35));
+        namaAspekfield.setBackground(new java.awt.Color(0, 102, 0));
+        namaAspekfield.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxField_AspekPenilaian.add(jTextField7, gridBagConstraints);
+        boxField_AspekPenilaian.add(namaAspekfield, gridBagConstraints);
 
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(0, 102, 51));
-        jLabel26.setText("Nama Lomba");
+        lombaLabelAspek.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lombaLabelAspek.setForeground(new java.awt.Color(0, 102, 51));
+        lombaLabelAspek.setText("Lomba");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxField_AspekPenilaian.add(jLabel26, gridBagConstraints);
+        boxField_AspekPenilaian.add(lombaLabelAspek, gridBagConstraints);
 
-        jTextField8.setBackground(new java.awt.Color(0, 102, 0));
-        jTextField8.setText("jTextField8");
-        jTextField8.setPreferredSize(new java.awt.Dimension(200, 35));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxField_AspekPenilaian.add(jTextField8, gridBagConstraints);
-
-        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel27.setText("Presentase");
+        presentaseLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        presentaseLabel.setForeground(new java.awt.Color(0, 102, 0));
+        presentaseLabel.setText("Presentase");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxField_AspekPenilaian.add(jLabel27, gridBagConstraints);
+        boxField_AspekPenilaian.add(presentaseLabel, gridBagConstraints);
 
-        jTextField9.setBackground(new java.awt.Color(0, 102, 0));
-        jTextField9.setText("jTextField9");
-        jTextField9.setPreferredSize(new java.awt.Dimension(200, 35));
+        presentaseField.setBackground(new java.awt.Color(0, 102, 0));
+        presentaseField.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxField_AspekPenilaian.add(jTextField9, gridBagConstraints);
+        boxField_AspekPenilaian.add(presentaseField, gridBagConstraints);
+
+        comboboxLombaAspek.setBackground(new java.awt.Color(0, 102, 0));
+        comboboxLombaAspek.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        comboboxLombaAspek.setForeground(new java.awt.Color(255, 255, 255));
+        comboboxLombaAspek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboboxLombaAspek.setMinimumSize(new java.awt.Dimension(200, 35));
+        comboboxLombaAspek.setPreferredSize(new java.awt.Dimension(200, 35));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxField_AspekPenilaian.add(comboboxLombaAspek, gridBagConstraints);
 
         box_AspekPenilaian.add(boxField_AspekPenilaian, java.awt.BorderLayout.CENTER);
 
-        boxPaneltabel10.add(box_AspekPenilaian, java.awt.BorderLayout.CENTER);
+        boxPaneltabel10.add(box_AspekPenilaian, java.awt.BorderLayout.EAST);
 
         boxPerkembanganpeserta10.add(boxPaneltabel10, java.awt.BorderLayout.CENTER);
 
@@ -1827,37 +1877,49 @@ public class DashboardPanitia extends javax.swing.JFrame {
         daftarJuara.setBackground(new Color(0,102,0));
     }//GEN-LAST:event_aspekLombaMousePressed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void btnAddAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAspekActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_btnAddAspekActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btnEditAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditAspekActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_btnEditAspekActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void btnDeleteAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAspekActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_btnDeleteAspekActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnHapusPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusPesertaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnHapusPesertaActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnRefreshPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPesertaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnRefreshPesertaActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void btnImportPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportPesertaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
+    }//GEN-LAST:event_btnImportPesertaActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnEditLombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditLombaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnEditLombaActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void fieldNamaPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNamaPesertaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_fieldNamaPesertaActionPerformed
+
+    private void koutaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_koutaFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_koutaFieldActionPerformed
+
+    private void namaLombaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaLombaFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namaLombaFieldActionPerformed
+
+    private void btnRefreshLombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshLombaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshLombaActionPerformed
 
     
     
@@ -1955,17 +2017,35 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JPanel boxTabel_DaftarLomba;
     private javax.swing.JPanel boxTabel_DaftarPeserta;
     private javax.swing.JPanel box_AspekPenilaian;
+    private javax.swing.JButton btnAddAspek;
+    private javax.swing.JButton btnAddLomba;
+    private javax.swing.JButton btnAddPeserta;
+    private javax.swing.JButton btnDeleteAspek;
+    private javax.swing.JButton btnEditAspek;
+    private javax.swing.JButton btnEditLomba;
+    private javax.swing.JButton btnEditPeserta;
+    private javax.swing.JButton btnHapusLomba;
+    private javax.swing.JButton btnHapusPeserta;
+    private javax.swing.JButton btnImportPeserta;
     private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnRefreshAspek;
+    private javax.swing.JButton btnRefreshLomba;
+    private javax.swing.JButton btnRefreshPeserta;
     private javax.swing.JPanel cardTotalJuri;
     private javax.swing.JPanel cardTotalLomba;
     private javax.swing.JPanel cardTotalPeserta;
+    private javax.swing.JComboBox<String> comboboxLombaAspek;
+    private javax.swing.JComboBox<String> comboboxLombaPeserta;
     private javax.swing.JPanel daftarJuara;
     private javax.swing.JPanel daftarJuri;
     private javax.swing.JPanel daftarLomba;
     private javax.swing.JPanel daftarPeserta;
     private javax.swing.JButton delJuri;
     private javax.swing.JButton editJuri;
+    private javax.swing.JTextField fieldAsalPeserta;
+    private javax.swing.JTextField fieldCariPeserta;
     private javax.swing.JTextField fieldNama;
+    private javax.swing.JTextField fieldNamaPeserta;
     private javax.swing.JPasswordField fieldPassword;
     private javax.swing.JTextField fieldUsername;
     private javax.swing.JPanel headerNavbar;
@@ -1977,25 +2057,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JPanel headerNavbar9;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel headerTxt;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -2004,14 +2067,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2033,28 +2088,29 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSplitPane jSplitPanePanitia;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable11;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel kontenPanel;
+    private javax.swing.JTextField koutaField;
+    private javax.swing.JLabel kuotaLabel;
+    private javax.swing.JLabel labelAsalPeserta;
+    private javax.swing.JLabel labelAspek;
+    private javax.swing.JLabel labelCariPeserta;
+    private javax.swing.JLabel labelLombaPeserta;
+    private javax.swing.JLabel labelNamaPeserta;
     private javax.swing.JPanel leftBoxtabeljuri;
     private javax.swing.JPanel leftPanelside;
     private javax.swing.JPanel logoutPanel;
     private javax.swing.JLabel logoutTxt;
+    private javax.swing.JLabel lombaLabelAspek;
     private javax.swing.JPanel menuNavbar;
+    private javax.swing.JTextField namaAspekfield;
     private javax.swing.JLabel namaLabel;
+    private javax.swing.JTextField namaLombaField;
+    private javax.swing.JLabel namaLombalabelLomba;
     private javax.swing.JPanel navbarBox;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JTextField presentaseField;
+    private javax.swing.JLabel presentaseLabel;
     private javax.swing.JPanel refreshBox;
     private javax.swing.JButton refreshBtnStatistik;
     private javax.swing.JPanel rekapNilai;
@@ -2067,7 +2123,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JPanel rightpanelStatistik;
     private javax.swing.JScrollPane scrollTabeljuri;
     private javax.swing.JPanel statistikPeserta;
+    private javax.swing.JTable tabelAspek;
     private javax.swing.JTable tabelJuri;
+    private javax.swing.JTable tabelLomba;
+    private javax.swing.JTable tabelPeserta;
     private javax.swing.JTable tabelRekap;
     private javax.swing.JTable tabelStatistikLomba;
     private javax.swing.JPanel topPanel;
