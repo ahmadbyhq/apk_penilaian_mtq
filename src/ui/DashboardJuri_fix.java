@@ -14,14 +14,14 @@ import model.Juri;
  *
  * @author Alief
  */
-public class DashboardJuriCoba extends javax.swing.JFrame {
+public class DashboardJuri_fix extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardJuriCoba.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardJuri_fix.class.getName());
 
     /**
      * Creates new form DashboardJuriCoba
      */
-    public DashboardJuriCoba() {
+    public DashboardJuri_fix() {
         initComponents();
     }
 
