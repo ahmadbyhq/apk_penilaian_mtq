@@ -1,10 +1,11 @@
 package main;
 
 import config.dbConnection;
-import java.sql.*;
+import controller.*;
+import model.*;
 import java.util.*;
 
-public class Main {
+public class main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Pilih User Anda:");
@@ -20,26 +21,29 @@ public class Main {
         System.out.println("Masukkan Password:");
         String password = sc.nextLine();
 
-        boolean loginBerhasil = AuthService.login(username, password, role);
+        boolean loginBerhasil = loginController.logins(username, password,role);
         if (loginBerhasil) {
             System.out.println("Login berhasil sebagai " + role);
 
             if (role.equals("panitia")) {
                 while (true) {
                     System.out.println("Menu Panitia:");
-                    System.out.println("1. Tambah Juri");
-                    System.out.println("2. Hapus Juri");
-                    System.out.println("3. Edit Juri");
-                    System.out.println("4. Tampilkan Peserta");
-                    System.out.println("5. Tambah Peserta");
-                    System.out.println("6. Hapus Peserta");
-                    System.out.println("7. Edit Peserta");
-                    System.out.println("8. Logout");
+                    System.out.println("1. Tampilkan Juri");
+                    System.out.println("2. Tambah Juri");
+                    System.out.println("3. Hapus Juri");
+                    System.out.println("4. Edit Juri");
+                    System.out.println("5. Tampilkan Peserta");
+                    System.out.println("6. Tambah Peserta");
+                    System.out.println("7. Hapus Peserta");
+                    System.out.println("8. Edit Peserta");
+                    System.out.println("9. Logout");
                     int menu = sc.nextInt();
                     sc.nextLine();
-
-                    switch (menu) {
+                    switch(menu) {
                         case 1:
+                            juriController.tampilJuri();
+                            break;
+                        case 2:
                             System.out.println("Username juri Baru:");
                             String u = sc.nextLine();
                             System.out.println("Password Juri Baru:");
@@ -50,14 +54,14 @@ public class Main {
                             User.tambahJuri(u, p, n);
                             break;
 
-                        case 2:
+                        case 3:
                             System.out.println("Username Juri yang ingin dihapus:");
                             String usernameHapus = sc.nextLine();
                             Panitia userHapus = new Panitia(0, username, password, "Panitia", role);
                             userHapus.hapusJuri(usernameHapus);
                             break;
 
-                        case 3:
+                        case 4:
                             System.out.println("Username juri yang ingin diedit:");
                             String usernameLama = sc.nextLine();
                             System.out.println("Username baru:");
@@ -71,7 +75,7 @@ public class Main {
                             userEdit.editJuri(usernameLama, usernameBaru, passwordBaru, namaBaru);
                             break;
 
-                        case 4:
+                        case 5:
                             System.out.println("Daftar Lomba Tersedia:");
                             System.out.println("1. MTQ Tartil ");
                             System.out.println("2. MHQ 2 Juz ");
@@ -98,7 +102,8 @@ public class Main {
                                 }
                             }
                             break;
-                        case 5:
+
+                        case 6:
                             System.out.println("Tambah Peserta Baru:");
                             System.out.println("ID Peserta:");
                             int idPeserta = sc.nextInt();
@@ -123,17 +128,19 @@ public class Main {
                                 System.out.println("Lomba tidak valid.");
                                 break;
                             }
-                            Peserta pesertaBaru = new Peserta(namaPeserta, lombaPeserta, asalPeserta);
+                            Peserta pesertaBaru = new Peserta(idPeserta, namaPeserta, lombaPeserta, asalPeserta);
                             pesertaBaru.tambahPeserta(idPeserta, namaPeserta, asalPeserta, lombaPeserta.getIdLomba());
                             break;
-                        case 6:
+
+                        case 7:
                             System.out.println("Nama Peserta yang ingin dihapus:");
                             String namaHapus = sc.nextLine();
-                            Lomba dummyLomba = new Lomba(0, "");
-                            Peserta pesertaHapus = new Peserta(namaHapus, dummyLomba, "");
+                            Lomba dummyLomba = new Lomba(0, "", 0);
+                            Peserta pesertaHapus = new Peserta(0, namaHapus, dummyLomba, "");
                             pesertaHapus.hapusPeserta();
                             break;
-                        case 7:
+
+                        case 8:
                             System.out.println("ID Peserta yang ingin diedit:");
                             int idEdit = sc.nextInt();
                             sc.nextLine();
@@ -157,10 +164,11 @@ public class Main {
                                 System.out.println("Lomba tidak valid.");
                                 break;
                             }
-                            Peserta pesertaEdit = new Peserta(namaBaruPeserta, lombaBaru, asalBaru);
+                            Peserta pesertaEdit = new Peserta(idEdit, namaBaruPeserta, lombaBaru, asalBaru);
                             pesertaEdit.editPeserta(namaBaruPeserta, asalBaru, lombaBaru);
                             break;
-                        case 8:
+
+                        case 9:
                             System.out.println("Logout...");
                             return;
 
@@ -169,71 +177,43 @@ public class Main {
                     }
                 }
             } else {
-                Lomba lombaDipilih = null;
                 while (true) {
-                    System.out.println("Menu Juri");
-                    System.out.println("1. Tentukan lomba yang ingin dinilai");
-                    System.out.println("2. Hapus nilai peserta");
-                    System.out.println("3. Logout");
+                    int id_juri = juriController.getIdJuri(username);
+                    System.out.println("=== Juri ===");
+                    System.out.println("Tentukan ID peserta yang ingin ditinjau");
+                    int id_peserta = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("1. Tampilkan nilai peserta");
+                    System.out.println("2. Tambah nilai peserta");
+                    System.out.println("3. Edit nilai peserta");
+                    System.out.println("4. Hapus nilai peserta");
+                    System.out.println("5. Ganti ID peserta");
+                    System.out.println("6. Rekap nilai peserta");
+                    System.out.println("7. Logout");
                     System.out.print("Pilih menu: ");
                     int menu = sc.nextInt();
                     sc.nextLine();
 
-                    switch (menu) {
+                    switch(menu) {
                         case 1:
-                            System.out.println("Daftar Lomba Tersedia:");
-                            System.out.println("1. MTQ Tartil ");
-                            System.out.println("2. MHQ 2 Juz ");
-                            System.out.println("Masukkan nama lomba: ");
-                            String lomba = sc.nextLine();
-                            if (Objects.equals(lomba, "MTQ Tartil")) {
-                                lombaDipilih = Lomba.getLombaByName("MTQ Tartil");
-                            } else if (Objects.equals(lomba, "MHQ 2 Juz")) {
-                                lombaDipilih = Lomba.getLombaByName("MHQ 2 Juz");
-                            } else {
-                                System.out.println("Pilihan tidak valid.");
-                                break;
-                            }
-                            if (lombaDipilih != null) {
-                                System.out.println("Lomba \"" + lombaDipilih.getNamaLomba() + "\" dipilih.");
-                            } else {
-                                System.out.println("Lomba tidak ditemukan di database.");
-                            }
+                            Juri.tampilkanNilai(id_peserta, id_juri);
                             break;
-
                         case 2:
-                            if (lombaDipilih == null) {
-                                System.out.println("Pilih dulu lomba yang ingin dinilai (menu 1).");
-                                break;
-                            }
-                            List<Peserta> pesertaLomba = database.getPesertaByLomba(lombaDipilih.getId());
-                            if (pesertaLomba.isEmpty()) {
-                                System.out.println("Tidak ada peserta pada lomba ini.");
-                                break;
-                            }
-
-                            System.out.println("Pilih peserta yang ingin dihapus nilainya:");
-                            for (int i = 0; i < pesertaLomba.size(); i++) {
-                                System.out.println((i + 1) + ". " + pesertaLomba.get(i).getNamaPeserta());
-                            }
-
-                            int pilihHapus = sc.nextInt();
-                            sc.nextLine();
-
-                            if (pilihHapus >= 1 && pilihHapus <= pesertaLomba.size()) {
-                                Peserta p = pesertaLomba.get(pilihHapus - 1);
-                                boolean sukses = database.hapusNilaiPeserta(p.getNamaPeserta());
-                                if (sukses) {
-                                    System.out.println("Nilai peserta berhasil dihapus.");
-                                } else {
-                                    System.out.println("Gagal menghapus nilai peserta.");
-                                }
-                            } else {
-                                System.out.println("Pilihan tidak valid.");
-                            }
+                            Juri.beriNilai(id_peserta, id_juri);
                             break;
-
                         case 3:
+                            Juri.editNilaiPeserta(id_peserta, id_juri);
+                            break;
+                        case 4:
+                            Juri.hapusNilaiPeserta(id_peserta, id_juri);
+                            break;
+                        case 5:
+                            Juri.gantiIdPeserta(id_juri, id_peserta);
+                            break;
+                        case 6:
+                            Juri.rekapNilaiPeserta(id_peserta, id_juri);
+                            break;
+                        case 7:
                             System.out.println("Logout...");
                             return;
 

@@ -181,14 +181,22 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPerkembanganpeserta8 = new javax.swing.JPanel();
         boxPaneltabel8 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        tabelRekap = new javax.swing.JTable();
+        tabelRekapNilai = new javax.swing.JTable();
+        panelBoxRekap = new javax.swing.JPanel();
+        btnRefreshNilai = new javax.swing.JButton();
+        btnEksporPDF = new javax.swing.JButton();
+        labelSearch = new javax.swing.JLabel();
+        fieldCariRekap = new javax.swing.JTextField();
         rightPanelJuara = new javax.swing.JPanel();
         headerNavbar9 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         boxPerkembanganpeserta9 = new javax.swing.JPanel();
         boxPaneltabel9 = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTable11 = new javax.swing.JTable();
+        tabelJuara = new javax.swing.JTable();
+        boxBtnJuara = new javax.swing.JPanel();
+        RefreshBtnJuara = new javax.swing.JButton();
+        eksporPDFJuara = new javax.swing.JButton();
         rightPanelAspek = new javax.swing.JPanel();
         headerNavbar10 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
@@ -1378,13 +1386,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPerkembanganpeserta8.setPreferredSize(new java.awt.Dimension(825, 275));
         boxPerkembanganpeserta8.setLayout(new java.awt.BorderLayout());
 
-        boxPaneltabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        boxPaneltabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 20, 20));
         boxPaneltabel8.setOpaque(false);
         boxPaneltabel8.setLayout(new java.awt.BorderLayout());
 
         jScrollPane11.setMinimumSize(new java.awt.Dimension(825, 275));
 
-        tabelRekap.setModel(new javax.swing.table.DefaultTableModel(
+        tabelRekapNilai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -1395,14 +1403,74 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 "Nama Peserta", "Nama Lomba", "Total Nilai"
             }
         ));
-        tabelRekap.setMinimumSize(new java.awt.Dimension(825, 275));
-        tabelRekap.setPreferredSize(new java.awt.Dimension(825, 275));
-        tabelRekap.setShowGrid(true);
-        jScrollPane11.setViewportView(tabelRekap);
+        tabelRekapNilai.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelRekapNilai.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelRekapNilai.setShowGrid(true);
+        jScrollPane11.setViewportView(tabelRekapNilai);
 
         boxPaneltabel8.add(jScrollPane11, java.awt.BorderLayout.CENTER);
 
         boxPerkembanganpeserta8.add(boxPaneltabel8, java.awt.BorderLayout.CENTER);
+
+        panelBoxRekap.setMinimumSize(new java.awt.Dimension(850, 60));
+        panelBoxRekap.setOpaque(false);
+        panelBoxRekap.setPreferredSize(new java.awt.Dimension(850, 60));
+        panelBoxRekap.setLayout(new java.awt.GridBagLayout());
+
+        btnRefreshNilai.setBackground(new java.awt.Color(0, 102, 0));
+        btnRefreshNilai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRefreshNilai.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefreshNilai.setText("Refresh");
+        btnRefreshNilai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshNilaiActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        panelBoxRekap.add(btnRefreshNilai, gridBagConstraints);
+
+        btnEksporPDF.setBackground(new java.awt.Color(0, 102, 0));
+        btnEksporPDF.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEksporPDF.setForeground(new java.awt.Color(255, 255, 255));
+        btnEksporPDF.setText("Ekspor PDF");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 35, 0, 0);
+        panelBoxRekap.add(btnEksporPDF, gridBagConstraints);
+
+        labelSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelSearch.setForeground(new java.awt.Color(0, 102, 0));
+        labelSearch.setText("Cari");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 250, 0, 15);
+        panelBoxRekap.add(labelSearch, gridBagConstraints);
+
+        fieldCariRekap.setBackground(new java.awt.Color(0, 102, 0));
+        fieldCariRekap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        fieldCariRekap.setForeground(new java.awt.Color(255, 255, 255));
+        fieldCariRekap.setMinimumSize(new java.awt.Dimension(200, 40));
+        fieldCariRekap.setPreferredSize(new java.awt.Dimension(200, 40));
+        fieldCariRekap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldCariRekapActionPerformed(evt);
+            }
+        });
+        fieldCariRekap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fieldCariRekapKeyPressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        panelBoxRekap.add(fieldCariRekap, gridBagConstraints);
+
+        boxPerkembanganpeserta8.add(panelBoxRekap, java.awt.BorderLayout.NORTH);
 
         rightPanelRekap.add(boxPerkembanganpeserta8, java.awt.BorderLayout.CENTER);
 
@@ -1430,13 +1498,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPerkembanganpeserta9.setPreferredSize(new java.awt.Dimension(825, 275));
         boxPerkembanganpeserta9.setLayout(new java.awt.BorderLayout());
 
-        boxPaneltabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        boxPaneltabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 20, 20));
         boxPaneltabel9.setOpaque(false);
         boxPaneltabel9.setLayout(new java.awt.BorderLayout());
 
         jScrollPane12.setMinimumSize(new java.awt.Dimension(825, 275));
 
-        jTable11.setModel(new javax.swing.table.DefaultTableModel(
+        tabelJuara.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -1447,22 +1515,54 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 "No.", "Nama Peserta", "Nama Lomba", "Total Nilai", "Juara"
             }
         ));
-        jTable11.setMinimumSize(new java.awt.Dimension(825, 275));
-        jTable11.setPreferredSize(new java.awt.Dimension(825, 275));
-        jTable11.setShowGrid(true);
-        jScrollPane12.setViewportView(jTable11);
-        if (jTable11.getColumnModel().getColumnCount() > 0) {
-            jTable11.getColumnModel().getColumn(0).setMinWidth(40);
-            jTable11.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTable11.getColumnModel().getColumn(1).setMinWidth(350);
-            jTable11.getColumnModel().getColumn(1).setMaxWidth(350);
-            jTable11.getColumnModel().getColumn(4).setMinWidth(100);
-            jTable11.getColumnModel().getColumn(4).setMaxWidth(100);
+        tabelJuara.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelJuara.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelJuara.setShowGrid(true);
+        jScrollPane12.setViewportView(tabelJuara);
+        if (tabelJuara.getColumnModel().getColumnCount() > 0) {
+            tabelJuara.getColumnModel().getColumn(0).setMinWidth(40);
+            tabelJuara.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelJuara.getColumnModel().getColumn(1).setMinWidth(350);
+            tabelJuara.getColumnModel().getColumn(1).setMaxWidth(350);
+            tabelJuara.getColumnModel().getColumn(4).setMinWidth(100);
+            tabelJuara.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
         boxPaneltabel9.add(jScrollPane12, java.awt.BorderLayout.CENTER);
 
         boxPerkembanganpeserta9.add(boxPaneltabel9, java.awt.BorderLayout.CENTER);
+
+        boxBtnJuara.setMinimumSize(new java.awt.Dimension(850, 50));
+        boxBtnJuara.setOpaque(false);
+        boxBtnJuara.setPreferredSize(new java.awt.Dimension(850, 50));
+        boxBtnJuara.setLayout(new java.awt.GridBagLayout());
+
+        RefreshBtnJuara.setBackground(new java.awt.Color(0, 102, 0));
+        RefreshBtnJuara.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        RefreshBtnJuara.setForeground(new java.awt.Color(255, 255, 255));
+        RefreshBtnJuara.setText("Refresh");
+        RefreshBtnJuara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshBtnJuaraActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 50);
+        boxBtnJuara.add(RefreshBtnJuara, gridBagConstraints);
+
+        eksporPDFJuara.setBackground(new java.awt.Color(0, 102, 0));
+        eksporPDFJuara.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eksporPDFJuara.setForeground(new java.awt.Color(255, 255, 255));
+        eksporPDFJuara.setText("Ekspor PDF ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 570);
+        boxBtnJuara.add(eksporPDFJuara, gridBagConstraints);
+
+        boxPerkembanganpeserta9.add(boxBtnJuara, java.awt.BorderLayout.NORTH);
 
         rightPanelJuara.add(boxPerkembanganpeserta9, java.awt.BorderLayout.CENTER);
 
@@ -2384,8 +2484,58 @@ public class DashboardPanitia extends javax.swing.JFrame {
         tampilkanAspekPenilaian();
     }//GEN-LAST:event_btnRefreshAspekActionPerformed
 
+    private void RefreshBtnJuaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnJuaraActionPerformed
+        //function daftar juara summon sini
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RefreshBtnJuaraActionPerformed
+
+    private void fieldCariRekapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCariRekapKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldCariRekapKeyPressed
+
+    private void fieldCariRekapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCariRekapActionPerformed
+       
+            String keyword = fieldCariRekap.getText().trim();
+            rekapNilaiController controller = new rekapNilaiController();
+            
+            List<rekapNilaiController.RekapNilaiData> hasil = controller.searchRekapNilai(keyword);
+            
+            DefaultTableModel model = (DefaultTableModel) tabelRekapNilai.getModel();
+            model.setRowCount(0);
+            
+            for (rekapNilaiController.RekapNilaiData data : hasil){
+                Object[] row = { data.nama_peserta, data.nama_lomba, data.totalNilai
+            };
+                model.addRow(row);
+            }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldCariRekapActionPerformed
+
+    private void btnRefreshNilaiActionPerformed(java.awt.event.ActionEvent evt) {                                                
+
+        List<Integer> daftarPeserta = rekapNilaiController.getAllPesertaIDs();
     
+        DefaultTableModel model = (DefaultTableModel) tabelRekapNilai.getModel();
+        model.setRowCount(0); // clear table
     
+        rekapNilaiController controller = new rekapNilaiController();
+    
+        for (int id_peserta : daftarPeserta) {
+            String nama_peserta = rekapNilaiController.getNamaPeserta(id_peserta);
+            String nama_lomba = rekapNilaiController.getNamaLombaByPeserta(id_peserta);
+    
+            rekapNilaiController.RekapNilaiData data = controller.getRekapNilai(id_peserta, 0); 
+            double totalNilai = data.totalNilai; 
+    
+            Object[] row = { nama_peserta, nama_lomba, totalNilai };
+            model.addRow(row);
+        }
+    }
+                                                   
+
     
     private void tampilkanDataJuri() {
     DefaultTableModel model = (DefaultTableModel) tabelJuri.getModel();
@@ -2502,10 +2652,12 @@ public class DashboardPanitia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton RefreshBtnJuara;
     private javax.swing.JButton addJuri;
     private javax.swing.JPanel aspekLomba;
     private javax.swing.JPanel bgDashboardPanit;
     private javax.swing.JPanel boxActJuri;
+    private javax.swing.JPanel boxBtnJuara;
     private javax.swing.JPanel boxBtnJuriAct;
     private javax.swing.JPanel boxBtn_DaftarLomba;
     private javax.swing.JPanel boxBtn_DaftarPeserta;
@@ -2544,12 +2696,14 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JButton btnEditAspek;
     private javax.swing.JButton btnEditLomba;
     private javax.swing.JButton btnEditPeserta;
+    private javax.swing.JButton btnEksporPDF;
     private javax.swing.JButton btnHapusLomba;
     private javax.swing.JButton btnHapusPeserta;
     private javax.swing.JButton btnImportPeserta;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRefreshAspek;
     private javax.swing.JButton btnRefreshLomba;
+    private javax.swing.JButton btnRefreshNilai;
     private javax.swing.JButton btnRefreshPeserta;
     private javax.swing.JPanel cardTotalJuri;
     private javax.swing.JPanel cardTotalLomba;
@@ -2562,8 +2716,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JPanel daftarPeserta;
     private javax.swing.JButton delJuri;
     private javax.swing.JButton editJuri;
+    private javax.swing.JButton eksporPDFJuara;
     private javax.swing.JTextField fieldAsalPeserta;
     private javax.swing.JTextField fieldCariPeserta;
+    private javax.swing.JTextField fieldCariRekap;
     private javax.swing.JTextField fieldNama;
     private javax.swing.JTextField fieldNamaPeserta;
     private javax.swing.JPasswordField fieldPassword;
@@ -2608,7 +2764,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSplitPane jSplitPanePanitia;
-    private javax.swing.JTable jTable11;
     private javax.swing.JPanel kontenPanel;
     private javax.swing.JTextField kuotaField;
     private javax.swing.JLabel kuotaLabel;
@@ -2617,6 +2772,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JLabel labelCariPeserta;
     private javax.swing.JLabel labelLombaPeserta;
     private javax.swing.JLabel labelNamaPeserta;
+    private javax.swing.JLabel labelSearch;
     private javax.swing.JPanel leftBoxtabeljuri;
     private javax.swing.JPanel leftPanelside;
     private javax.swing.JPanel logoutPanel;
@@ -2628,6 +2784,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JTextField namaLombaField;
     private javax.swing.JLabel namaLombalabelLomba;
     private javax.swing.JPanel navbarBox;
+    private javax.swing.JPanel panelBoxRekap;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField presentaseField;
     private javax.swing.JLabel presentaseLabel;
@@ -2644,10 +2801,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollTabeljuri;
     private javax.swing.JPanel statistikPeserta;
     private javax.swing.JTable tabelAspek;
+    private javax.swing.JTable tabelJuara;
     private javax.swing.JTable tabelJuri;
     private javax.swing.JTable tabelLomba;
     private javax.swing.JTable tabelPeserta;
-    private javax.swing.JTable tabelRekap;
+    private javax.swing.JTable tabelRekapNilai;
     private javax.swing.JTable tabelStatistikLomba;
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel totalJuritxt;

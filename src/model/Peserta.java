@@ -65,11 +65,6 @@ public class Peserta {
         System.out.println("Lomba   : " + id_lomba.getNamaLomba());
     }
 
-    public void dinilaiOleh(Juri juri) {
-        System.out.println("Peserta \"" + nama_peserta + "\" akan dinilai oleh Juri: " + juri.nama);
-        juri.beriNilai();
-    }
-
     @Override
     public String toString() {
         return String.format("Peserta[nama=%s, asal=%s, lomba=%s]",

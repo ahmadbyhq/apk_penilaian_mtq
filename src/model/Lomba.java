@@ -8,16 +8,12 @@ public class Lomba {
     private String nama_lomba;
     private int kuota;
 
-    public Lomba(int id_lomba, String nama_lomba) {
-        this.id_lomba = id_lomba;
-        this.nama_lomba = nama_lomba;
-    }
-
     public Lomba(int id_lomba, String nama_lomba, int kuota) {
         this.id_lomba = id_lomba;
         this.nama_lomba = nama_lomba;
         this.kuota = kuota;
     }
+
 
     //  getter
     public int getId() {
@@ -58,7 +54,7 @@ public class Lomba {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return new Lomba(rs.getInt("id_lomba"), rs.getString("nama_lomba"));
+                return new Lomba(rs.getInt("id_lomba"), rs.getString("nama_lomba"), rs.getInt("kuota"));
             }
             conn.close();
         } catch (Exception e) {
