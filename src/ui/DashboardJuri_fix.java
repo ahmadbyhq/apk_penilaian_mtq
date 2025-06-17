@@ -9,12 +9,13 @@ import java.awt.Color;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
-import model.Juri;
+import model.*;
 /**
  *
  * @author Alief
  */
 public class DashboardJuri_fix extends javax.swing.JFrame {
+    private StatistikController statistikController;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardJuri_fix.class.getName());
 
@@ -23,6 +24,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
      */
     public DashboardJuri_fix() {
         initComponents();
+        statistikController = new StatistikController();
     }
 
     /**
@@ -95,6 +97,11 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard Juri");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         bgDashboardPanit.setLayout(new java.awt.BorderLayout());
 
@@ -615,7 +622,8 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     }//GEN-LAST:event_statistikPesertaMouseClicked
 
     private void statistikPesertaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statistikPesertaMousePressed
-
+        statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
+        statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba); 
         rightpanelStatistik.setVisible(true);
         rightPanelPenilaian.setVisible(false);
         
@@ -667,9 +675,16 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     }//GEN-LAST:event_beriNilaiBtnActionPerformed
 
     private void refreshBtnStatistik1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnStatistik1ActionPerformed
-        // TODO add your handling code here:
+        statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
+        statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba);        // TODO add your handling code here:
 
     }//GEN-LAST:event_refreshBtnStatistik1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
+        statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba); 
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

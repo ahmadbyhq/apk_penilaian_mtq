@@ -9,10 +9,13 @@ import javax.swing.table.*;
 import model.Juri;
 
 public class DashboardPanitia extends javax.swing.JFrame {
+
+    private StatistikController statistikController;
     
     public DashboardPanitia() {
         initComponents();
         this.setLocationRelativeTo(null);
+        statistikController = new StatistikController();
         
         DefaultTableModel model = new DefaultTableModel(
             new Object[][]{},
@@ -547,7 +550,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
         totalPesertatxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         totalPesertatxt.setForeground(new java.awt.Color(255, 255, 255));
         totalPesertatxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalPesertatxt.setText("100");
         cardTotalPeserta.add(totalPesertatxt, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -584,7 +586,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
         totalJuritxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         totalJuritxt.setForeground(new java.awt.Color(255, 255, 255));
         totalJuritxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalJuritxt.setText("100");
         cardTotalJuri.add(totalJuritxt, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -620,7 +621,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
         totalLombatxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         totalLombatxt.setForeground(new java.awt.Color(255, 255, 255));
         totalLombatxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalLombatxt.setText("100");
         cardTotalLomba.add(totalLombatxt, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1618,6 +1618,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void statistikPesertaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statistikPesertaMousePressed
         // TODO add your handling code here:
+        statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
+        statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba);
         rightpanelStatistik.setVisible(true);
         rightPanelJuri.setVisible(false);
         rightPanelPeserta.setVisible(false);
@@ -1639,6 +1641,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void daftarJuriMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftarJuriMousePressed
         // TODO add your handling code here:
+        tampilkanDataJuri();
         rightPanelJuri.setVisible(true);
         rightpanelStatistik.setVisible(false);
         rightPanelPeserta.setVisible(false);
@@ -1739,6 +1742,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         tampilkanDataJuri();
+        StatistikController statistikController = new StatistikController();
+        statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
+        statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba);
+
     }//GEN-LAST:event_formWindowOpened
 
     private void fieldNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNamaActionPerformed
@@ -1801,6 +1808,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void refreshBtnStatistikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnStatistikActionPerformed
         // TODO add your handling code here:
+        statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
+        statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba);
         
     }//GEN-LAST:event_refreshBtnStatistikActionPerformed
 
@@ -1940,6 +1949,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
             model.addRow(row);
         }
     }
+    
+
+
+
 
     
     /**
