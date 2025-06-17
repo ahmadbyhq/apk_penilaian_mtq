@@ -162,7 +162,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPerkembanganpeserta8 = new javax.swing.JPanel();
         boxPaneltabel8 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        tabelRekap = new javax.swing.JTable();
+        tabelRekapNilai = new javax.swing.JTable();
         panelBoxRekap = new javax.swing.JPanel();
         btnRefreshNilai = new javax.swing.JButton();
         btnEksporPDF = new javax.swing.JButton();
@@ -1336,7 +1336,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         jScrollPane11.setMinimumSize(new java.awt.Dimension(825, 275));
 
-        tabelRekap.setModel(new javax.swing.table.DefaultTableModel(
+        tabelRekapNilai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -1347,10 +1347,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 "Nama Peserta", "Nama Lomba", "Total Nilai"
             }
         ));
-        tabelRekap.setMinimumSize(new java.awt.Dimension(825, 275));
-        tabelRekap.setPreferredSize(new java.awt.Dimension(825, 275));
-        tabelRekap.setShowGrid(true);
-        jScrollPane11.setViewportView(tabelRekap);
+        tabelRekapNilai.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelRekapNilai.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelRekapNilai.setShowGrid(true);
+        jScrollPane11.setViewportView(tabelRekapNilai);
 
         boxPaneltabel8.add(jScrollPane11, java.awt.BorderLayout.CENTER);
 
@@ -2037,12 +2037,28 @@ public class DashboardPanitia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldCariRekapKeyPressed
 
-    private void btnRefreshNilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshNilaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRefreshNilaiActionPerformed
+    private void btnRefreshNilaiActionPerformed(java.awt.event.ActionEvent evt) {                                                
 
+        List<Integer> daftarPeserta = rekapNilaiController.getAllPesertaIDs();
     
+        DefaultTableModel model = (DefaultTableModel) tabelRekapNilai.getModel();
+        model.setRowCount(0); // clear table
     
+        rekapNilaiController controller = new rekapNilaiController();
+    
+        for (int id_peserta : daftarPeserta) {
+            String nama_peserta = rekapNilaiController.getNamaPeserta(id_peserta);
+            String nama_lomba = rekapNilaiController.getNamaLombaByPeserta(id_peserta);
+    
+            rekapNilaiController.RekapNilaiData data = controller.getRekapNilai(id_peserta, 0); 
+            double totalNilai = rekapNilaiController.getTotalNilai(); 
+    
+            Object[] row = { nama_peserta, nama_lomba, totalNilai };
+            model.addRow(row);
+        }
+    }
+                                                   
+
     
     private void tampilkanDataJuri() {
     DefaultTableModel model = (DefaultTableModel) tabelJuri.getModel();
@@ -2061,8 +2077,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
         }
     }
     
-
-
 
 
     
@@ -2259,7 +2273,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JTable tabelJuri;
     private javax.swing.JTable tabelLomba;
     private javax.swing.JTable tabelPeserta;
-    private javax.swing.JTable tabelRekap;
+    private javax.swing.JTable tabelRekapNilai;
     private javax.swing.JTable tabelStatistikLomba;
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel totalJuritxt;
