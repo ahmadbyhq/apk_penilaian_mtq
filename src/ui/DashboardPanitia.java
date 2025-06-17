@@ -1399,6 +1399,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
         fieldCariRekap.setForeground(new java.awt.Color(255, 255, 255));
         fieldCariRekap.setMinimumSize(new java.awt.Dimension(200, 40));
         fieldCariRekap.setPreferredSize(new java.awt.Dimension(200, 40));
+        fieldCariRekap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldCariRekapActionPerformed(evt);
+            }
+        });
         fieldCariRekap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 fieldCariRekapKeyPressed(evt);
@@ -2037,6 +2042,24 @@ public class DashboardPanitia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldCariRekapKeyPressed
 
+    private void fieldCariRekapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCariRekapActionPerformed
+       
+            String keyword = fieldCariRekap.getText().trim();
+            rekapNilaiController controller = new rekapNilaiController();
+            
+            List<rekapNilaiController.RekapNilaiData> hasil = controller.searchRekapNilai(keyword);
+            
+            DefaultTableModel model = (DefaultTableModel) tabelRekapNilai.getModel();
+            model.setRowCount(0);
+            
+            for (rekapNilaiController.RekapNilaiData data : hasil){
+                Object[] row = { data.nama_peserta, data.nama_lomba, data.totalNilai
+            };
+                model.addRow(row);
+            }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldCariRekapActionPerformed
+
     private void btnRefreshNilaiActionPerformed(java.awt.event.ActionEvent evt) {                                                
 
         List<Integer> daftarPeserta = rekapNilaiController.getAllPesertaIDs();
@@ -2051,7 +2074,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
             String nama_lomba = rekapNilaiController.getNamaLombaByPeserta(id_peserta);
     
             rekapNilaiController.RekapNilaiData data = controller.getRekapNilai(id_peserta, 0); 
-            double totalNilai = rekapNilaiController.getTotalNilai(); 
+            double totalNilai = data.totalNilai; 
     
             Object[] row = { nama_peserta, nama_lomba, totalNilai };
             model.addRow(row);
