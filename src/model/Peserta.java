@@ -7,7 +7,7 @@ public class Peserta {
     private Lomba id_lomba;
     private String asal;
 
-    public Peserta(String nama_peserta, Lomba id_lomba, String asal) {
+    public Peserta(int id_peserta, String nama_peserta, Lomba id_lomba, String asal) {
         if (id_lomba == null) {
             throw new IllegalArgumentException("Lomba tidak boleh kosong.");
         }
@@ -31,11 +31,6 @@ public class Peserta {
         System.out.println("Nama    : " + nama_peserta);
         System.out.println("Asal    : " + asal);
         System.out.println("Lomba   : " + id_lomba.getNamaLomba());
-    }
-
-    public void dinilaiOleh(Juri juri) {
-        System.out.println("Peserta \"" + nama_peserta + "\" akan dinilai oleh Juri: " + juri.nama);
-        juri.beriNilai();
     }
 
     @Override

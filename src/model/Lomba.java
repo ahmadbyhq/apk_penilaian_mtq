@@ -6,11 +6,15 @@ import controller.*;
 public class Lomba {
     private int id_lomba;
     private String nama_lomba;
+    private int kuota;
 
-    public Lomba(int id_lomba, String nama_lomba) {
+    public Lomba(int id_lomba, String nama_lomba, int kuota) {
         this.id_lomba = id_lomba;
         this.nama_lomba = nama_lomba;
+        this.kuota = kuota;
     }
+
+//    getter
 
     public int getId() {
         return id_lomba;
@@ -24,6 +28,23 @@ public class Lomba {
         return nama_lomba;
     }
 
+    public int getKuota(){
+        return kuota;
+    }
+
+    //setter
+    public void setIdLomba(int id_lomba){
+        this.id_lomba = id_lomba;
+    }
+
+    public void setNamaLomba(String nama_lomba) {
+        this.nama_lomba = nama_lomba;
+    }
+
+    public void setKuota(int kuota) {
+        this.kuota = kuota;
+    }
+
     public static Lomba getLombaByName(String nama_lomba) {
         try {
             Connection conn = database.getConnection();
@@ -33,7 +54,7 @@ public class Lomba {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return new Lomba(rs.getInt("id_lomba"), rs.getString("nama_lomba"));
+                return new Lomba(rs.getInt("id_lomba"), rs.getString("nama_lomba"), rs.getInt("kuota"));
             }
             conn.close();
         } catch (Exception e) {
