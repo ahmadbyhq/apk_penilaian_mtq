@@ -225,7 +225,7 @@ public class login_fix extends javax.swing.JFrame {
         if ("panitia".equalsIgnoreCase(user.getRole())) {
             new DashboardPanitia().setVisible(true);
         } else if ("juri".equalsIgnoreCase(user.getRole())) {
-            new dashboardJuri().setVisible(true);
+            new DashboardJuri_fix().setVisible(true);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Role tidak dikenali.");
         }

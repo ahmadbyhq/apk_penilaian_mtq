@@ -19,7 +19,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardJuri_fix.class.getName());
 
     /**
-     * Creates new form DashboardJuriCoba
+     * Creates new form DashboardJuri_fix
      */
     public DashboardJuri_fix() {
         initComponents();
@@ -54,37 +54,47 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         topPanel = new javax.swing.JPanel();
         headerNavbar = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        boxPerkembanganpeserta = new javax.swing.JPanel();
+        boxPaneltabel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabelStatistikLomba = new javax.swing.JTable();
         boxCard = new javax.swing.JPanel();
         cardTotalPeserta = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         totalPesertatxt = new javax.swing.JLabel();
+        cardTotalJuri = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        totalJuritxt = new javax.swing.JLabel();
+        cardTotalLomba = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        totalLombatxt = new javax.swing.JLabel();
         boxRefresh = new javax.swing.JPanel();
-        boxPerkembanganpeserta = new javax.swing.JPanel();
-        boxPaneltabel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tabelStatistikLomba = new javax.swing.JTable();
-        refreshBtnStatistik = new javax.swing.JButton();
+        refreshBtnStatistik1 = new javax.swing.JButton();
         rightPanelPenilaian = new javax.swing.JPanel();
         headerNavbar1 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         boxCRUDjuri = new javax.swing.JPanel();
-        boxTabel = new javax.swing.JPanel();
-        boxActJuri = new javax.swing.JPanel();
-        refreshBox = new javax.swing.JPanel();
-        btnRefresh = new javax.swing.JButton();
-        boxFieldJuri = new javax.swing.JPanel();
-        namaLabel = new javax.swing.JLabel();
-        fieldNama = new javax.swing.JTextField();
-        boxBtnJuriAct = new javax.swing.JPanel();
-        addJuri = new javax.swing.JButton();
-        editJuri = new javax.swing.JButton();
-        leftBoxtabeljuri = new javax.swing.JPanel();
+        boxtabelNilai = new javax.swing.JPanel();
         scrollTabeljuri = new javax.swing.JScrollPane();
         tabelJuri = new javax.swing.JTable();
+        boxActJuri = new javax.swing.JPanel();
+        boxFieldJuri = new javax.swing.JPanel();
+        inputNilaiLabel = new javax.swing.JLabel();
+        fieldBeriNilai = new javax.swing.JTextField();
+        boxBtnAddnilai = new javax.swing.JPanel();
+        beriNilaiBtn = new javax.swing.JButton();
+        boxSouthFilter = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Dashboard Juri");
 
         bgDashboardPanit.setLayout(new java.awt.BorderLayout());
 
@@ -172,7 +182,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/list_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png"))); // NOI18N
-        jLabel7.setText("Aspek Penilaian");
+        jLabel7.setText("Penilaian Peserta");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabel7.setIconTextGap(16);
         jLabel7.setMaximumSize(new java.awt.Dimension(225, 30));
@@ -250,6 +260,38 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
 
         topPanel.add(headerNavbar, java.awt.BorderLayout.NORTH);
 
+        rightpanelStatistik.add(topPanel, java.awt.BorderLayout.NORTH);
+
+        boxPerkembanganpeserta.setMinimumSize(new java.awt.Dimension(825, 275));
+        boxPerkembanganpeserta.setOpaque(false);
+        boxPerkembanganpeserta.setLayout(new java.awt.BorderLayout());
+
+        boxPaneltabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 20, 20));
+        boxPaneltabel.setOpaque(false);
+        boxPaneltabel.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane3.setMinimumSize(new java.awt.Dimension(825, 275));
+
+        tabelStatistikLomba.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nama Lomba", "Total Peserta", "Kuota"
+            }
+        ));
+        tabelStatistikLomba.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelStatistikLomba.setRowHeight(25);
+        tabelStatistikLomba.setShowGrid(true);
+        jScrollPane3.setViewportView(tabelStatistikLomba);
+
+        boxPaneltabel.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+
+        boxPerkembanganpeserta.add(boxPaneltabel, java.awt.BorderLayout.CENTER);
+
         boxCard.setMinimumSize(new java.awt.Dimension(850, 125));
         boxCard.setOpaque(false);
         boxCard.setPreferredSize(new java.awt.Dimension(850, 125));
@@ -293,9 +335,94 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 0);
         boxCard.add(cardTotalPeserta, gridBagConstraints);
 
+        cardTotalJuri.setBackground(new java.awt.Color(0, 102, 0));
+        cardTotalJuri.setMinimumSize(new java.awt.Dimension(175, 100));
+        cardTotalJuri.setPreferredSize(new java.awt.Dimension(175, 100));
+        cardTotalJuri.setLayout(new java.awt.BorderLayout());
+
+        jPanel12.setBackground(new java.awt.Color(0, 76, 6));
+        jPanel12.setMinimumSize(new java.awt.Dimension(175, 35));
+        jPanel12.setPreferredSize(new java.awt.Dimension(175, 35));
+        jPanel12.setLayout(new java.awt.BorderLayout());
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Total Juri");
+        jPanel12.add(jLabel9, java.awt.BorderLayout.CENTER);
+
+        cardTotalJuri.add(jPanel12, java.awt.BorderLayout.NORTH);
+
+        jPanel13.setMinimumSize(new java.awt.Dimension(175, 65));
+        jPanel13.setOpaque(false);
+        jPanel13.setLayout(new java.awt.BorderLayout());
+        cardTotalJuri.add(jPanel13, java.awt.BorderLayout.SOUTH);
+
+        totalJuritxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        totalJuritxt.setForeground(new java.awt.Color(255, 255, 255));
+        totalJuritxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalJuritxt.setText("100");
+        cardTotalJuri.add(totalJuritxt, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        boxCard.add(cardTotalJuri, gridBagConstraints);
+
+        cardTotalLomba.setBackground(new java.awt.Color(0, 102, 0));
+        cardTotalLomba.setMinimumSize(new java.awt.Dimension(175, 100));
+        cardTotalLomba.setPreferredSize(new java.awt.Dimension(175, 100));
+        cardTotalLomba.setLayout(new java.awt.BorderLayout());
+
+        jPanel14.setBackground(new java.awt.Color(0, 76, 6));
+        jPanel14.setMinimumSize(new java.awt.Dimension(175, 35));
+        jPanel14.setPreferredSize(new java.awt.Dimension(175, 35));
+        jPanel14.setLayout(new java.awt.BorderLayout());
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Total Lomba");
+        jPanel14.add(jLabel11, java.awt.BorderLayout.CENTER);
+
+        cardTotalLomba.add(jPanel14, java.awt.BorderLayout.NORTH);
+
+        jPanel15.setMinimumSize(new java.awt.Dimension(175, 65));
+        jPanel15.setOpaque(false);
+        jPanel15.setLayout(new java.awt.BorderLayout());
+        cardTotalLomba.add(jPanel15, java.awt.BorderLayout.SOUTH);
+
+        totalLombatxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        totalLombatxt.setForeground(new java.awt.Color(255, 255, 255));
+        totalLombatxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalLombatxt.setText("100");
+        cardTotalLomba.add(totalLombatxt, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 2.0;
+        boxCard.add(cardTotalLomba, gridBagConstraints);
+
         boxRefresh.setMinimumSize(new java.awt.Dimension(100, 100));
         boxRefresh.setOpaque(false);
         boxRefresh.setLayout(new java.awt.CardLayout());
+
+        refreshBtnStatistik1.setBackground(new java.awt.Color(0, 102, 0));
+        refreshBtnStatistik1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        refreshBtnStatistik1.setForeground(new java.awt.Color(255, 255, 255));
+        refreshBtnStatistik1.setText("Refresh");
+        refreshBtnStatistik1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        refreshBtnStatistik1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnStatistik1ActionPerformed(evt);
+            }
+        });
+        boxRefresh.add(refreshBtnStatistik1, "card2");
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -303,51 +430,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         gridBagConstraints.weightx = 2.0;
         boxCard.add(boxRefresh, gridBagConstraints);
 
-        topPanel.add(boxCard, java.awt.BorderLayout.CENTER);
-
-        rightpanelStatistik.add(topPanel, java.awt.BorderLayout.NORTH);
-
-        boxPerkembanganpeserta.setMinimumSize(new java.awt.Dimension(825, 275));
-        boxPerkembanganpeserta.setOpaque(false);
-        boxPerkembanganpeserta.setLayout(new java.awt.BorderLayout());
-
-        boxPaneltabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 20, 20));
-        boxPaneltabel.setOpaque(false);
-        boxPaneltabel.setLayout(new java.awt.BorderLayout());
-
-        jScrollPane3.setMinimumSize(new java.awt.Dimension(825, 275));
-
-        tabelStatistikLomba.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nama Lomba", "Total Peserta", "Kuota"
-            }
-        ));
-        tabelStatistikLomba.setMinimumSize(new java.awt.Dimension(825, 275));
-        tabelStatistikLomba.setRowHeight(25);
-        tabelStatistikLomba.setShowGrid(true);
-        jScrollPane3.setViewportView(tabelStatistikLomba);
-
-        boxPaneltabel.add(jScrollPane3, java.awt.BorderLayout.CENTER);
-
-        refreshBtnStatistik.setBackground(new java.awt.Color(0, 102, 0));
-        refreshBtnStatistik.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        refreshBtnStatistik.setForeground(new java.awt.Color(255, 255, 255));
-        refreshBtnStatistik.setText("Refresh");
-        refreshBtnStatistik.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        refreshBtnStatistik.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshBtnStatistikActionPerformed(evt);
-            }
-        });
-        boxPaneltabel.add(refreshBtnStatistik, java.awt.BorderLayout.PAGE_END);
-
-        boxPerkembanganpeserta.add(boxPaneltabel, java.awt.BorderLayout.CENTER);
+        boxPerkembanganpeserta.add(boxCard, java.awt.BorderLayout.NORTH);
 
         rightpanelStatistik.add(boxPerkembanganpeserta, java.awt.BorderLayout.CENTER);
 
@@ -365,7 +448,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Statistik Peserta");
+        jLabel14.setText("Penilaian Peserta");
         headerNavbar1.add(jLabel14, java.awt.BorderLayout.CENTER);
 
         rightPanelPenilaian.add(headerNavbar1, java.awt.BorderLayout.NORTH);
@@ -375,115 +458,9 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         boxCRUDjuri.setPreferredSize(new java.awt.Dimension(825, 275));
         boxCRUDjuri.setLayout(new java.awt.BorderLayout());
 
-        boxTabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        boxTabel.setMinimumSize(new java.awt.Dimension(865, 275));
-        boxTabel.setOpaque(false);
-        boxTabel.setPreferredSize(new java.awt.Dimension(865, 275));
-        boxTabel.setLayout(new java.awt.BorderLayout());
-
-        boxActJuri.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1));
-        boxActJuri.setMinimumSize(new java.awt.Dimension(100, 150));
-        boxActJuri.setOpaque(false);
-        boxActJuri.setPreferredSize(new java.awt.Dimension(100, 150));
-        boxActJuri.setLayout(new java.awt.BorderLayout());
-
-        refreshBox.setLayout(new java.awt.CardLayout());
-
-        btnRefresh.setBackground(new java.awt.Color(0, 102, 0));
-        btnRefresh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnRefresh.setForeground(new java.awt.Color(255, 255, 255));
-        btnRefresh.setText("Refresh");
-        btnRefresh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnRefresh.setMinimumSize(new java.awt.Dimension(30, 23));
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshActionPerformed(evt);
-            }
-        });
-        refreshBox.add(btnRefresh, "card2");
-
-        boxActJuri.add(refreshBox, java.awt.BorderLayout.NORTH);
-
-        boxFieldJuri.setBackground(new java.awt.Color(204, 204, 204));
-        boxFieldJuri.setMinimumSize(new java.awt.Dimension(50, 125));
-        boxFieldJuri.setOpaque(false);
-        boxFieldJuri.setPreferredSize(new java.awt.Dimension(50, 125));
-        boxFieldJuri.setLayout(new java.awt.GridBagLayout());
-
-        namaLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        namaLabel.setForeground(new java.awt.Color(0, 102, 0));
-        namaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        namaLabel.setText("Masukkan nilai");
-        namaLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxFieldJuri.add(namaLabel, gridBagConstraints);
-
-        fieldNama.setBackground(new java.awt.Color(0, 102, 0));
-        fieldNama.setForeground(new java.awt.Color(255, 255, 255));
-        fieldNama.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        fieldNama.setMinimumSize(new java.awt.Dimension(200, 35));
-        fieldNama.setPreferredSize(new java.awt.Dimension(200, 35));
-        fieldNama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldNamaActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        boxFieldJuri.add(fieldNama, gridBagConstraints);
-
-        boxActJuri.add(boxFieldJuri, java.awt.BorderLayout.CENTER);
-
-        boxBtnJuriAct.setOpaque(false);
-        boxBtnJuriAct.setLayout(new java.awt.GridBagLayout());
-
-        addJuri.setBackground(new java.awt.Color(0, 102, 0));
-        addJuri.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        addJuri.setForeground(new java.awt.Color(255, 255, 255));
-        addJuri.setText("Tambah");
-        addJuri.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        addJuri.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        addJuri.setPreferredSize(new java.awt.Dimension(100, 22));
-        addJuri.setRequestFocusEnabled(false);
-        addJuri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addJuriActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.weightx = 1.0;
-        boxBtnJuriAct.add(addJuri, gridBagConstraints);
-
-        editJuri.setBackground(new java.awt.Color(0, 102, 0));
-        editJuri.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        editJuri.setForeground(new java.awt.Color(255, 255, 255));
-        editJuri.setText("Edit");
-        editJuri.setMargin(new java.awt.Insets(1, 15, 1, 15));
-        editJuri.setPreferredSize(new java.awt.Dimension(100, 20));
-        editJuri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editJuriActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.weightx = 1.0;
-        boxBtnJuriAct.add(editJuri, gridBagConstraints);
-
-        boxActJuri.add(boxBtnJuriAct, java.awt.BorderLayout.PAGE_END);
-
-        boxTabel.add(boxActJuri, java.awt.BorderLayout.SOUTH);
-
-        leftBoxtabeljuri.setLayout(new java.awt.BorderLayout());
-        boxTabel.add(leftBoxtabeljuri, java.awt.BorderLayout.WEST);
+        boxtabelNilai.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 15));
+        boxtabelNilai.setOpaque(false);
+        boxtabelNilai.setLayout(new java.awt.BorderLayout());
 
         scrollTabeljuri.setMinimumSize(new java.awt.Dimension(490, 600));
         scrollTabeljuri.setOpaque(false);
@@ -518,9 +495,107 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         tabelJuri.setShowGrid(true);
         scrollTabeljuri.setViewportView(tabelJuri);
 
-        boxTabel.add(scrollTabeljuri, java.awt.BorderLayout.CENTER);
+        boxtabelNilai.add(scrollTabeljuri, java.awt.BorderLayout.CENTER);
 
-        boxCRUDjuri.add(boxTabel, java.awt.BorderLayout.CENTER);
+        boxCRUDjuri.add(boxtabelNilai, java.awt.BorderLayout.CENTER);
+
+        boxActJuri.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        boxActJuri.setMinimumSize(new java.awt.Dimension(794, 89));
+        boxActJuri.setOpaque(false);
+        boxActJuri.setPreferredSize(new java.awt.Dimension(794, 89));
+        boxActJuri.setLayout(new java.awt.BorderLayout());
+
+        boxFieldJuri.setBackground(new java.awt.Color(204, 204, 204));
+        boxFieldJuri.setMinimumSize(new java.awt.Dimension(50, 125));
+        boxFieldJuri.setOpaque(false);
+        boxFieldJuri.setPreferredSize(new java.awt.Dimension(50, 125));
+        boxFieldJuri.setLayout(new java.awt.GridBagLayout());
+
+        inputNilaiLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        inputNilaiLabel.setForeground(new java.awt.Color(0, 102, 0));
+        inputNilaiLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        inputNilaiLabel.setText("Masukkan nilai");
+        inputNilaiLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        boxFieldJuri.add(inputNilaiLabel, gridBagConstraints);
+
+        fieldBeriNilai.setBackground(new java.awt.Color(0, 102, 0));
+        fieldBeriNilai.setForeground(new java.awt.Color(255, 255, 255));
+        fieldBeriNilai.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        fieldBeriNilai.setMinimumSize(new java.awt.Dimension(200, 35));
+        fieldBeriNilai.setPreferredSize(new java.awt.Dimension(200, 35));
+        fieldBeriNilai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldBeriNilaiActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        boxFieldJuri.add(fieldBeriNilai, gridBagConstraints);
+
+        boxBtnAddnilai.setMinimumSize(new java.awt.Dimension(150, 30));
+        boxBtnAddnilai.setPreferredSize(new java.awt.Dimension(150, 30));
+        boxBtnAddnilai.setLayout(new java.awt.BorderLayout());
+
+        beriNilaiBtn.setBackground(new java.awt.Color(0, 102, 0));
+        beriNilaiBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        beriNilaiBtn.setForeground(new java.awt.Color(255, 255, 255));
+        beriNilaiBtn.setText("Beri Nilai");
+        beriNilaiBtn.setMargin(new java.awt.Insets(1, 15, 1, 15));
+        beriNilaiBtn.setPreferredSize(new java.awt.Dimension(100, 20));
+        beriNilaiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                beriNilaiBtnActionPerformed(evt);
+            }
+        });
+        boxBtnAddnilai.add(beriNilaiBtn, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 50);
+        boxFieldJuri.add(boxBtnAddnilai, gridBagConstraints);
+
+        boxActJuri.add(boxFieldJuri, java.awt.BorderLayout.CENTER);
+
+        boxCRUDjuri.add(boxActJuri, java.awt.BorderLayout.SOUTH);
+
+        boxSouthFilter.setMinimumSize(new java.awt.Dimension(850, 50));
+        boxSouthFilter.setOpaque(false);
+        boxSouthFilter.setPreferredSize(new java.awt.Dimension(850, 50));
+        boxSouthFilter.setLayout(new java.awt.GridBagLayout());
+
+        jComboBox1.setBackground(new java.awt.Color(0, 102, 0));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setMinimumSize(new java.awt.Dimension(150, 30));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(150, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 25);
+        boxSouthFilter.add(jComboBox1, gridBagConstraints);
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Refresh");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 0);
+        boxSouthFilter.add(jButton1, gridBagConstraints);
+
+        boxCRUDjuri.add(boxSouthFilter, java.awt.BorderLayout.NORTH);
 
         rightPanelPenilaian.add(boxCRUDjuri, java.awt.BorderLayout.CENTER);
 
@@ -540,10 +615,11 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     }//GEN-LAST:event_statistikPesertaMouseClicked
 
     private void statistikPesertaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statistikPesertaMousePressed
-        rightPanelPenilaian.setVisible(false);
+
         rightpanelStatistik.setVisible(true);
+        rightPanelPenilaian.setVisible(false);
         
-        PesertaStatistik.setBackground(new Color(0,76,6));
+        statistikPeserta.setBackground(new Color(0,76,6));
         penilaianPeserta.setBackground(new Color(0,102,0));
         
     }//GEN-LAST:event_statistikPesertaMousePressed
@@ -558,7 +634,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         rightpanelStatistik.setVisible(false);
         
         penilaianPeserta.setBackground(new Color(0,76,6));
-        PesertaStatistik.setBackground(new Color(0,102,0));
+        statistikPeserta.setBackground(new Color(0,102,0));
     }//GEN-LAST:event_penilaianPesertaMousePressed
 
     private void logoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutPanelMouseClicked
@@ -581,28 +657,19 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_logoutPanelMousePressed
 
-    private void refreshBtnStatistikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnStatistikActionPerformed
+    private void fieldBeriNilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBeriNilaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldBeriNilaiActionPerformed
+
+    private void beriNilaiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beriNilaiBtnActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_refreshBtnStatistikActionPerformed
+    }//GEN-LAST:event_beriNilaiBtnActionPerformed
 
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+    private void refreshBtnStatistik1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnStatistik1ActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_btnRefreshActionPerformed
-
-    private void fieldNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNamaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldNamaActionPerformed
-
-    private void addJuriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJuriActionPerformed
-
-    }//GEN-LAST:event_addJuriActionPerformed
-
-    private void editJuriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJuriActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_editJuriActionPerformed
+    }//GEN-LAST:event_refreshBtnStatistik1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -626,50 +693,57 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DashboardJuriCoba().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new DashboardJuri_fix().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PesertaStatistik;
-    private javax.swing.JButton addJuri;
+    private javax.swing.JButton beriNilaiBtn;
     private javax.swing.JPanel bgDashboardPanit;
     private javax.swing.JPanel boxActJuri;
-    private javax.swing.JPanel boxBtnJuriAct;
+    private javax.swing.JPanel boxBtnAddnilai;
     private javax.swing.JPanel boxCRUDjuri;
     private javax.swing.JPanel boxCard;
     private javax.swing.JPanel boxFieldJuri;
     private javax.swing.JPanel boxPaneltabel;
     private javax.swing.JPanel boxPerkembanganpeserta;
     private javax.swing.JPanel boxRefresh;
-    private javax.swing.JPanel boxTabel;
-    private javax.swing.JButton btnRefresh;
+    private javax.swing.JPanel boxSouthFilter;
+    private javax.swing.JPanel boxtabelNilai;
+    private javax.swing.JPanel cardTotalJuri;
+    private javax.swing.JPanel cardTotalLomba;
     private javax.swing.JPanel cardTotalPeserta;
-    private javax.swing.JButton editJuri;
-    private javax.swing.JTextField fieldNama;
+    private javax.swing.JTextField fieldBeriNilai;
     private javax.swing.JPanel headerNavbar;
     private javax.swing.JPanel headerNavbar1;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel headerTxt;
+    private javax.swing.JLabel inputNilaiLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPanePanitia;
     private javax.swing.JPanel kontenPanel;
-    private javax.swing.JPanel leftBoxtabeljuri;
     private javax.swing.JPanel leftPanelside;
     private javax.swing.JPanel logoutPanel;
     private javax.swing.JLabel logoutTxt;
     private javax.swing.JPanel menuNavbar;
-    private javax.swing.JLabel namaLabel;
     private javax.swing.JPanel navbarBox;
     private javax.swing.JPanel penilaianPeserta;
-    private javax.swing.JPanel refreshBox;
-    private javax.swing.JButton refreshBtnStatistik;
+    private javax.swing.JButton refreshBtnStatistik1;
     private javax.swing.JPanel rightPanelPenilaian;
     private javax.swing.JPanel rightpanelStatistik;
     private javax.swing.JScrollPane scrollTabeljuri;
@@ -677,6 +751,8 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JTable tabelJuri;
     private javax.swing.JTable tabelStatistikLomba;
     private javax.swing.JPanel topPanel;
+    private javax.swing.JLabel totalJuritxt;
+    private javax.swing.JLabel totalLombatxt;
     private javax.swing.JLabel totalPesertatxt;
     // End of variables declaration//GEN-END:variables
 }
