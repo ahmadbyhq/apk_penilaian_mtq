@@ -169,7 +169,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPerkembanganpeserta9 = new javax.swing.JPanel();
         boxPaneltabel9 = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTable11 = new javax.swing.JTable();
+        tabelJuara = new javax.swing.JTable();
+        boxBtnJuara = new javax.swing.JPanel();
+        RefreshBtnJuara = new javax.swing.JButton();
+        eksporPDFJuara = new javax.swing.JButton();
         rightPanelAspek = new javax.swing.JPanel();
         headerNavbar10 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
@@ -1374,13 +1377,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPerkembanganpeserta9.setPreferredSize(new java.awt.Dimension(825, 275));
         boxPerkembanganpeserta9.setLayout(new java.awt.BorderLayout());
 
-        boxPaneltabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        boxPaneltabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 20, 20));
         boxPaneltabel9.setOpaque(false);
         boxPaneltabel9.setLayout(new java.awt.BorderLayout());
 
         jScrollPane12.setMinimumSize(new java.awt.Dimension(825, 275));
 
-        jTable11.setModel(new javax.swing.table.DefaultTableModel(
+        tabelJuara.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -1391,22 +1394,54 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 "No.", "Nama Peserta", "Nama Lomba", "Total Nilai", "Juara"
             }
         ));
-        jTable11.setMinimumSize(new java.awt.Dimension(825, 275));
-        jTable11.setPreferredSize(new java.awt.Dimension(825, 275));
-        jTable11.setShowGrid(true);
-        jScrollPane12.setViewportView(jTable11);
-        if (jTable11.getColumnModel().getColumnCount() > 0) {
-            jTable11.getColumnModel().getColumn(0).setMinWidth(40);
-            jTable11.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTable11.getColumnModel().getColumn(1).setMinWidth(350);
-            jTable11.getColumnModel().getColumn(1).setMaxWidth(350);
-            jTable11.getColumnModel().getColumn(4).setMinWidth(100);
-            jTable11.getColumnModel().getColumn(4).setMaxWidth(100);
+        tabelJuara.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelJuara.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelJuara.setShowGrid(true);
+        jScrollPane12.setViewportView(tabelJuara);
+        if (tabelJuara.getColumnModel().getColumnCount() > 0) {
+            tabelJuara.getColumnModel().getColumn(0).setMinWidth(40);
+            tabelJuara.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelJuara.getColumnModel().getColumn(1).setMinWidth(350);
+            tabelJuara.getColumnModel().getColumn(1).setMaxWidth(350);
+            tabelJuara.getColumnModel().getColumn(4).setMinWidth(100);
+            tabelJuara.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
         boxPaneltabel9.add(jScrollPane12, java.awt.BorderLayout.CENTER);
 
         boxPerkembanganpeserta9.add(boxPaneltabel9, java.awt.BorderLayout.CENTER);
+
+        boxBtnJuara.setMinimumSize(new java.awt.Dimension(850, 50));
+        boxBtnJuara.setOpaque(false);
+        boxBtnJuara.setPreferredSize(new java.awt.Dimension(850, 50));
+        boxBtnJuara.setLayout(new java.awt.GridBagLayout());
+
+        RefreshBtnJuara.setBackground(new java.awt.Color(0, 102, 0));
+        RefreshBtnJuara.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        RefreshBtnJuara.setForeground(new java.awt.Color(255, 255, 255));
+        RefreshBtnJuara.setText("Refresh");
+        RefreshBtnJuara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshBtnJuaraActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 50);
+        boxBtnJuara.add(RefreshBtnJuara, gridBagConstraints);
+
+        eksporPDFJuara.setBackground(new java.awt.Color(0, 102, 0));
+        eksporPDFJuara.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eksporPDFJuara.setForeground(new java.awt.Color(255, 255, 255));
+        eksporPDFJuara.setText("Ekspor PDF ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 570);
+        boxBtnJuara.add(eksporPDFJuara, gridBagConstraints);
+
+        boxPerkembanganpeserta9.add(boxBtnJuara, java.awt.BorderLayout.NORTH);
 
         rightPanelJuara.add(boxPerkembanganpeserta9, java.awt.BorderLayout.CENTER);
 
@@ -1930,6 +1965,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRefreshLombaActionPerformed
 
+    private void RefreshBtnJuaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnJuaraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RefreshBtnJuaraActionPerformed
+
     
     
     
@@ -1994,10 +2033,12 @@ public class DashboardPanitia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton RefreshBtnJuara;
     private javax.swing.JButton addJuri;
     private javax.swing.JPanel aspekLomba;
     private javax.swing.JPanel bgDashboardPanit;
     private javax.swing.JPanel boxActJuri;
+    private javax.swing.JPanel boxBtnJuara;
     private javax.swing.JPanel boxBtnJuriAct;
     private javax.swing.JPanel boxBtn_DaftarLomba;
     private javax.swing.JPanel boxBtn_DaftarPeserta;
@@ -2055,6 +2096,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JPanel daftarPeserta;
     private javax.swing.JButton delJuri;
     private javax.swing.JButton editJuri;
+    private javax.swing.JButton eksporPDFJuara;
     private javax.swing.JTextField fieldAsalPeserta;
     private javax.swing.JTextField fieldCariPeserta;
     private javax.swing.JTextField fieldNama;
@@ -2101,7 +2143,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSplitPane jSplitPanePanitia;
-    private javax.swing.JTable jTable11;
     private javax.swing.JPanel kontenPanel;
     private javax.swing.JTextField koutaField;
     private javax.swing.JLabel kuotaLabel;
@@ -2137,6 +2178,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollTabeljuri;
     private javax.swing.JPanel statistikPeserta;
     private javax.swing.JTable tabelAspek;
+    private javax.swing.JTable tabelJuara;
     private javax.swing.JTable tabelJuri;
     private javax.swing.JTable tabelLomba;
     private javax.swing.JTable tabelPeserta;
