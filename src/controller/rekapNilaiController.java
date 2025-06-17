@@ -14,15 +14,28 @@ import java.util.*;
 public class rekapNilaiController {
 
     private double totalNilai;
+    
     public class RekapNilaiData {
     public String nama_peserta;
     public String nama_lomba;
     public double totalNilai;
 
-    public RekapNilaiData(String namaPeserta, String namaLomba, double totalNilai) {
+    public RekapNilaiData(String nama_peserta, String nama_lomba, double totalNilai) {
         this.nama_peserta = nama_peserta;
         this.nama_lomba = nama_lomba;
         this.totalNilai = totalNilai;
+    }
+    
+    public String getNama_peserta(){
+        return nama_peserta;
+    }
+    
+    public String getNama_lomba(){
+        return nama_lomba;
+    }
+    
+    public double getTotal_Nilai(){
+        return totalNilai;
     }
 
     }
@@ -58,7 +71,6 @@ public RekapNilaiData getRekapNilai(int id_peserta, int id_juri) {
         """;
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, id_peserta);
-        stmt.setInt(2, id_juri);
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
@@ -133,4 +145,36 @@ public double getTotalNilai() {
     return this.totalNilai;
 }
 
+public List<RekapNilaiData> searchRekapNilai(String keyword){
+    List<RekapNilaiData> result = new ArrayList<>();
+    keyword = "%" + keyword + "%";
+    
+    try (Connection conn = dbConnection.getConnection()){
+        String sql = """
+                     SELECT p.nama_peserta, l.nama_lomba,
+                     COALESCE(SUM(n.skor * a.presentase / 100), 0) AS total_nilai
+                     FROM peserta p
+                     JOIN lomba l ON p.id_lomba = l.id_lomba
+                     LEFT JOIN nilai n ON p.id_peserta = n.id_peserta
+                     LEFT JOIN aspek_penilaian a ON n.id_aspek = a.id_aspek
+                     WHERE p.nama_peserta LIKE ? OR l.nama_lomba LIKE ?
+                     GROUP BY p.id_peserta
+                     """;
+        
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, keyword);
+        stmt.setString(2, keyword);
+        
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            String nama_peserta = rs.getString("nama_peserta");
+            String nama_lomba = rs.getString("nama_lomba");
+            double total = rs.getDouble("total_nilai");
+            result.add(new RekapNilaiData(nama_peserta, nama_lomba, total));
+        }
+    } catch (Exception e){
+        e.printStackTrace();
+    }
+    return result;
+}
 }
