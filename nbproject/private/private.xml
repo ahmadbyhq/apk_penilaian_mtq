@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/FP/apk_penilaian_mtq/src/ui/login_fix.java</file>
-            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/FP/apk_penilaian_mtq/src/config/dbConnection.java</file>
-            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/FP/apk_penilaian_mtq/src/controller/loginController.java</file>
-            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/FP/apk_penilaian_mtq/src/main/main.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/ui/DashboardJuri_fix.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/ui/DashboardPanitia.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/ui/login_fix.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/controller/DaftarpesertaController.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/controller/StatistikController.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/model/Peserta.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/model/Juri.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/model/User.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq/src/model/Lomba.java</file>
         </group>
     </open-files>
 </project-private>

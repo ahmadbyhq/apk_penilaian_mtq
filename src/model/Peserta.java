@@ -7,14 +7,28 @@ public class Peserta {
     private Lomba id_lomba;
     private String asal;
 
-    public Peserta(String nama_peserta, Lomba id_lomba, String asal) {
-        if (id_lomba == null) {
-            throw new IllegalArgumentException("Lomba tidak boleh kosong.");
-        }
+
+    public Peserta(int id_peserta, String nama_peserta, Lomba id_lomba, String asal){
         this.id_peserta = id_peserta;
         this.nama_peserta = nama_peserta;
         this.id_lomba = id_lomba;
         this.asal = asal;
+    }
+
+
+    public Peserta(String nama_peserta, Lomba id_lomba, String asal) {
+        if (id_lomba == null) {
+            throw new IllegalArgumentException("Lomba tidak boleh kosong.");
+        }
+        // this.id_peserta = id_peserta;
+        this.nama_peserta = nama_peserta;
+        this.id_lomba = id_lomba;
+        this.asal = asal;
+    }
+
+
+    public int getIdPeserta() {
+        return id_peserta;
     }
 
     public String getNamaPeserta() {
@@ -26,6 +40,24 @@ public class Peserta {
     public String getAsal() {
         return asal;
     }
+
+    public void setIdPeserta(int id_peserta) {
+        this.id_peserta = id_peserta;
+    }
+
+    public void setNamaPeserta(String nama_peserta) {
+        this.nama_peserta = nama_peserta;
+    }
+
+    public void setLomba(Lomba id_lomba) {
+        this.id_lomba = id_lomba;
+    }
+
+    public void setAsal(String asal) {
+        this.asal = asal;
+    }
+
+
     public void infoPeserta() {
         System.out.println("=== Data Peserta ===");
         System.out.println("Nama    : " + nama_peserta);
