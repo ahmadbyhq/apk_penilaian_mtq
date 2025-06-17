@@ -1,21 +1,41 @@
 package ui;
 
 import java.awt.Color;
+import java.io.File;
+
 import controller.*;
 import java.util.*;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.*;
-import model.Juri;
+
+import model.*;
 
 public class DashboardPanitia extends javax.swing.JFrame {
 
     private StatistikController statistikController;
+    private DaftarpesertaController pesertaController;
+    private DaftarLombaController daftarLombaController;    
+    // private List<Peserta> listPesertaTabel = new ArrayList<>();
+    private List<Peserta> listPesertaTabel;
+    private List<Lomba> listLombaTabel;
+    private AspekPenilaianController aspekController;
+
+
+    
+
+    
+
+
     
     public DashboardPanitia() {
         initComponents();
         this.setLocationRelativeTo(null);
         statistikController = new StatistikController();
+        pesertaController = new DaftarpesertaController();
+        daftarLombaController = new DaftarLombaController();
+        
+        
         
         DefaultTableModel model = new DefaultTableModel(
             new Object[][]{},
@@ -116,9 +136,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         boxPerkembanganpeserta6 = new javax.swing.JPanel();
         boxPaneltabel6 = new javax.swing.JPanel();
-        boxTabel_DaftarPeserta = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabelPeserta = new javax.swing.JTable();
         boxField_DaftarPeserta = new javax.swing.JPanel();
         boxRefresh_DaftarPeserta = new javax.swing.JPanel();
         btnRefreshPeserta = new javax.swing.JButton();
@@ -136,6 +153,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         btnAddPeserta = new javax.swing.JButton();
         btnEditPeserta = new javax.swing.JButton();
         btnHapusPeserta = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelPeserta = new javax.swing.JTable();
         rightPanelLomba = new javax.swing.JPanel();
         headerNavbar7 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -155,7 +174,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         namaLombalabelLomba = new javax.swing.JLabel();
         namaLombaField = new javax.swing.JTextField();
         kuotaLabel = new javax.swing.JLabel();
-        koutaField = new javax.swing.JTextField();
+        kuotaField = new javax.swing.JTextField();
         rightPanelRekap = new javax.swing.JPanel();
         headerNavbar8 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -665,7 +684,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPaneltabel.setOpaque(false);
         boxPaneltabel.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane3.setMinimumSize(new java.awt.Dimension(825, 275));
+        jScrollPane3.setMinimumSize(new java.awt.Dimension(810, 280));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(810, 280));
 
         tabelStatistikLomba.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -686,7 +706,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelStatistikLomba.setMinimumSize(new java.awt.Dimension(825, 275));
+        tabelStatistikLomba.setMinimumSize(new java.awt.Dimension(810, 280));
+        tabelStatistikLomba.setPreferredSize(new java.awt.Dimension(810, 280));
         tabelStatistikLomba.setRowHeight(25);
         tabelStatistikLomba.setSelectionBackground(new java.awt.Color(51, 153, 0));
         tabelStatistikLomba.setShowGrid(true);
@@ -887,7 +908,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         leftBoxtabeljuri.setLayout(new java.awt.BorderLayout());
 
-        scrollTabeljuri.setMinimumSize(new java.awt.Dimension(490, 375));
+        scrollTabeljuri.setMinimumSize(null);
 
         tabelJuri.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -900,7 +921,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 "Nama Juri", "Username", "Password"
             }
         ));
-        tabelJuri.setMinimumSize(new java.awt.Dimension(490, 375));
         tabelJuri.setRowHeight(25);
         tabelJuri.setSelectionBackground(new java.awt.Color(51, 153, 0));
         tabelJuri.setSelectionForeground(new java.awt.Color(255, 255, 255));
@@ -942,46 +962,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxPaneltabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         boxPaneltabel6.setOpaque(false);
         boxPaneltabel6.setLayout(new java.awt.BorderLayout());
-
-        boxTabel_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
-        boxTabel_DaftarPeserta.setMinimumSize(new java.awt.Dimension(450, 100));
-        boxTabel_DaftarPeserta.setPreferredSize(new java.awt.Dimension(450, 100));
-        boxTabel_DaftarPeserta.setLayout(new java.awt.BorderLayout());
-
-        tabelPeserta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "No", "Nama Peserta", "Asal", "Lomba"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabelPeserta.setMinimumSize(new java.awt.Dimension(450, 100));
-        tabelPeserta.setPreferredSize(new java.awt.Dimension(450, 100));
-        tabelPeserta.setSelectionBackground(new java.awt.Color(51, 153, 0));
-        tabelPeserta.setShowGrid(true);
-        jScrollPane2.setViewportView(tabelPeserta);
-        if (tabelPeserta.getColumnModel().getColumnCount() > 0) {
-            tabelPeserta.getColumnModel().getColumn(0).setMinWidth(40);
-            tabelPeserta.getColumnModel().getColumn(0).setMaxWidth(40);
-            tabelPeserta.getColumnModel().getColumn(3).setMinWidth(200);
-            tabelPeserta.getColumnModel().getColumn(3).setMaxWidth(200);
-        }
-
-        boxTabel_DaftarPeserta.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        boxPaneltabel6.add(boxTabel_DaftarPeserta, java.awt.BorderLayout.CENTER);
 
         boxField_DaftarPeserta.setBackground(new java.awt.Color(255, 255, 255));
         boxField_DaftarPeserta.setPreferredSize(new java.awt.Dimension(275, 385));
@@ -1028,7 +1008,17 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxCRUD_DaftarPeserta.add(labelCariPeserta, gridBagConstraints);
 
         fieldCariPeserta.setBackground(new java.awt.Color(0, 102, 51));
+        fieldCariPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        fieldCariPeserta.setForeground(new java.awt.Color(255, 255, 255));
         fieldCariPeserta.setPreferredSize(new java.awt.Dimension(200, 35));
+        fieldCariPeserta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                fieldCariPesertaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fieldCariPesertaKeyReleased(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -1046,6 +1036,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxCRUD_DaftarPeserta.add(labelNamaPeserta, gridBagConstraints);
 
         fieldNamaPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        fieldNamaPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        fieldNamaPeserta.setForeground(new java.awt.Color(255, 255, 255));
         fieldNamaPeserta.setPreferredSize(new java.awt.Dimension(200, 35));
         fieldNamaPeserta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1069,6 +1061,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxCRUD_DaftarPeserta.add(labelAsalPeserta, gridBagConstraints);
 
         fieldAsalPeserta.setBackground(new java.awt.Color(0, 102, 51));
+        fieldAsalPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        fieldAsalPeserta.setForeground(new java.awt.Color(255, 255, 255));
         fieldAsalPeserta.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1107,12 +1101,22 @@ public class DashboardPanitia extends javax.swing.JFrame {
         btnAddPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAddPeserta.setForeground(new java.awt.Color(255, 255, 255));
         btnAddPeserta.setText("Tambah");
+        btnAddPeserta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPesertaActionPerformed(evt);
+            }
+        });
         boxBtn_DaftarPeserta.add(btnAddPeserta);
 
         btnEditPeserta.setBackground(new java.awt.Color(0, 102, 0));
         btnEditPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEditPeserta.setForeground(new java.awt.Color(255, 255, 255));
         btnEditPeserta.setText("Edit");
+        btnEditPeserta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditPesertaActionPerformed(evt);
+            }
+        });
         boxBtn_DaftarPeserta.add(btnEditPeserta);
 
         btnHapusPeserta.setBackground(new java.awt.Color(0, 102, 0));
@@ -1129,6 +1133,40 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxField_DaftarPeserta.add(boxBtn_DaftarPeserta, java.awt.BorderLayout.PAGE_END);
 
         boxPaneltabel6.add(boxField_DaftarPeserta, java.awt.BorderLayout.EAST);
+
+        jScrollPane2.setMinimumSize(null);
+
+        tabelPeserta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "No", "Nama Peserta", "Asal", "Lomba"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelPeserta.setRowHeight(25);
+        tabelPeserta.setSelectionBackground(new java.awt.Color(51, 153, 0));
+        tabelPeserta.setShowGrid(true);
+        jScrollPane2.setViewportView(tabelPeserta);
+        if (tabelPeserta.getColumnModel().getColumnCount() > 0) {
+            tabelPeserta.getColumnModel().getColumn(0).setMinWidth(40);
+            tabelPeserta.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelPeserta.getColumnModel().getColumn(3).setMinWidth(200);
+            tabelPeserta.getColumnModel().getColumn(3).setMaxWidth(200);
+        }
+
+        boxPaneltabel6.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         boxPerkembanganpeserta6.add(boxPaneltabel6, java.awt.BorderLayout.CENTER);
 
@@ -1166,6 +1204,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxTabel_DaftarLomba.setPreferredSize(new java.awt.Dimension(500, 100));
         boxTabel_DaftarLomba.setLayout(new java.awt.BorderLayout());
 
+        jScrollPane4.setMinimumSize(null);
+
         tabelLomba.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -1185,6 +1225,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelLomba.setRowHeight(25);
+        tabelLomba.setSelectionBackground(new java.awt.Color(51, 153, 0));
         tabelLomba.setShowGrid(true);
         jScrollPane4.setViewportView(tabelLomba);
 
@@ -1220,6 +1262,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
         btnAddLomba.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAddLomba.setForeground(new java.awt.Color(255, 255, 255));
         btnAddLomba.setText("Tambah");
+        btnAddLomba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddLombaActionPerformed(evt);
+            }
+        });
         boxBtn_DaftarLomba.add(btnAddLomba);
 
         btnEditLomba.setBackground(new java.awt.Color(0, 102, 0));
@@ -1237,6 +1284,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
         btnHapusLomba.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHapusLomba.setForeground(new java.awt.Color(255, 255, 255));
         btnHapusLomba.setText("Hapus");
+        btnHapusLomba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusLombaActionPerformed(evt);
+            }
+        });
         boxBtn_DaftarLomba.add(btnHapusLomba);
 
         boxField_DaftarLomba.add(boxBtn_DaftarLomba, java.awt.BorderLayout.PAGE_END);
@@ -1255,6 +1307,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxCRUD_DaftarLomba.add(namaLombalabelLomba, gridBagConstraints);
 
         namaLombaField.setBackground(new java.awt.Color(0, 102, 0));
+        namaLombaField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        namaLombaField.setForeground(new java.awt.Color(255, 255, 255));
         namaLombaField.setPreferredSize(new java.awt.Dimension(200, 35));
         namaLombaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1272,23 +1326,25 @@ public class DashboardPanitia extends javax.swing.JFrame {
         kuotaLabel.setText("Kouta");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
         boxCRUD_DaftarLomba.add(kuotaLabel, gridBagConstraints);
 
-        koutaField.setBackground(new java.awt.Color(0, 102, 0));
-        koutaField.setPreferredSize(new java.awt.Dimension(200, 35));
-        koutaField.addActionListener(new java.awt.event.ActionListener() {
+        kuotaField.setBackground(new java.awt.Color(0, 102, 0));
+        kuotaField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        kuotaField.setForeground(new java.awt.Color(255, 255, 255));
+        kuotaField.setPreferredSize(new java.awt.Dimension(200, 35));
+        kuotaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                koutaFieldActionPerformed(evt);
+                kuotaFieldActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
-        boxCRUD_DaftarLomba.add(koutaField, gridBagConstraints);
+        boxCRUD_DaftarLomba.add(kuotaField, gridBagConstraints);
 
         boxField_DaftarLomba.add(boxCRUD_DaftarLomba, java.awt.BorderLayout.CENTER);
 
@@ -1442,6 +1498,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxTabel_AspekPenilaian.setPreferredSize(new java.awt.Dimension(500, 100));
         boxTabel_AspekPenilaian.setLayout(new java.awt.BorderLayout());
 
+        jScrollPane1.setMinimumSize(null);
+
         tabelAspek.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1461,7 +1519,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelAspek.setPreferredSize(new java.awt.Dimension(300, 60));
+        tabelAspek.setRowHeight(25);
+        tabelAspek.setSelectionBackground(new java.awt.Color(51, 153, 0));
         tabelAspek.setShowGrid(true);
         jScrollPane1.setViewportView(tabelAspek);
         if (tabelAspek.getColumnModel().getColumnCount() > 0) {
@@ -1488,6 +1547,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
         btnRefreshAspek.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRefreshAspek.setForeground(new java.awt.Color(255, 255, 255));
         btnRefreshAspek.setText("Refresh");
+        btnRefreshAspek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshAspekActionPerformed(evt);
+            }
+        });
         boxRefresh_AspekPenilaian.add(btnRefreshAspek, "card2");
 
         box_AspekPenilaian.add(boxRefresh_AspekPenilaian, java.awt.BorderLayout.PAGE_START);
@@ -1544,6 +1608,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxField_AspekPenilaian.add(labelAspek, gridBagConstraints);
 
         namaAspekfield.setBackground(new java.awt.Color(0, 102, 0));
+        namaAspekfield.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        namaAspekfield.setForeground(new java.awt.Color(255, 255, 255));
         namaAspekfield.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1573,6 +1639,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boxField_AspekPenilaian.add(presentaseLabel, gridBagConstraints);
 
         presentaseField.setBackground(new java.awt.Color(0, 102, 0));
+        presentaseField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        presentaseField.setForeground(new java.awt.Color(255, 255, 255));
         presentaseField.setPreferredSize(new java.awt.Dimension(200, 35));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1661,6 +1729,9 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void daftarPesertaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftarPesertaMousePressed
         // TODO add your handling code here:
+        tampilkanPeserta();
+        pesertaController.isiComboBoxLomba(comboboxLombaPeserta);
+        
         rightPanelPeserta.setVisible(true);
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
@@ -1681,6 +1752,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void daftarLombaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftarLombaMousePressed
         // TODO add your handling code here:
+        tampilkanLomba();
         rightPanelLomba.setVisible(true);
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
@@ -1742,9 +1814,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         tampilkanDataJuri();
-        StatistikController statistikController = new StatistikController();
         statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
         statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba);
+        tampilkanPeserta();
+        tampilkanLomba();
+        tampilkanAspekPenilaian();
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -1869,6 +1943,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void aspekLombaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aspekLombaMousePressed
         // TODO add your handling code here:
+        pesertaController.isiComboBoxLomba(comboboxLombaAspek);
+        tampilkanAspekPenilaian();
         rightPanelAspek.setVisible(true);
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
@@ -1888,39 +1964,273 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void btnAddAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAspekActionPerformed
         // TODO add your handling code here:
+        
+        String namaAspek = namaAspekfield.getText().trim();
+        String namaLomba = (String) comboboxLombaAspek.getSelectedItem();
+        String presentaseText = presentaseField.getText().trim();
+
+        if (namaAspek.isEmpty() || namaLomba == null || presentaseText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Semua field harus diisi.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int presentase;
+        try {
+            presentase = Integer.parseInt(presentaseText);
+            if (presentase < 1 || presentase > 100) {
+                JOptionPane.showMessageDialog(this, "Presentase harus antara 1-100.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Presentase harus berupa angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        DaftarpesertaController lombaController = new DaftarpesertaController();
+        Lomba lomba = lombaController.getLombaByNama(namaLomba);
+        if (lomba == null) {
+            JOptionPane.showMessageDialog(this, "Lomba tidak ditemukan.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        AspekPenilaian aspek = new AspekPenilaian(
+            0,
+            lomba.getIdLomba(),
+            namaAspek,
+            lomba.getNamaLomba(),
+            presentase
+        );
+
+        AspekPenilaianController aspekController = new AspekPenilaianController();
+
+        boolean sukses = aspekController.tambahAspek(aspek);
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Aspek penilaian berhasil ditambahkan.");
+            tampilkanAspekPenilaian();
+        } else {
+            JOptionPane.showMessageDialog(this, "Total presentase aspek melebihi 100%!", "Gagal", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnAddAspekActionPerformed
 
     private void btnEditAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditAspekActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = tabelAspek.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih aspek yang ingin diedit.");
+            return;
+        }
+
+        // Ambil data lama
+        int idAspek = Integer.parseInt(tabelAspek.getValueAt(selectedRow, 0).toString());
+        String namaLama = tabelAspek.getValueAt(selectedRow, 1).toString();
+        String namaLombaLama = tabelAspek.getValueAt(selectedRow, 2).toString();
+        String presentaseLamaStr = tabelAspek.getValueAt(selectedRow, 3).toString();
+
+        // Input nama aspek
+        String namaBaru = JOptionPane.showInputDialog(this, "Edit Nama Aspek:", namaLama);
+        if (namaBaru == null || namaBaru.trim().isEmpty()) return;
+
+
+
+        DaftarpesertaController lombaController = new DaftarpesertaController();
+        List<Lomba> daftarLomba = lombaController.getSemuaLomba();
+
+        if (daftarLomba == null || daftarLomba.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data lomba yang tersedia.");
+            return;
+        }
+
+        // Ambil nama-namanya
+        String[] pilihanLomba = daftarLomba.stream()
+                .map(Lomba::getNamaLomba)
+                .toArray(String[]::new);
+
+        // Tampilkan combo box di JOptionPane
+        String namaLombaBaru = (String) JOptionPane.showInputDialog(
+            this,
+            "Pilih Lomba Baru:",
+            "Edit Lomba",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            pilihanLomba,
+            namaLombaLama
+        );
+
+        if (namaLombaBaru == null || namaLombaBaru.trim().isEmpty()) return;
+
+        Lomba lombaBaru = lombaController.getLombaByNama(namaLombaBaru);
+        if (lombaBaru == null) {
+            JOptionPane.showMessageDialog(this, "Lomba tidak ditemukan!");
+            return;
+        }
+
+        
+        String presentaseStr = JOptionPane.showInputDialog(this, "Edit Presentase:", presentaseLamaStr);
+        if (presentaseStr == null || presentaseStr.trim().isEmpty()) return;
+
+        int presentase;
+        try {
+            presentase = Integer.parseInt(presentaseStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Presentase harus berupa angka!");
+            return;
+        }
+
+        // Buat objek aspek baru
+        AspekPenilaian aspek = new AspekPenilaian(
+            idAspek,
+            lombaBaru.getIdLomba(),
+            namaBaru,
+            namaLombaBaru,
+            presentase
+        );
+
+        AspekPenilaianController aspekController = new AspekPenilaianController();
+        boolean sukses = aspekController.editAspek(aspek);
+
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Aspek berhasil diupdate.");
+            tampilkanAspekPenilaian();
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal memperbarui aspek.");
+        }
+
     }//GEN-LAST:event_btnEditAspekActionPerformed
 
     private void btnDeleteAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAspekActionPerformed
         // TODO add your handling code here:
+
+        int selectedRow = tabelAspek.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih aspek yang ingin dihapus.");
+            return;
+        }
+
+        int konfirmasi = JOptionPane.showConfirmDialog(
+            this,
+            "Apakah Anda yakin ingin menghapus aspek ini?",
+            "Konfirmasi Hapus",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (konfirmasi != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int idAspek = Integer.parseInt(tabelAspek.getValueAt(selectedRow, 0).toString());
+        AspekPenilaianController aspekController = new AspekPenilaianController();
+        boolean sukses = aspekController.hapusAspek(idAspek);
+
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Aspek berhasil dihapus.");
+            tampilkanAspekPenilaian();
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menghapus aspek.");
+        }
     }//GEN-LAST:event_btnDeleteAspekActionPerformed
 
     private void btnHapusPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusPesertaActionPerformed
         // TODO add your handling code here:
+            int selectedRow = tabelPeserta.getSelectedRow();
+
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Pilih peserta yang ingin dihapus terlebih dahulu.");
+                return;
+            }
+
+            Peserta peserta = listPesertaTabel.get(selectedRow);
+
+            int konfirmasi = JOptionPane.showConfirmDialog(
+                this,
+                "Apakah Anda yakin ingin menghapus peserta \"" + peserta.getNamaPeserta() + "\"?",
+                "Konfirmasi Hapus",
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if (konfirmasi == JOptionPane.YES_OPTION) {
+                boolean sukses = pesertaController.deletePeserta(peserta.getIdPeserta());
+                if (sukses) {
+                    JOptionPane.showMessageDialog(this, "Peserta berhasil dihapus.");
+                    tampilkanPeserta();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Gagal menghapus peserta.");
+                }
+            }
     }//GEN-LAST:event_btnHapusPesertaActionPerformed
 
     private void btnRefreshPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPesertaActionPerformed
         // TODO add your handling code here:
+        tampilkanPeserta();
+        pesertaController.isiComboBoxLomba(comboboxLombaPeserta);
     }//GEN-LAST:event_btnRefreshPesertaActionPerformed
 
     private void btnImportPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportPesertaActionPerformed
         // TODO add your handling code here:
+
+        JFileChooser fileChooser = new JFileChooser();
+        int pilihan = fileChooser.showOpenDialog(this);
+
+        if (pilihan == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            boolean sukses = pesertaController.importPesertaDariCSV(file);
+
+            if (sukses) {
+                JOptionPane.showMessageDialog(this, "Import berhasil.");
+                tampilkanPeserta();
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal mengimpor file.");
+            }
+        }
     }//GEN-LAST:event_btnImportPesertaActionPerformed
 
     private void btnEditLombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditLombaActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tabelLomba.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih lomba yang ingin diedit.");
+            return;
+        }
+
+        Lomba lombaLama = listLombaTabel.get(selectedRow);
+        String namaBaru = JOptionPane.showInputDialog(this, "Masukkan nama lomba baru:", lombaLama.getNamaLomba());
+        if (namaBaru == null || namaBaru.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama tidak boleh kosong.");
+            return;
+        }
+
+        String kuotaStr = JOptionPane.showInputDialog(this, "Masukkan kuota baru:", lombaLama.getKuota());
+        if (kuotaStr == null || kuotaStr.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Kuota tidak boleh kosong.");
+            return;
+        }
+
+
+        if (namaBaru.isEmpty() || kuotaStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama dan kuota tidak boleh kosong.");
+            return;
+        }
+
+        try {
+            int kuotaBaru = Integer.parseInt(kuotaStr);
+            Lomba lombaBaru = new Lomba(lombaLama.getId(), namaBaru, kuotaBaru);
+            if (daftarLombaController.editLomba(lombaLama.getId(), lombaBaru)) {
+                JOptionPane.showMessageDialog(this, "Lomba berhasil diedit.");
+                tampilkanLomba();
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal mengedit lomba.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Kuota harus berupa angka.");
+        }
     }//GEN-LAST:event_btnEditLombaActionPerformed
 
     private void fieldNamaPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNamaPesertaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldNamaPesertaActionPerformed
 
-    private void koutaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_koutaFieldActionPerformed
+    private void kuotaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kuotaFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_koutaFieldActionPerformed
+    }//GEN-LAST:event_kuotaFieldActionPerformed
 
     private void namaLombaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaLombaFieldActionPerformed
         // TODO add your handling code here:
@@ -1928,7 +2238,151 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void btnRefreshLombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshLombaActionPerformed
         // TODO add your handling code here:
+        tampilkanLomba();
     }//GEN-LAST:event_btnRefreshLombaActionPerformed
+
+    private void fieldCariPesertaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCariPesertaKeyReleased
+        // TODO add your handling code here:
+//        pesertaController.cariPeserta(tabelPeserta, fieldCariPeserta.getText());
+    }//GEN-LAST:event_fieldCariPesertaKeyReleased
+
+    private void fieldCariPesertaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCariPesertaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            pesertaController.cariPeserta(tabelPeserta, fieldCariPeserta.getText());
+        }
+    }//GEN-LAST:event_fieldCariPesertaKeyPressed
+
+    private void btnAddPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPesertaActionPerformed
+        // TODO add your handling code here:
+
+        String nama = fieldNamaPeserta.getText();
+        String asal = fieldAsalPeserta.getText();
+        String namaLomba = (String) comboboxLombaPeserta.getSelectedItem();
+
+        // Validasi input
+        if (nama.isEmpty() || asal.isEmpty() || namaLomba == null || namaLomba.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Semua field harus diisi!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Lomba lombaDipilih = pesertaController.getLombaByNama(namaLomba);
+        Peserta peserta = new Peserta(nama, lombaDipilih, asal);
+
+        // simpan ke database
+        boolean sukses = pesertaController.tambahPeserta(peserta);
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Peserta berhasil ditambahkan.");
+            fieldNamaPeserta.setText("");
+            fieldAsalPeserta.setText("");
+            tampilkanPeserta();
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menambahkan peserta.");
+        }
+
+    }//GEN-LAST:event_btnAddPesertaActionPerformed
+
+    private void btnEditPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPesertaActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tabelPeserta.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih peserta terlebih dahulu.");
+            return;
+        }
+
+        Peserta pesertaLama = listPesertaTabel.get(selectedRow);
+        String namaLama = pesertaLama.getNamaPeserta();
+        String asalLama = pesertaLama.getAsal();
+        String namaLombaLama = pesertaLama.getLomba().getNamaLomba();
+
+        String namaBaru = JOptionPane.showInputDialog(this, "Edit Nama Peserta:", namaLama);
+        if (namaBaru == null) return;
+
+        String asalBaru = JOptionPane.showInputDialog(this, "Edit Asal Peserta:", asalLama);
+        if (asalBaru == null) return;
+
+        // Pilih lomba
+        List<Lomba> daftarLomba = pesertaController.getSemuaLomba();
+        String[] pilihanLomba = daftarLomba.stream().map(Lomba::getNamaLomba).toArray(String[]::new);
+        String namaLombaBaru = (String) JOptionPane.showInputDialog(
+            this,
+            "Pilih Lomba Baru:",
+            "Edit Lomba",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            pilihanLomba,
+            namaLombaLama
+        );
+        if (namaLombaBaru == null) return;
+
+        Lomba lombaBaru = pesertaController.getLombaByNama(namaLombaBaru);
+        if (lombaBaru == null) {
+            JOptionPane.showMessageDialog(this, "Lomba tidak ditemukan!");
+            return;
+        }
+
+        Peserta pesertaBaru = new Peserta(namaBaru, lombaBaru, asalBaru);
+        int idPeserta = pesertaLama.getIdPeserta();
+
+        boolean sukses = pesertaController.editPeserta(idPeserta, pesertaBaru);
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Data peserta berhasil diupdate.");
+            tampilkanPeserta();
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal memperbarui data peserta.");
+        }
+
+    }//GEN-LAST:event_btnEditPesertaActionPerformed
+
+    private void btnAddLombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLombaActionPerformed
+        // TODO add your handling code here:
+            String nama = namaLombaField.getText();
+            String kuotaStr = kuotaField.getText();
+
+            if (nama.isEmpty() || kuotaStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nama lomba dan kuota tidak boleh kosong.");
+                return;
+            }
+
+            try {
+                int kuota = Integer.parseInt(kuotaStr);
+                Lomba lombaBaru = new Lomba(0, nama, kuota);
+                if (daftarLombaController.tambahLomba(lombaBaru)) {
+                    JOptionPane.showMessageDialog(this, "Lomba berhasil ditambahkan.");
+                    tampilkanLomba();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Gagal menambahkan lomba.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Kuota harus berupa angka.");
+            }
+    }//GEN-LAST:event_btnAddLombaActionPerformed
+
+    private void btnHapusLombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusLombaActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tabelLomba.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih lomba yang ingin dihapus.");
+            return;
+        }
+
+        Lomba lomba = listLombaTabel.get(selectedRow);
+        int konfirmasi = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus lomba ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+        if (konfirmasi == JOptionPane.YES_OPTION) {
+            if (daftarLombaController.hapusLomba(lomba.getId())) {
+                JOptionPane.showMessageDialog(this, "Lomba berhasil dihapus.");
+                tampilkanLomba();
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal menghapus lomba.");
+            }
+        }
+    }//GEN-LAST:event_btnHapusLombaActionPerformed
+
+    private void btnRefreshAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshAspekActionPerformed
+        // TODO add your handling code here:
+        tampilkanAspekPenilaian();
+    }//GEN-LAST:event_btnRefreshAspekActionPerformed
 
     
     
@@ -1949,6 +2403,60 @@ public class DashboardPanitia extends javax.swing.JFrame {
             model.addRow(row);
         }
     }
+
+    private void tampilkanPeserta() {
+        listPesertaTabel = pesertaController.getSemuaPeserta();
+        DefaultTableModel model = (DefaultTableModel) tabelPeserta.getModel();
+        model.setRowCount(0);
+
+        int no = 1;
+        for (Peserta p : listPesertaTabel) {
+            model.addRow(new Object[]{
+                no++,
+                p.getNamaPeserta(),
+                p.getAsal(),
+                p.getLomba().getNamaLomba()
+            });
+        }
+    }
+
+    private void tampilkanLomba(){
+        listLombaTabel = daftarLombaController.getSemuaLomba();
+        DefaultTableModel model = (DefaultTableModel) tabelLomba.getModel();
+        model.setRowCount(0);
+
+        for (Lomba lomba : listLombaTabel) {
+            Object[] row = new Object[] {
+                lomba.getNamaLomba(),
+                lomba.getKuota()
+            };
+            model.addRow(row);
+        }
+    }
+
+    public void tampilkanAspekPenilaian() {
+        DefaultTableModel model = (DefaultTableModel) tabelAspek.getModel();
+        model.setRowCount(0); // Kosongkan isi tabel sebelum ditampilkan ulang
+
+        AspekPenilaianController controller = new AspekPenilaianController();
+        List<AspekPenilaian> daftarAspek = controller.getSemuaAspek();
+
+        int no = 1;
+        for (AspekPenilaian aspek : daftarAspek) {
+            model.addRow(new Object[] {
+                no++,
+                aspek.getNamaAspek(),
+                aspek.getNamaLomba(),
+                aspek.getPresentase()
+            });
+        }
+    }
+
+
+
+
+
+
     
 
 
@@ -2028,7 +2536,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JPanel boxTabel;
     private javax.swing.JPanel boxTabel_AspekPenilaian;
     private javax.swing.JPanel boxTabel_DaftarLomba;
-    private javax.swing.JPanel boxTabel_DaftarPeserta;
     private javax.swing.JPanel box_AspekPenilaian;
     private javax.swing.JButton btnAddAspek;
     private javax.swing.JButton btnAddLomba;
@@ -2103,7 +2610,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPanePanitia;
     private javax.swing.JTable jTable11;
     private javax.swing.JPanel kontenPanel;
-    private javax.swing.JTextField koutaField;
+    private javax.swing.JTextField kuotaField;
     private javax.swing.JLabel kuotaLabel;
     private javax.swing.JLabel labelAsalPeserta;
     private javax.swing.JLabel labelAspek;
