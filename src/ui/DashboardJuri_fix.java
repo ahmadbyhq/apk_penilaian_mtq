@@ -91,6 +91,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         fieldBeriNilai = new javax.swing.JTextField();
         boxBtnAddnilai = new javax.swing.JPanel();
         beriNilaiBtn = new javax.swing.JButton();
+        btnEditNilai = new javax.swing.JButton();
         boxSouthFilter = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -470,7 +471,6 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         boxtabelNilai.setLayout(new java.awt.BorderLayout());
 
         scrollTabeljuri.setMinimumSize(new java.awt.Dimension(490, 600));
-        scrollTabeljuri.setOpaque(false);
         scrollTabeljuri.setPreferredSize(new java.awt.Dimension(820, 1000));
 
         tabelJuri.setModel(new javax.swing.table.DefaultTableModel(
@@ -567,6 +567,16 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 50);
         boxFieldJuri.add(boxBtnAddnilai, gridBagConstraints);
+
+        btnEditNilai.setBackground(new java.awt.Color(0, 102, 0));
+        btnEditNilai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditNilai.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditNilai.setText("Edit Nilai");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
+        boxFieldJuri.add(btnEditNilai, gridBagConstraints);
 
         boxActJuri.add(boxFieldJuri, java.awt.BorderLayout.CENTER);
 
@@ -725,6 +735,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JPanel boxRefresh;
     private javax.swing.JPanel boxSouthFilter;
     private javax.swing.JPanel boxtabelNilai;
+    private javax.swing.JButton btnEditNilai;
     private javax.swing.JPanel cardTotalJuri;
     private javax.swing.JPanel cardTotalLomba;
     private javax.swing.JPanel cardTotalPeserta;
