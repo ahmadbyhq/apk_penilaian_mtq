@@ -22,9 +22,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private AspekPenilaianController aspekController;
 
 
-    
-
-    
 
 
     
@@ -2485,7 +2482,29 @@ public class DashboardPanitia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshAspekActionPerformed
 
     private void RefreshBtnJuaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnJuaraActionPerformed
-        //function daftar juara summon sini
+             try {
+        daftarJuaraController controller = new daftarJuaraController();
+        List<Juara> listJuara = controller.getDataJuara();
+
+        DefaultTableModel model = (DefaultTableModel) tabelJuara.getModel();
+        model.setRowCount(0); // clear table
+
+        int no = 1;
+        for (Juara j : listJuara) {
+            model.addRow(new Object[] {
+                no++, 
+                j.getNamaPeserta(), 
+                j.getNamaLomba(), 
+                j.getTotalNilai(), 
+                j.getJuara()
+            });
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Gagal mengambil data juara: " + e.getMessage());
+        e.printStackTrace();
+    }
+                //function daftar juara summon sini
         // TODO add your handling code here:
     }//GEN-LAST:event_RefreshBtnJuaraActionPerformed
 
