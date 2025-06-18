@@ -4,11 +4,12 @@
  */
 package ui;
 import controller.*;
-import java.util.*;
 import java.awt.Color;
-
+import java.util.*;
+import config.dbConnection;
 import javax.swing.JOptionPane;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 import model.*;
 /**
  *
@@ -91,9 +92,8 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         fieldBeriNilai = new javax.swing.JTextField();
         boxBtnAddnilai = new javax.swing.JPanel();
         beriNilaiBtn = new javax.swing.JButton();
-        btnEditNilai = new javax.swing.JButton();
         boxSouthFilter = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxPilihLombaPenilaian = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -568,16 +568,6 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 50);
         boxFieldJuri.add(boxBtnAddnilai, gridBagConstraints);
 
-        btnEditNilai.setBackground(new java.awt.Color(0, 102, 0));
-        btnEditNilai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEditNilai.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditNilai.setText("Edit Nilai");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
-        boxFieldJuri.add(btnEditNilai, gridBagConstraints);
-
         boxActJuri.add(boxFieldJuri, java.awt.BorderLayout.CENTER);
 
         boxCRUDjuri.add(boxActJuri, java.awt.BorderLayout.SOUTH);
@@ -587,24 +577,34 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         boxSouthFilter.setPreferredSize(new java.awt.Dimension(850, 50));
         boxSouthFilter.setLayout(new java.awt.GridBagLayout());
 
-        jComboBox1.setBackground(new java.awt.Color(0, 102, 0));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setMinimumSize(new java.awt.Dimension(150, 30));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(150, 30));
+        jComboBoxPilihLombaPenilaian.setBackground(new java.awt.Color(0, 102, 0));
+        jComboBoxPilihLombaPenilaian.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jComboBoxPilihLombaPenilaian.setForeground(new java.awt.Color(255, 255, 255));
+        jComboBoxPilihLombaPenilaian.setModel(new javax.swing.DefaultComboBoxModel<>());
+        jComboBoxPilihLombaPenilaian.setMinimumSize(new java.awt.Dimension(150, 30));
+        jComboBoxPilihLombaPenilaian.setPreferredSize(new java.awt.Dimension(150, 30));
+        jComboBoxPilihLombaPenilaian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPilihLombaPenilaianActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 25);
-        boxSouthFilter.add(jComboBox1, gridBagConstraints);
+        boxSouthFilter.add(jComboBoxPilihLombaPenilaian, gridBagConstraints);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -696,6 +696,101 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba); 
     }//GEN-LAST:event_formWindowOpened
 
+    private void jComboBoxPilihLombaPenilaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPilihLombaPenilaianActionPerformed
+        // TODO add your handling code here:
+        tampilkanPesertaBerdasarkanLomba();
+    }//GEN-LAST:event_jComboBoxPilihLombaPenilaianActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        isiComboBoxLomba();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void isiComboBoxLomba() {
+        penilaianPesertaController controller = new penilaianPesertaController();
+        List<LombaItem> list = controller.getListLomba();
+    
+        jComboBoxPilihLombaPenilaian.removeAllItems();
+        for (LombaItem item : list) {
+            jComboBoxPilihLombaPenilaian.addItem(item);
+        }
+    }
+
+    private void tampilkanPesertaBerdasarkanLomba() {
+        LombaItem item = (LombaItem) jComboBoxPilihLombaPenilaian.getSelectedItem();
+        if (item == null) return;
+    
+        int idLomba = item.getIdLomba();
+    
+        DefaultTableModel model = new DefaultTableModel();
+    
+        List<String> kolomAspek = new ArrayList<>();
+        try {
+            Connection conn = dbConnection.getConnection();
+    
+            // Ambil aspek berdasarkan id_lomba
+            String sqlAspek = "SELECT nama_aspek FROM aspek_penilaian WHERE id_lomba = ?";
+            PreparedStatement psAspek = conn.prepareStatement(sqlAspek);
+            psAspek.setInt(1, idLomba);
+            ResultSet rsAspek = psAspek.executeQuery();
+    
+            model.addColumn("Nama Peserta");
+            while (rsAspek.next()) {
+                String namaAspek = rsAspek.getString("nama_aspek");
+                kolomAspek.add(namaAspek);
+                model.addColumn(namaAspek);
+            }
+    
+            rsAspek.close();
+            psAspek.close();
+    
+            // Ambil peserta & nilai per aspek
+            String sqlPeserta = "SELECT p.nama_peserta, a.nama_aspek, n.skor " +
+                                "FROM nilai n " +
+                                "JOIN peserta p ON n.id_peserta = p.id_peserta " +
+                                "JOIN aspek_penilaian a ON n.id_aspek = a.id_aspek " +
+                                "WHERE n.id_lomba = ?";
+    
+            PreparedStatement ps = conn.prepareStatement(sqlPeserta);
+            ps.setInt(1, idLomba);
+            ResultSet rs = ps.executeQuery();
+    
+            // Map: nama_peserta -> Map<nama_aspek, skor>
+            Map<String, Map<String, Integer>> dataMap = new LinkedHashMap<>();
+    
+            while (rs.next()) {
+                String namaPeserta = rs.getString("nama_peserta");
+                String aspek = rs.getString("nama_aspek");
+                int skor = rs.getInt("skor");
+    
+                dataMap.putIfAbsent(namaPeserta, new HashMap<>());
+                dataMap.get(namaPeserta).put(aspek, skor);
+            }
+    
+            // Bangun baris tabel
+            for (String namaPeserta : dataMap.keySet()) {
+                Map<String, Integer> nilaiAspek = dataMap.get(namaPeserta);
+                Object[] row = new Object[kolomAspek.size() + 1];
+                row[0] = namaPeserta;
+                for (int i = 0; i < kolomAspek.size(); i++) {
+                    row[i + 1] = nilaiAspek.getOrDefault(kolomAspek.get(i), null);
+                }
+                model.addRow(row);
+            }
+    
+            rs.close(); ps.close(); conn.close();
+    
+        } catch (SQLException e) {
+            System.out.println("Gagal ambil data peserta: " + e.getMessage());
+        }
+    
+        tabelJuri.setModel(model);
+    }
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -735,7 +830,6 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JPanel boxRefresh;
     private javax.swing.JPanel boxSouthFilter;
     private javax.swing.JPanel boxtabelNilai;
-    private javax.swing.JButton btnEditNilai;
     private javax.swing.JPanel cardTotalJuri;
     private javax.swing.JPanel cardTotalLomba;
     private javax.swing.JPanel cardTotalPeserta;
@@ -746,7 +840,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JLabel headerTxt;
     private javax.swing.JLabel inputNilaiLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<LombaItem> jComboBoxPilihLombaPenilaian;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
@@ -780,5 +874,6 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JLabel totalJuritxt;
     private javax.swing.JLabel totalLombatxt;
     private javax.swing.JLabel totalPesertatxt;
+
     // End of variables declaration//GEN-END:variables
 }
