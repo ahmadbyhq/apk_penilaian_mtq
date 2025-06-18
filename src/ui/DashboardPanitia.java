@@ -193,10 +193,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
         jScrollPane11 = new javax.swing.JScrollPane();
         tabelRekapNilai = new javax.swing.JTable();
         panelBoxRekap = new javax.swing.JPanel();
-        btnRefreshNilai = new javax.swing.JButton();
         btnEksporPDF = new javax.swing.JButton();
         labelSearch = new javax.swing.JLabel();
         fieldCariRekap = new javax.swing.JTextField();
+        btnRefreshRekapNilai = new javax.swing.JButton();
         rightPanelJuara = new javax.swing.JPanel();
         headerNavbar9 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -1429,20 +1429,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
         panelBoxRekap.setPreferredSize(new java.awt.Dimension(850, 60));
         panelBoxRekap.setLayout(new java.awt.GridBagLayout());
 
-        btnRefreshNilai.setBackground(new java.awt.Color(0, 102, 0));
-        btnRefreshNilai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnRefreshNilai.setForeground(new java.awt.Color(255, 255, 255));
-        btnRefreshNilai.setText("Refresh");
-        btnRefreshNilai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshNilaiActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        panelBoxRekap.add(btnRefreshNilai, gridBagConstraints);
-
         btnEksporPDF.setBackground(new java.awt.Color(0, 102, 0));
         btnEksporPDF.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEksporPDF.setForeground(new java.awt.Color(255, 255, 255));
@@ -1486,6 +1472,21 @@ public class DashboardPanitia extends javax.swing.JFrame {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         panelBoxRekap.add(fieldCariRekap, gridBagConstraints);
+
+        btnRefreshRekapNilai.setBackground(new java.awt.Color(0, 102, 0));
+        btnRefreshRekapNilai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRefreshRekapNilai.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefreshRekapNilai.setText("Refresh");
+        btnRefreshRekapNilai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshRekapNilaiActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 50);
+        panelBoxRekap.add(btnRefreshRekapNilai, gridBagConstraints);
 
         boxPerkembanganpeserta8.add(panelBoxRekap, java.awt.BorderLayout.NORTH);
 
@@ -1955,6 +1956,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         tampilkanLomba();
         tampilkanAspekPenilaian();
         tampilkanJuara();
+        tampilkanRekapNilai();
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -2305,20 +2307,38 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private void btnImportPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportPesertaActionPerformed
         // TODO add your handling code here:
 
+        // JFileChooser fileChooser = new JFileChooser();
+        // int pilihan = fileChooser.showOpenDialog(this);
+
+        // if (pilihan == JFileChooser.APPROVE_OPTION) {
+        //     File file = fileChooser.getSelectedFile();
+        //     boolean sukses = pesertaController.importPesertaDariCSV(file);
+
+        //     if (sukses) {
+        //         JOptionPane.showMessageDialog(this, "Import berhasil.");
+        //         tampilkanPeserta();
+        //     } else {
+        //         JOptionPane.showMessageDialog(this, "Gagal mengimpor file.");
+        //     }
+        // }
+
         JFileChooser fileChooser = new JFileChooser();
         int pilihan = fileChooser.showOpenDialog(this);
 
         if (pilihan == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            boolean sukses = pesertaController.importPesertaDariCSV(file);
+            String hasilImport = pesertaController.importPesertaDariCSV(file);
 
-            if (sukses) {
+            if (hasilImport.equals("SUKSES")) {
                 JOptionPane.showMessageDialog(this, "Import berhasil.");
-                tampilkanPeserta();
+            } else if (hasilImport.startsWith("ERROR")) {
+                JOptionPane.showMessageDialog(this, "Gagal mengimpor file:\n" + hasilImport);
             } else {
-                JOptionPane.showMessageDialog(this, "Gagal mengimpor file.");
+                JOptionPane.showMessageDialog(this, hasilImport); // tampilkan baris yang gagal
             }
-        }
+
+            tampilkanPeserta(); // tetap tampilkan peserta meski sebagian gagal
+    }
     }//GEN-LAST:event_btnImportPesertaActionPerformed
 
     private void btnEditLombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditLombaActionPerformed
@@ -2617,7 +2637,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 document.open();
 
                 document.add(new Paragraph("Daftar Rekap Nilai Lomba MTQ"));
-                document.add(new Paragraph(" ")); // spacer
+                document.add(new Paragraph(" ")); 
 
                 PdfPTable pdfTable = new PdfPTable(tabelJuara.getColumnCount());
 
@@ -2646,18 +2666,17 @@ public class DashboardPanitia extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_eksporPDFJuaraActionPerformed
 
-    private void btnRefreshNilaiActionPerformed(java.awt.event.ActionEvent evt) {        
+    private void btnRefreshRekapNilaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshRekapNilaiActionPerformed
+        // TODO add your handling code here:
         tampilkanRekapNilai();
-
-
-    }
+    }//GEN-LAST:event_btnRefreshRekapNilaiActionPerformed
 
 
     public void tampilkanRekapNilai(){
         List<Integer> daftarPeserta = rekapNilaiController.getAllPesertaIDs();
     
         DefaultTableModel model = (DefaultTableModel) tabelRekapNilai.getModel();
-        model.setRowCount(0); // clear table
+        model.setRowCount(0);
     
         rekapNilaiController controller = new rekapNilaiController();
     
@@ -2866,8 +2885,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRefreshAspek;
     private javax.swing.JButton btnRefreshLomba;
-    private javax.swing.JButton btnRefreshNilai;
     private javax.swing.JButton btnRefreshPeserta;
+    private javax.swing.JButton btnRefreshRekapNilai;
     private javax.swing.JPanel cardTotalJuri;
     private javax.swing.JPanel cardTotalLomba;
     private javax.swing.JPanel cardTotalPeserta;

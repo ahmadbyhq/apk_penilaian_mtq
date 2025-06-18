@@ -5,7 +5,6 @@
 package controller;
 
 import config.dbConnection;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -234,7 +233,46 @@ public class DaftarpesertaController {
         return daftar;
     }
 
-    public boolean importPesertaDariCSV(File file) {
+    // public boolean importPesertaDariCSV(File file) {
+    //     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+    //         Connection conn = dbConnection.getConnection();
+    //         String sql = "INSERT INTO peserta (nama_peserta, asal, id_lomba) VALUES (?, ?, ?)";
+    //         PreparedStatement pst = conn.prepareStatement(sql);
+
+    //         String line;
+    //         boolean isFirstLine = true;
+
+    //         while ((line = br.readLine()) != null) {
+    //             if (isFirstLine) {
+    //                 isFirstLine = false;
+    //                 continue;
+    //             }
+
+    //             String[] data = line.split(",");
+    //             if (data.length >= 3) {
+    //                 String nama = data[0].trim();
+    //                 String asal = data[1].trim();
+    //                 int idLomba = Integer.parseInt(data[2].trim());
+
+    //                 pst.setString(1, nama);
+    //                 pst.setString(2, asal);
+    //                 pst.setInt(3, idLomba);
+    //                 pst.addBatch();
+    //             }
+    //         }
+
+    //         pst.executeBatch();
+    //         return true;
+
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return false;
+    //     }
+    // }
+
+    public String importPesertaDariCSV(File file) {
+        List<String> barisGagal = new ArrayList<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             Connection conn = dbConnection.getConnection();
             String sql = "INSERT INTO peserta (nama_peserta, asal, id_lomba) VALUES (?, ?, ?)";
@@ -242,10 +280,12 @@ public class DaftarpesertaController {
 
             String line;
             boolean isFirstLine = true;
+            int barisKe = 1;
 
             while ((line = br.readLine()) != null) {
                 if (isFirstLine) {
                     isFirstLine = false;
+                    barisKe++;
                     continue;
                 }
 
@@ -255,21 +295,37 @@ public class DaftarpesertaController {
                     String asal = data[1].trim();
                     int idLomba = Integer.parseInt(data[2].trim());
 
-                    pst.setString(1, nama);
-                    pst.setString(2, asal);
-                    pst.setInt(3, idLomba);
-                    pst.addBatch();
+                    try {
+                        pst.setString(1, nama);
+                        pst.setString(2, asal);
+                        pst.setInt(3, idLomba);
+                        pst.executeUpdate();
+                    } catch (SQLException e) {
+                        barisGagal.add("Baris " + barisKe + " gagal: " + line);
+                    }
+                } else {
+                    barisGagal.add("Baris " + barisKe + " tidak lengkap: " + line);
                 }
+
+                barisKe++;
             }
 
-            pst.executeBatch();
-            return true;
+            if (barisGagal.isEmpty()) {
+                return "SUKSES";
+            } else {
+                StringBuilder msg = new StringBuilder("Import selesai, tetapi beberapa baris gagal:\n");
+                for (String gagal : barisGagal) {
+                    msg.append(gagal).append("\n");
+                }
+                return msg.toString();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return "ERROR: " + e.getMessage();
         }
     }
+
 
 
 
