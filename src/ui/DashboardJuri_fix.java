@@ -3,13 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ui;
+import config.dbConnection;
 import controller.*;
 import java.awt.Color;
+import java.sql.*;
 import java.util.*;
-import config.dbConnection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.sql.*;
 import model.*;
 /**
  *
@@ -92,6 +92,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         fieldBeriNilai = new javax.swing.JTextField();
         boxBtnAddnilai = new javax.swing.JPanel();
         beriNilaiBtn = new javax.swing.JButton();
+        editNilaiPeserta = new javax.swing.JButton();
         boxSouthFilter = new javax.swing.JPanel();
         jComboBoxPilihLombaPenilaian = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -568,6 +569,21 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 50);
         boxFieldJuri.add(boxBtnAddnilai, gridBagConstraints);
 
+        editNilaiPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        editNilaiPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        editNilaiPeserta.setForeground(new java.awt.Color(255, 255, 255));
+        editNilaiPeserta.setText("Edit Nilai");
+        editNilaiPeserta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editNilaiPesertaActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
+        boxFieldJuri.add(editNilaiPeserta, gridBagConstraints);
+
         boxActJuri.add(boxFieldJuri, java.awt.BorderLayout.CENTER);
 
         boxCRUDjuri.add(boxActJuri, java.awt.BorderLayout.SOUTH);
@@ -580,7 +596,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         jComboBoxPilihLombaPenilaian.setBackground(new java.awt.Color(0, 102, 0));
         jComboBoxPilihLombaPenilaian.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jComboBoxPilihLombaPenilaian.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBoxPilihLombaPenilaian.setModel(new javax.swing.DefaultComboBoxModel<>());
+        jComboBoxPilihLombaPenilaian.setModel(new javax.swing.DefaultComboBoxModel<>());        
         jComboBoxPilihLombaPenilaian.setMinimumSize(new java.awt.Dimension(150, 30));
         jComboBoxPilihLombaPenilaian.setPreferredSize(new java.awt.Dimension(150, 30));
         jComboBoxPilihLombaPenilaian.addActionListener(new java.awt.event.ActionListener() {
@@ -706,15 +722,26 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         isiComboBoxLomba();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void editNilaiPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editNilaiPesertaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editNilaiPesertaActionPerformed
+
     private void isiComboBoxLomba() {
         penilaianPesertaController controller = new penilaianPesertaController();
         List<LombaItem> list = controller.getListLomba();
     
-        jComboBoxPilihLombaPenilaian.removeAllItems();
-        for (LombaItem item : list) {
-            jComboBoxPilihLombaPenilaian.addItem(item);
+        // Pastikan comboBox tidak null sebelum dipakai
+        if (jComboBoxPilihLombaPenilaian != null) {
+            jComboBoxPilihLombaPenilaian.removeAllItems();
+    
+            for (LombaItem item : list) {
+                jComboBoxPilihLombaPenilaian.addItem(item);
+            }
+        } else {
+            System.out.println("jComboBoxPilihLombaPenilaian belum diinisialisasi!");
         }
     }
+    
 
     private void tampilkanPesertaBerdasarkanLomba() {
         LombaItem item = (LombaItem) jComboBoxPilihLombaPenilaian.getSelectedItem();
@@ -833,6 +860,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JPanel cardTotalJuri;
     private javax.swing.JPanel cardTotalLomba;
     private javax.swing.JPanel cardTotalPeserta;
+    private javax.swing.JButton editNilaiPeserta;
     private javax.swing.JTextField fieldBeriNilai;
     private javax.swing.JPanel headerNavbar;
     private javax.swing.JPanel headerNavbar1;
@@ -874,6 +902,5 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JLabel totalJuritxt;
     private javax.swing.JLabel totalLombatxt;
     private javax.swing.JLabel totalPesertatxt;
-
     // End of variables declaration//GEN-END:variables
 }
