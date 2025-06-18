@@ -4,6 +4,7 @@
  */
 package controller;
 
+import model.Juri;
 import config.*;
 import java.sql.*;
 import java.util.*;

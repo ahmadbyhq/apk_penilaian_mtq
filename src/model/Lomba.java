@@ -14,6 +14,13 @@ public class Lomba {
         this.kuota = kuota;
     }
 
+    public Lomba(int id_lomba, String nama_lomba) {
+        this.id_lomba = id_lomba;
+        this.nama_lomba = nama_lomba;
+    }
+
+    
+
 
     //  getter
     public int getId() {

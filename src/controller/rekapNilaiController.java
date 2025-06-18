@@ -63,22 +63,38 @@ public RekapNilaiData getRekapNilai(int id_peserta, int id_juri) {
         }
 
         // Hitung total nilai
+        // String sql = """
+        //     SELECT a.presentase, n.skor
+        //     FROM nilai n
+        //     JOIN aspek_penilaian a ON n.id_aspek = a.id_aspek
+        //     WHERE n.id_peserta = ? 
+        // """;
+
         String sql = """
-            SELECT a.presentase, n.skor
+            SELECT a.presentase, AVG(n.skor) AS rata_skor
             FROM nilai n
             JOIN aspek_penilaian a ON n.id_aspek = a.id_aspek
-            WHERE n.id_peserta = ? 
+            WHERE n.id_peserta = ?
+            GROUP BY a.id_aspek, a.presentase
         """;
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, id_peserta);
         ResultSet rs = stmt.executeQuery();
 
+        // while (rs.next()) {
+        //     double persen = rs.getDouble("presentase");
+        //     int skor = rs.getInt("skor");
+        //     totalSkor += (skor * persen) / 100.0;
+        //     totalPersen += persen;
+        // }
+
         while (rs.next()) {
             double persen = rs.getDouble("presentase");
-            int skor = rs.getInt("skor");
-            totalSkor += (skor * persen) / 100.0;
-            totalPersen += persen;
+            double rataSkor = rs.getDouble("rata_skor");
+            totalSkor += (rataSkor * persen) / 100.0;
         }
+
+
 
     } catch (Exception e) {
         e.printStackTrace();

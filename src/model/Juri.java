@@ -3,6 +3,7 @@ package model;
 import config.dbConnection;
 import java.util.*;
 import java.sql.*;
+import model.User;
 
 public class Juri extends User {
 

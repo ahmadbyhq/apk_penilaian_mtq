@@ -15,10 +15,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private StatistikController statistikController;
     private DaftarpesertaController pesertaController;
-    private DaftarLombaController daftarLombaController;    
-    // private List<Peserta> listPesertaTabel = new ArrayList<>();
+    private DaftarLombaController daftarLombaController; 
+    private daftarJuaraController juaraController;
     private List<Peserta> listPesertaTabel;
     private List<Lomba> listLombaTabel;
+    private List<AspekPenilaian> listAspekTabel;
     private AspekPenilaianController aspekController;
 
 
@@ -34,6 +35,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         statistikController = new StatistikController();
         pesertaController = new DaftarpesertaController();
         daftarLombaController = new DaftarLombaController();
+        juaraController = new daftarJuaraController();
         
         
         
@@ -1405,6 +1407,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         ));
         tabelRekapNilai.setMinimumSize(new java.awt.Dimension(825, 275));
         tabelRekapNilai.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelRekapNilai.setRowHeight(25);
+        tabelRekapNilai.setSelectionBackground(new java.awt.Color(255, 255, 255));
         tabelRekapNilai.setShowGrid(true);
         jScrollPane11.setViewportView(tabelRekapNilai);
 
@@ -1435,6 +1439,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
         btnEksporPDF.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEksporPDF.setForeground(new java.awt.Color(255, 255, 255));
         btnEksporPDF.setText("Ekspor PDF");
+        btnEksporPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEksporPDFActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -1504,6 +1513,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         jScrollPane12.setMinimumSize(new java.awt.Dimension(825, 275));
 
+        tabelJuara.setForeground(new java.awt.Color(255, 255, 255));
         tabelJuara.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -1517,6 +1527,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         ));
         tabelJuara.setMinimumSize(new java.awt.Dimension(825, 275));
         tabelJuara.setPreferredSize(new java.awt.Dimension(825, 275));
+        tabelJuara.setRowHeight(25);
+        tabelJuara.setSelectionBackground(new java.awt.Color(51, 153, 0));
         tabelJuara.setShowGrid(true);
         jScrollPane12.setViewportView(tabelJuara);
         if (tabelJuara.getColumnModel().getColumnCount() > 0) {
@@ -1873,6 +1885,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void rekapNilaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rekapNilaiMousePressed
         // TODO add your handling code here:
+        tampilkanRekapNilai();
         rightPanelRekap.setVisible(true);
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
@@ -1894,6 +1907,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void daftarJuaraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_daftarJuaraMousePressed
         // TODO add your handling code here:
+        tampilkanJuara();
         rightPanelJuara.setVisible(true);
         rightpanelStatistik.setVisible(false);
         rightPanelJuri.setVisible(false);
@@ -1919,6 +1933,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         tampilkanPeserta();
         tampilkanLomba();
         tampilkanAspekPenilaian();
+        tampilkanJuara();
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -2114,17 +2129,19 @@ public class DashboardPanitia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddAspekActionPerformed
 
     private void btnEditAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditAspekActionPerformed
+
         int selectedRow = tabelAspek.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Pilih aspek yang ingin diedit.");
             return;
         }
 
-        // Ambil data lama
-        int idAspek = Integer.parseInt(tabelAspek.getValueAt(selectedRow, 0).toString());
-        String namaLama = tabelAspek.getValueAt(selectedRow, 1).toString();
-        String namaLombaLama = tabelAspek.getValueAt(selectedRow, 2).toString();
-        String presentaseLamaStr = tabelAspek.getValueAt(selectedRow, 3).toString();
+        
+        AspekPenilaian aspekLama = listAspekTabel.get(selectedRow);
+        int idAspek = aspekLama.getIdAspek(); 
+        String namaLama = aspekLama.getNamaAspek();
+        String namaLombaLama = aspekLama.getNamaLomba();
+        String presentaseLamaStr = String.valueOf(aspekLama.getPresentase());
 
         // Input nama aspek
         String namaBaru = JOptionPane.showInputDialog(this, "Edit Nama Aspek:", namaLama);
@@ -2199,7 +2216,6 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void btnDeleteAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAspekActionPerformed
         // TODO add your handling code here:
-
         int selectedRow = tabelAspek.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Pilih aspek yang ingin dihapus.");
@@ -2217,7 +2233,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
             return;
         }
 
-        int idAspek = Integer.parseInt(tabelAspek.getValueAt(selectedRow, 0).toString());
+        
+        int idAspek = listAspekTabel.get(selectedRow).getIdAspek();
         AspekPenilaianController aspekController = new AspekPenilaianController();
         boolean sukses = aspekController.hapusAspek(idAspek);
 
@@ -2486,6 +2503,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void RefreshBtnJuaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnJuaraActionPerformed
         //function daftar juara summon sini
+        tampilkanJuara();
         // TODO add your handling code here:
     }//GEN-LAST:event_RefreshBtnJuaraActionPerformed
 
@@ -2514,8 +2532,18 @@ public class DashboardPanitia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldCariRekapActionPerformed
 
-    private void btnRefreshNilaiActionPerformed(java.awt.event.ActionEvent evt) {                                                
+    private void btnEksporPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksporPDFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEksporPDFActionPerformed
 
+    private void btnRefreshNilaiActionPerformed(java.awt.event.ActionEvent evt) {        
+        tampilkanRekapNilai();
+
+
+    }
+
+
+    public void tampilkanRekapNilai(){
         List<Integer> daftarPeserta = rekapNilaiController.getAllPesertaIDs();
     
         DefaultTableModel model = (DefaultTableModel) tabelRekapNilai.getModel();
@@ -2533,10 +2561,10 @@ public class DashboardPanitia extends javax.swing.JFrame {
             Object[] row = { nama_peserta, nama_lomba, totalNilai };
             model.addRow(row);
         }
-    }
-                                                   
 
-    
+    }
+
+
     private void tampilkanDataJuri() {
     DefaultTableModel model = (DefaultTableModel) tabelJuri.getModel();
     model.setRowCount(0);
@@ -2585,14 +2613,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
     }
 
     public void tampilkanAspekPenilaian() {
-        DefaultTableModel model = (DefaultTableModel) tabelAspek.getModel();
-        model.setRowCount(0); // Kosongkan isi tabel sebelum ditampilkan ulang
-
         AspekPenilaianController controller = new AspekPenilaianController();
-        List<AspekPenilaian> daftarAspek = controller.getSemuaAspek();
+        listAspekTabel = controller.getSemuaAspek();
+        DefaultTableModel model = (DefaultTableModel) tabelAspek.getModel();
+        model.setRowCount(0);
 
         int no = 1;
-        for (AspekPenilaian aspek : daftarAspek) {
+        for (AspekPenilaian aspek : listAspekTabel) {
             model.addRow(new Object[] {
                 no++,
                 aspek.getNamaAspek(),
@@ -2601,6 +2628,37 @@ public class DashboardPanitia extends javax.swing.JFrame {
             });
         }
     }
+
+
+
+
+    private void tampilkanJuara() {
+    //function daftar juara summon siniAdd commentMore actions
+                 try {
+            daftarJuaraController controller = new daftarJuaraController();
+            List<Juara> listJuara = controller.getDataJuara();
+
+            DefaultTableModel model = (DefaultTableModel) tabelJuara.getModel();
+            model.setRowCount(0); // clear table
+
+            int no = 1;
+            for (Juara j : listJuara) {
+                model.addRow(new Object[] {
+                    no++, 
+                    j.getNamaPeserta(), 
+                    j.getNamaLomba(), 
+                    j.getTotalNilai(), 
+                    j.getJuara()
+                });
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal mengambil data juara: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 
