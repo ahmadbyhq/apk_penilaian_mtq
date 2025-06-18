@@ -2,6 +2,16 @@ package ui;
 
 import java.awt.Color;
 import java.io.File;
+import java.io.FileOutputStream;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 
 import controller.*;
 import java.util.*;
@@ -33,6 +43,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         pesertaController = new DaftarpesertaController();
         daftarLombaController = new DaftarLombaController();
         juaraController = new daftarJuaraController();
+        
         
         
         
@@ -1405,7 +1416,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         tabelRekapNilai.setMinimumSize(new java.awt.Dimension(825, 275));
         tabelRekapNilai.setPreferredSize(new java.awt.Dimension(825, 275));
         tabelRekapNilai.setRowHeight(25);
-        tabelRekapNilai.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        tabelRekapNilai.setSelectionBackground(new java.awt.Color(51, 153, 0));
         tabelRekapNilai.setShowGrid(true);
         jScrollPane11.setViewportView(tabelRekapNilai);
 
@@ -1510,7 +1521,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
         jScrollPane12.setMinimumSize(new java.awt.Dimension(825, 275));
 
-        tabelJuara.setForeground(new java.awt.Color(255, 255, 255));
+        tabelJuara.setForeground(new java.awt.Color(0, 0, 0));
         tabelJuara.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -1521,7 +1532,15 @@ public class DashboardPanitia extends javax.swing.JFrame {
             new String [] {
                 "No.", "Nama Peserta", "Nama Lomba", "Total Nilai", "Juara"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelJuara.setMinimumSize(new java.awt.Dimension(825, 275));
         tabelJuara.setPreferredSize(new java.awt.Dimension(825, 275));
         tabelJuara.setRowHeight(25);
@@ -1565,6 +1584,11 @@ public class DashboardPanitia extends javax.swing.JFrame {
         eksporPDFJuara.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eksporPDFJuara.setForeground(new java.awt.Color(255, 255, 255));
         eksporPDFJuara.setText("Ekspor PDF ");
+        eksporPDFJuara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eksporPDFJuaraActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -2499,29 +2523,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshAspekActionPerformed
 
     private void RefreshBtnJuaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnJuaraActionPerformed
-            try {
-            daftarJuaraController controller = new daftarJuaraController();
-            List<Juara> listJuara = controller.getDataJuara();
-
-            DefaultTableModel model = (DefaultTableModel) tabelJuara.getModel();
-            model.setRowCount(0); // clear table
-
-            int no = 1;
-            for (Juara j : listJuara) {
-                model.addRow(new Object[] {
-                    no++, 
-                    j.getNamaPeserta(), 
-                    j.getNamaLomba(), 
-                    j.getTotalNilai(), 
-                    j.getJuara()
-                });
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal mengambil data juara: " + e.getMessage());
-            e.printStackTrace();
-        }
-                //function daftar juara summon sini
+         tampilkanJuara();
         // TODO add your handling code here:
     }//GEN-LAST:event_RefreshBtnJuaraActionPerformed
 
@@ -2552,7 +2554,97 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void btnEksporPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEksporPDFActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Simpan sebagai PDF");
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            if (!fileToSave.getAbsolutePath().endsWith(".pdf")) {
+                fileToSave = new File(fileToSave.getAbsolutePath() + ".pdf");
+            }
+
+            Document document = new Document();
+            try {
+                PdfWriter.getInstance(document, new FileOutputStream(fileToSave));
+                document.open();
+
+                document.add(new Paragraph("Daftar Juara Lomba MTQ"));
+                document.add(new Paragraph(" ")); // spacer
+
+                PdfPTable pdfTable = new PdfPTable(tabelRekapNilai.getColumnCount());
+
+                // Tambahkan header kolom
+                for (int i = 0; i < tabelRekapNilai.getColumnCount(); i++) {
+                    pdfTable.addCell(new PdfPCell(new Phrase(tabelRekapNilai.getColumnName(i))));
+                }
+
+                // Tambahkan baris data
+                for (int row = 0; row < tabelRekapNilai.getRowCount(); row++) {
+                    for (int col = 0; col < tabelRekapNilai.getColumnCount(); col++) {
+                        Object value = tabelRekapNilai.getValueAt(row, col);
+                        pdfTable.addCell(value != null ? value.toString() : "");
+                    }
+                }
+
+                document.add(pdfTable);
+                JOptionPane.showMessageDialog(this, "PDF berhasil disimpan di:\n" + fileToSave.getAbsolutePath());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Gagal menyimpan PDF: " + e.getMessage());
+            } finally {
+                document.close();
+            }
+        }
     }//GEN-LAST:event_btnEksporPDFActionPerformed
+
+    private void eksporPDFJuaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eksporPDFJuaraActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Simpan sebagai PDF");
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            if (!fileToSave.getAbsolutePath().endsWith(".pdf")) {
+                fileToSave = new File(fileToSave.getAbsolutePath() + ".pdf");
+            }
+
+            Document document = new Document();
+            try {
+                PdfWriter.getInstance(document, new FileOutputStream(fileToSave));
+                document.open();
+
+                document.add(new Paragraph("Daftar Rekap Nilai Lomba MTQ"));
+                document.add(new Paragraph(" ")); // spacer
+
+                PdfPTable pdfTable = new PdfPTable(tabelJuara.getColumnCount());
+
+                // Tambahkan header kolom
+                for (int i = 0; i < tabelJuara.getColumnCount(); i++) {
+                    pdfTable.addCell(new PdfPCell(new Phrase(tabelJuara.getColumnName(i))));
+                }
+
+                // Tambahkan baris data
+                for (int row = 0; row < tabelJuara.getRowCount(); row++) {
+                    for (int col = 0; col < tabelJuara.getColumnCount(); col++) {
+                        Object value = tabelJuara.getValueAt(row, col);
+                        pdfTable.addCell(value != null ? value.toString() : "");
+                    }
+                }
+
+                document.add(pdfTable);
+                JOptionPane.showMessageDialog(this, "PDF berhasil disimpan di:\n" + fileToSave.getAbsolutePath());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Gagal menyimpan PDF: " + e.getMessage());
+            } finally {
+                document.close();
+            }
+        }
+    }//GEN-LAST:event_eksporPDFJuaraActionPerformed
 
     private void btnRefreshNilaiActionPerformed(java.awt.event.ActionEvent evt) {        
         tampilkanRekapNilai();
@@ -2651,30 +2743,25 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
 
     private void tampilkanJuara() {
-    //function daftar juara summon siniAdd commentMore actions
-                 try {
-            daftarJuaraController controller = new daftarJuaraController();
-            List<Juara> listJuara = controller.getDataJuara();
+        List<Juara> daftarJuara = juaraController.getJuaraPerLomba();
+        DefaultTableModel model = (DefaultTableModel) tabelJuara.getModel();
+        model.setRowCount(0); 
 
-            DefaultTableModel model = (DefaultTableModel) tabelJuara.getModel();
-            model.setRowCount(0); // clear table
-
-            int no = 1;
-            for (Juara j : listJuara) {
-                model.addRow(new Object[] {
-                    no++, 
-                    j.getNamaPeserta(), 
-                    j.getNamaLomba(), 
-                    j.getTotalNilai(), 
-                    j.getJuara()
-                });
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal mengambil data juara: " + e.getMessage());
-            e.printStackTrace();
+        int no = 1;
+        for (Juara j : daftarJuara) {
+            model.addRow(new Object[]{
+                no++,
+                j.getNamaPeserta(),
+                j.getNamaLomba(),
+                j.getTotalNilai(),
+                "Juara " + j.getJuara()
+            });
         }
+
+        tabelJuara.setModel(model);
     }
+
+
 
 
 

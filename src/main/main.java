@@ -1,5 +1,6 @@
 package main;
 
+import model.Juri;
 import config.dbConnection;
 import controller.*;
 import model.*;

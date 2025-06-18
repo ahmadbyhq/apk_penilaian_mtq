@@ -14,6 +14,8 @@ public class Juara {
     private double totalNilai;
     private int juara;
 
+    public Juara(){};
+
     public Juara(String nama_peserta, String nama_lomba, double totalNilai, int juara) {
         this.nama_peserta = nama_peserta;
         this.nama_lomba = nama_lomba;
@@ -36,4 +38,21 @@ public class Juara {
     public int getJuara() {
         return juara;
     }
+
+    public void setNamaPeserta(String nama_peserta) {
+        this.nama_peserta = nama_peserta;
+    }
+
+    public void setNamaLomba(String nama_lomba) {
+        this.nama_lomba = nama_lomba;
+    }
+
+    public void setTotalNilai(double totalNilai) {
+        this.totalNilai = totalNilai;
+    }
+
+    public void setJuara(int juara) {
+        this.juara = juara;
+    }
+
 }
