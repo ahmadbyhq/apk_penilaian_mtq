@@ -6,10 +6,9 @@ package model;
 
 /**
  *
- * @author baiha
+ * @author Chris Bimo
  */
 public class Juara {
-
     private String nama_peserta;
     private String nama_lomba;
     private double totalNilai;
@@ -37,5 +36,4 @@ public class Juara {
     public int getJuara() {
         return juara;
     }
-
 }
