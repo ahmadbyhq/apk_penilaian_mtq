@@ -5,6 +5,9 @@
         <group>
             <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq%20-%20localdb/src/ui/DashboardPanitia.java</file>
             <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq%20-%20localdb/src/config/dbConnection.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq%20-%20localdb/src/controller/penilaianPesertaController.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq%20-%20localdb/src/controller/DaftarpesertaController.java</file>
+            <file>file:/D:/Kuliah/Semester%204/Pemrograman%20Berorientasi%20Objek/apk_penilaian_mtq%20-%20localdb/src/controller/rekapNilaiController.java</file>
         </group>
     </open-files>
 </project-private>

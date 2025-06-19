@@ -4,6 +4,7 @@
  */
 package controller;
 
+import config.dbConnection;
 import model.Juri;
 import config.*;
 import java.sql.*;

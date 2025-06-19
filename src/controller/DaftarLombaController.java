@@ -4,6 +4,7 @@
  */
 package controller;
 
+import config.dbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

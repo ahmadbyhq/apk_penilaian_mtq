@@ -7,6 +7,8 @@ package ui;
 
 import controller.loginController;
 import model.*;
+import auth.*;
+import javax.swing.*;
 /**
  *
  * @author baiha
@@ -211,28 +213,46 @@ public class login_fix extends javax.swing.JFrame {
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
 
         
-    String username = usernameLogin.getText();
-    String password = new String(passwordLogin.getPassword());
+        String username = usernameLogin.getText();
+        String password = new String(passwordLogin.getPassword());
+        
+        User user = loginController.login(username, password);
 
-    User user = loginController.login(username, password);
+        if (user != null) {
+            Session.setCurrentUser(user);
+            JOptionPane.showMessageDialog(this, "Login Berhasil");
+            this.dispose();
 
-    if (user != null) {
-        // Kalau inputan sudah sesuai dengan database, maka pindah frame
-        javax.swing.JOptionPane.showMessageDialog(this, "Login Berhasil");
-        this.dispose(); // tutup frame login
-        // new dashboardPanitia().setVisible(true);
-
-        if ("panitia".equalsIgnoreCase(user.getRole())) {
-            new DashboardPanitia().setVisible(true);
-        } else if ("juri".equalsIgnoreCase(user.getRole())) {
-            new DashboardJuri_fix().setVisible(true);
+            if ("panitia".equalsIgnoreCase(user.getRole())) {
+                new DashboardPanitia().setVisible(true);
+            } else if ("juri".equalsIgnoreCase(user.getRole())) {
+                new DashboardJuri_fix().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Role tidak dikenali.");
+            }
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Role tidak dikenali.");
+            JOptionPane.showMessageDialog(this, "Username atau password salah.");
         }
-
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Username atau password salah.");
-    }
+//
+//        User user = loginController.login(username, password);
+//
+//        if (user != null) {
+//            // Kalau inputan sudah sesuai dengan database, maka pindah frame
+//            javax.swing.JOptionPane.showMessageDialog(this, "Login Berhasil");
+//            this.dispose(); // tutup frame login
+//            // new dashboardPanitia().setVisible(true);
+//
+//            if ("panitia".equalsIgnoreCase(user.getRole())) {
+//                new DashboardPanitia().setVisible(true);
+//            } else if ("juri".equalsIgnoreCase(user.getRole())) {
+//                new DashboardJuri_fix().setVisible(true);
+//            } else {
+//                javax.swing.JOptionPane.showMessageDialog(this, "Role tidak dikenali.");
+//            }
+//
+//        } else {
+//            javax.swing.JOptionPane.showMessageDialog(this, "Username atau password salah.");
+//        }
         
      // TODO add your handling code here:   
 

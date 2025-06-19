@@ -58,18 +58,24 @@ public class Peserta {
     }
 
 
-    public void infoPeserta() {
-        System.out.println("=== Data Peserta ===");
-        System.out.println("Nama    : " + nama_peserta);
-        System.out.println("Asal    : " + asal);
-        System.out.println("Lomba   : " + id_lomba.getNamaLomba());
-    }
 
     @Override
     public String toString() {
-        return String.format("Peserta[nama=%s, asal=%s, lomba=%s]",
-                nama_peserta, asal, id_lomba.getNamaLomba());
+        return nama_peserta + " - " + asal;
     }
+
+    // public void infoPeserta() {
+    //     System.out.println("=== Data Peserta ===");
+    //     System.out.println("Nama    : " + nama_peserta);
+    //     System.out.println("Asal    : " + asal);
+    //     System.out.println("Lomba   : " + id_lomba.getNamaLomba());
+    // }
+
+    // @Override
+    // public String toString() {
+    //     return String.format("Peserta[nama=%s, asal=%s, lomba=%s]",
+    //             nama_peserta, asal, id_lomba.getNamaLomba());
+    // }
 
     public void tambahPeserta(int id_peserta, String nama_peserta, String asal, int id_lomba){
         try {

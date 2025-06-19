@@ -15,6 +15,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import controller.*;
 import java.util.*;
+import auth.*;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -1949,6 +1950,13 @@ public class DashboardPanitia extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        if (!Session.isLoggedIn() || !"panitia".equalsIgnoreCase(Session.getCurrentUser().getRole())) {
+            JOptionPane.showMessageDialog(this, "Silakan login terlebih dahulu sebagai panitia.");
+            dispose();
+            new login_fix().setVisible(true);
+        }
+
         tampilkanDataJuri();
         statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
         statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba);
@@ -2013,6 +2021,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
+            Session.clearSession();
             this.dispose();
             new login_fix().setVisible(true);
         }
@@ -2144,6 +2153,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
         boolean sukses = aspekController.tambahAspek(aspek);
         if (sukses) {
             JOptionPane.showMessageDialog(this, "Aspek penilaian berhasil ditambahkan.");
+            namaAspekfield.setText("");
+            presentaseField.setText("");
             tampilkanAspekPenilaian();
         } else {
             JOptionPane.showMessageDialog(this, "Total presentase aspek melebihi 100%!", "Gagal", JOptionPane.WARNING_MESSAGE);
@@ -2507,6 +2518,8 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 Lomba lombaBaru = new Lomba(0, nama, kuota);
                 if (daftarLombaController.tambahLomba(lombaBaru)) {
                     JOptionPane.showMessageDialog(this, "Lomba berhasil ditambahkan.");
+                    namaLombaField.setText("");
+                    kuotaField.setText("");
                     tampilkanLomba();
                 } else {
                     JOptionPane.showMessageDialog(this, "Gagal menambahkan lomba.");
@@ -2590,8 +2603,7 @@ public class DashboardPanitia extends javax.swing.JFrame {
                 document.open();
 
                 document.add(new Paragraph("Daftar Juara Lomba MTQ"));
-                document.add(new Paragraph(" ")); // spacer
-
+                document.add(new Paragraph(" "));
                 PdfPTable pdfTable = new PdfPTable(tabelRekapNilai.getColumnCount());
 
                 // Tambahkan header kolom

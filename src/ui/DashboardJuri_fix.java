@@ -3,14 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ui;
-import config.dbConnection;
 import controller.*;
 import java.awt.Color;
-import java.sql.*;
-import java.util.*;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import model.*;
+import auth.*;
+
 /**
  *
  * @author Alief
@@ -26,6 +29,9 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     public DashboardJuri_fix() {
         initComponents();
         statistikController = new StatistikController();
+        jComboBoxPilihPeserta.setModel(new DefaultComboBoxModel<>());
+        jComboBoxPilihAspek.setModel(new DefaultComboBoxModel<>());
+
     }
 
     /**
@@ -84,8 +90,8 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         boxCRUDjuri = new javax.swing.JPanel();
         boxtabelNilai = new javax.swing.JPanel();
-        scrollTabeljuri = new javax.swing.JScrollPane();
-        tabelJuri = new javax.swing.JTable();
+        scrollTabelPenilaianPeserta = new javax.swing.JScrollPane();
+        tabelPenilaianPeserta = new javax.swing.JTable();
         boxActJuri = new javax.swing.JPanel();
         boxFieldJuri = new javax.swing.JPanel();
         inputNilaiLabel = new javax.swing.JLabel();
@@ -94,8 +100,12 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         beriNilaiBtn = new javax.swing.JButton();
         editNilaiPeserta = new javax.swing.JButton();
         boxSouthFilter = new javax.swing.JPanel();
-        jComboBoxPilihLombaPenilaian = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jComboBoxPilihLomba = new javax.swing.JComboBox<>();
+        jComboBoxPilihPeserta = new javax.swing.JComboBox<>();
+        jComboBoxPilihAspek = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard Juri");
@@ -471,10 +481,9 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         boxtabelNilai.setOpaque(false);
         boxtabelNilai.setLayout(new java.awt.BorderLayout());
 
-        scrollTabeljuri.setMinimumSize(new java.awt.Dimension(490, 600));
-        scrollTabeljuri.setPreferredSize(new java.awt.Dimension(820, 1000));
+        scrollTabelPenilaianPeserta.setMinimumSize(null);
 
-        tabelJuri.setModel(new javax.swing.table.DefaultTableModel(
+        tabelPenilaianPeserta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -482,7 +491,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nama", "Tajwid", "Fashahah", "Adab", "Suara Dan Lagu", "Penguasaan Juz"
+                "No.", "Nama Peserta", "Asal", "Lomba", "Aspek Penilaian", "Skor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -493,17 +502,21 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelJuri.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-        tabelJuri.setMinimumSize(new java.awt.Dimension(400, 700));
-        tabelJuri.setName(""); // NOI18N
-        tabelJuri.setPreferredSize(new java.awt.Dimension(750, 700));
-        tabelJuri.setRowHeight(25);
-        tabelJuri.setSelectionBackground(new java.awt.Color(51, 153, 0));
-        tabelJuri.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tabelJuri.setShowGrid(true);
-        scrollTabeljuri.setViewportView(tabelJuri);
+        tabelPenilaianPeserta.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        tabelPenilaianPeserta.setName(""); // NOI18N
+        tabelPenilaianPeserta.setRowHeight(25);
+        tabelPenilaianPeserta.setSelectionBackground(new java.awt.Color(51, 153, 0));
+        tabelPenilaianPeserta.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tabelPenilaianPeserta.setShowGrid(true);
+        scrollTabelPenilaianPeserta.setViewportView(tabelPenilaianPeserta);
+        if (tabelPenilaianPeserta.getColumnModel().getColumnCount() > 0) {
+            tabelPenilaianPeserta.getColumnModel().getColumn(0).setMinWidth(40);
+            tabelPenilaianPeserta.getColumnModel().getColumn(0).setMaxWidth(40);
+            tabelPenilaianPeserta.getColumnModel().getColumn(5).setMinWidth(75);
+            tabelPenilaianPeserta.getColumnModel().getColumn(5).setMaxWidth(75);
+        }
 
-        boxtabelNilai.add(scrollTabeljuri, java.awt.BorderLayout.CENTER);
+        boxtabelNilai.add(scrollTabelPenilaianPeserta, java.awt.BorderLayout.CENTER);
 
         boxCRUDjuri.add(boxtabelNilai, java.awt.BorderLayout.CENTER);
 
@@ -588,45 +601,95 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
 
         boxCRUDjuri.add(boxActJuri, java.awt.BorderLayout.SOUTH);
 
-        boxSouthFilter.setMinimumSize(new java.awt.Dimension(850, 50));
+        boxSouthFilter.setMinimumSize(new java.awt.Dimension(850, 75));
         boxSouthFilter.setOpaque(false);
-        boxSouthFilter.setPreferredSize(new java.awt.Dimension(850, 50));
+        boxSouthFilter.setPreferredSize(new java.awt.Dimension(850, 75));
         boxSouthFilter.setLayout(new java.awt.GridBagLayout());
 
-        jComboBoxPilihLombaPenilaian.setBackground(new java.awt.Color(0, 102, 0));
-        jComboBoxPilihLombaPenilaian.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jComboBoxPilihLombaPenilaian.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBoxPilihLombaPenilaian.setModel(new javax.swing.DefaultComboBoxModel<>());        
-        jComboBoxPilihLombaPenilaian.setMinimumSize(new java.awt.Dimension(150, 30));
-        jComboBoxPilihLombaPenilaian.setPreferredSize(new java.awt.Dimension(150, 30));
-        jComboBoxPilihLombaPenilaian.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxPilihLomba.setBackground(new java.awt.Color(0, 102, 0));
+        jComboBoxPilihLomba.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jComboBoxPilihLomba.setForeground(new java.awt.Color(255, 255, 255));
+        // jComboBoxPilihLomba.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxPilihLomba.setModel(new javax.swing.DefaultComboBoxModel<>());
+        jComboBoxPilihLomba.setMinimumSize(new java.awt.Dimension(175, 30));
+        jComboBoxPilihLomba.setPreferredSize(new java.awt.Dimension(175, 30));
+        jComboBoxPilihLomba.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxPilihLombaPenilaianActionPerformed(evt);
+                jComboBoxPilihLombaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 25);
-        boxSouthFilter.add(jComboBoxPilihLombaPenilaian, gridBagConstraints);
+        boxSouthFilter.add(jComboBoxPilihLomba, gridBagConstraints);
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Refresh");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxPilihPeserta.setBackground(new java.awt.Color(0, 102, 0));
+        jComboBoxPilihPeserta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jComboBoxPilihPeserta.setForeground(new java.awt.Color(255, 255, 255));
+        // jComboBoxPilihPeserta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxPilihPeserta.setMinimumSize(new java.awt.Dimension(225, 30));
+        jComboBoxPilihPeserta.setPreferredSize(new java.awt.Dimension(225, 30));
+        jComboBoxPilihPeserta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jComboBoxPilihPesertaActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 0);
-        boxSouthFilter.add(jButton1, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 25);
+        boxSouthFilter.add(jComboBoxPilihPeserta, gridBagConstraints);
+
+        jComboBoxPilihAspek.setBackground(new java.awt.Color(0, 102, 0));
+        jComboBoxPilihAspek.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jComboBoxPilihAspek.setForeground(new java.awt.Color(255, 255, 255));
+        // jComboBoxPilihAspek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxPilihAspek.setMinimumSize(new java.awt.Dimension(225, 30));
+        jComboBoxPilihAspek.setPreferredSize(new java.awt.Dimension(225, 30));
+        jComboBoxPilihAspek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPilihAspekActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 25, 0, 25);
+        boxSouthFilter.add(jComboBoxPilihAspek, gridBagConstraints);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel2.setText("Pilih Lomba");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 125);
+        boxSouthFilter.add(jLabel2, gridBagConstraints);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel3.setText("Pilih Peserta");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 125);
+        boxSouthFilter.add(jLabel3, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel4.setText("Pilih Aspek Penilaian");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 100);
+        boxSouthFilter.add(jLabel4, gridBagConstraints);
 
         boxCRUDjuri.add(boxSouthFilter, java.awt.BorderLayout.NORTH);
 
@@ -664,6 +727,15 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
 
     private void penilaianPesertaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_penilaianPesertaMousePressed
         // TODO add your handling code here:
+        jComboBoxPilihPeserta.setModel(new DefaultComboBoxModel<>());
+        jComboBoxPilihAspek.setModel(new DefaultComboBoxModel<>());
+        penilaianPesertaController controller = new penilaianPesertaController();
+        jComboBoxPilihLomba.removeAllItems();
+
+        for (Lomba l : controller.getDaftarLomba()) {
+            jComboBoxPilihLomba.addItem(l);
+        }
+        tampilkanDataPenilaian();
         rightPanelPenilaian.setVisible(true);
         rightpanelStatistik.setVisible(false);
         
@@ -682,6 +754,7 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
+            Session.clearSession();
             this.dispose();
             new login_fix().setVisible(true);
         }
@@ -698,121 +771,253 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private void beriNilaiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beriNilaiBtnActionPerformed
         // TODO add your handling code here:
 
+        Peserta peserta = (Peserta) jComboBoxPilihPeserta.getSelectedItem();
+        AspekPenilaian aspek = (AspekPenilaian) jComboBoxPilihAspek.getSelectedItem();
+        Lomba lomba = (Lomba) jComboBoxPilihLomba.getSelectedItem();
+
+        if (peserta != null && aspek != null && lomba != null) {
+            try {
+                int skor = Integer.parseInt(fieldBeriNilai.getText());
+
+                if (skor < 0 || skor > 100) {
+                    JOptionPane.showMessageDialog(this, "Nilai harus antara 0 sampai 100.");
+                    return;
+                }
+
+                
+                int idJuri = Session.getCurrentUser().getId();
+                
+                penilaianPesertaController controller = new penilaianPesertaController();
+                boolean sukses = controller.simpanNilai(
+                    peserta.getIdPeserta(),
+                    idJuri,
+                    lomba.getIdLomba(),
+                    aspek.getIdAspek(),
+                    skor
+                );
+
+                if (sukses) {
+                    JOptionPane.showMessageDialog(this, "Nilai berhasil disimpan.");
+                    tampilkanDataPenilaian();
+                    fieldBeriNilai.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Gagal menyimpan nilai.");
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Nilai harus berupa angka.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Peserta, aspek, atau lomba belum dipilih.");
+        }
+
     }//GEN-LAST:event_beriNilaiBtnActionPerformed
 
     private void refreshBtnStatistik1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnStatistik1ActionPerformed
         statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
-        statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba);        // TODO add your handling code here:
+        statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba); 
+        tampilkanDataPenilaian();       // TODO add your handling code here:
 
     }//GEN-LAST:event_refreshBtnStatistik1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        if (!Session.isLoggedIn() || !"juri".equalsIgnoreCase(Session.getCurrentUser().getRole())) {
+            JOptionPane.showMessageDialog(this, "Silakan login terlebih dahulu sebagai juri.");
+            dispose();
+            new login_fix().setVisible(true);
+        }
+        
         statistikController.tampilkanStatistik(totalPesertatxt, totalJuritxt, totalLombatxt);
         statistikController.tampilkanTabelStatistikPeserta(tabelStatistikLomba); 
+
     }//GEN-LAST:event_formWindowOpened
 
-    private void jComboBoxPilihLombaPenilaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPilihLombaPenilaianActionPerformed
+    private void jComboBoxPilihLombaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPilihLombaActionPerformed
         // TODO add your handling code here:
-        tampilkanPesertaBerdasarkanLomba();
-    }//GEN-LAST:event_jComboBoxPilihLombaPenilaianActionPerformed
+        // tampilkanPesertaBerdasarkanLomba();
+        penilaianPesertaController controller = new penilaianPesertaController();
+        Lomba selected = (Lomba) jComboBoxPilihLomba.getSelectedItem();
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        isiComboBoxLomba();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (selected != null) {
+            jComboBoxPilihPeserta.removeAllItems();
+            for (Peserta p : controller.getPesertaBerdasarkanLomba(selected.getIdLomba())) {
+                jComboBoxPilihPeserta.addItem(p);
+            }
+
+            jComboBoxPilihAspek.removeAllItems();
+            for (AspekPenilaian a : controller.getAspekBerdasarkanLomba(selected.getIdLomba())) {
+                jComboBoxPilihAspek.addItem(a);
+            }
+        }
+        tampilkanDataPenilaian();
+
+    }//GEN-LAST:event_jComboBoxPilihLombaActionPerformed
 
     private void editNilaiPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editNilaiPesertaActionPerformed
         // TODO add your handling code here:
+        int row = tabelPenilaianPeserta.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Silakan pilih peserta yang ingin diedit.");
+            return;
+        }
+
+        String namaPeserta = tabelPenilaianPeserta.getValueAt(row, 1).toString();
+        String namaLomba = tabelPenilaianPeserta.getValueAt(row, 3).toString();
+        String namaAspek = tabelPenilaianPeserta.getValueAt(row, 4).toString();
+        String skorLama = tabelPenilaianPeserta.getValueAt(row, 5).toString();
+
+        String skorBaruStr = JOptionPane.showInputDialog(this, "Masukkan skor baru:", skorLama);
+
+        if (skorBaruStr != null && !skorBaruStr.isEmpty()) {
+            try {
+                int skorBaru = Integer.parseInt(skorBaruStr);
+                if (skorBaru < 0 || skorBaru > 100) {
+                    JOptionPane.showMessageDialog(this, "Nilai harus 0 - 100.");
+                    return;
+                }
+
+                // Panggil controller update
+                penilaianPesertaController controller = new penilaianPesertaController();
+                boolean sukses = controller.updateSkor(namaPeserta, namaLomba, namaAspek, skorBaru);
+
+                if (sukses) {
+                    JOptionPane.showMessageDialog(this, "Nilai berhasil diupdate.");
+                    tampilkanDataPenilaian(); // refresh tabel
+                } else {
+                    JOptionPane.showMessageDialog(this, "Gagal update nilai.");
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Masukkan angka yang valid.");
+            }
+        }
+
+
+
     }//GEN-LAST:event_editNilaiPesertaActionPerformed
 
-    private void isiComboBoxLomba() {
+    private void jComboBoxPilihPesertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPilihPesertaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPilihPesertaActionPerformed
+
+    private void jComboBoxPilihAspekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPilihAspekActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPilihAspekActionPerformed
+
+    private void tampilkanDataPenilaian() {
+        User user = Session.getCurrentUser();
+        
+
+        Lomba selectedLomba = (Lomba) jComboBoxPilihLomba.getSelectedItem();
+        if (selectedLomba == null) {
+            return;
+        }
+
+        int idJuri = user.getId();
+        int idLomba = selectedLomba.getIdLomba();
+
+        DefaultTableModel model = (DefaultTableModel) tabelPenilaianPeserta.getModel();
+        model.setRowCount(0);
+
         penilaianPesertaController controller = new penilaianPesertaController();
-        List<LombaItem> list = controller.getListLomba();
-    
-        // Pastikan comboBox tidak null sebelum dipakai
-        if (jComboBoxPilihLombaPenilaian != null) {
-            jComboBoxPilihLombaPenilaian.removeAllItems();
-    
-            for (LombaItem item : list) {
-                jComboBoxPilihLombaPenilaian.addItem(item);
-            }
-        } else {
-            System.out.println("jComboBoxPilihLombaPenilaian belum diinisialisasi!");
+        List<Object[]> data = controller.getPenilaianByJuriDanLomba(idJuri, idLomba);
+
+        for (Object[] row : data) {
+            model.addRow(row);
         }
     }
+
+
+
+    // private void isiComboBoxLomba() {
+    //     penilaianPesertaController controller = new penilaianPesertaController();
+    //     List<LombaItem> list = controller.getListLomba();
+    
+    //     // Pastikan comboBox tidak null sebelum dipakai
+    //     if (jComboBoxPilihLombaPenilaian != null) {
+    //         jComboBoxPilihLombaPenilaian.removeAllItems();
+    
+    //         for (LombaItem item : list) {
+    //             jComboBoxPilihLombaPenilaian.addItem(item);
+    //         }
+    //     } else {
+    //         System.out.println("jComboBoxPilihLombaPenilaian belum diinisialisasi!");
+    //     }
+    // }
     
 
-    private void tampilkanPesertaBerdasarkanLomba() {
-        LombaItem item = (LombaItem) jComboBoxPilihLombaPenilaian.getSelectedItem();
-        if (item == null) return;
+    // private void tampilkanPesertaBerdasarkanLomba() {
+    //     LombaItem item = (LombaItem) jComboBoxPilihLombaPenilaian.getSelectedItem();
+    //     if (item == null) return;
     
-        int idLomba = item.getIdLomba();
+    //     int idLomba = item.getIdLomba();
     
-        DefaultTableModel model = new DefaultTableModel();
+    //     DefaultTableModel model = new DefaultTableModel();
     
-        List<String> kolomAspek = new ArrayList<>();
-        try {
-            Connection conn = dbConnection.getConnection();
+    //     List<String> kolomAspek = new ArrayList<>();
+    //     try {
+    //         Connection conn = dbConnection.getConnection();
     
-            // Ambil aspek berdasarkan id_lomba
-            String sqlAspek = "SELECT nama_aspek FROM aspek_penilaian WHERE id_lomba = ?";
-            PreparedStatement psAspek = conn.prepareStatement(sqlAspek);
-            psAspek.setInt(1, idLomba);
-            ResultSet rsAspek = psAspek.executeQuery();
+    //         // Ambil aspek berdasarkan id_lomba
+    //         String sqlAspek = "SELECT nama_aspek FROM aspek_penilaian WHERE id_lomba = ?";
+    //         PreparedStatement psAspek = conn.prepareStatement(sqlAspek);
+    //         psAspek.setInt(1, idLomba);
+    //         ResultSet rsAspek = psAspek.executeQuery();
     
-            model.addColumn("Nama Peserta");
-            while (rsAspek.next()) {
-                String namaAspek = rsAspek.getString("nama_aspek");
-                kolomAspek.add(namaAspek);
-                model.addColumn(namaAspek);
-            }
+    //         model.addColumn("Nama Peserta");
+    //         while (rsAspek.next()) {
+    //             String namaAspek = rsAspek.getString("nama_aspek");
+    //             kolomAspek.add(namaAspek);
+    //             model.addColumn(namaAspek);
+    //         }
     
-            rsAspek.close();
-            psAspek.close();
+    //         rsAspek.close();
+    //         psAspek.close();
     
-            // Ambil peserta & nilai per aspek
-            String sqlPeserta = "SELECT p.nama_peserta, a.nama_aspek, n.skor " +
-                                "FROM nilai n " +
-                                "JOIN peserta p ON n.id_peserta = p.id_peserta " +
-                                "JOIN aspek_penilaian a ON n.id_aspek = a.id_aspek " +
-                                "WHERE n.id_lomba = ?";
+    //         // Ambil peserta & nilai per aspek
+    //         String sqlPeserta = "SELECT p.nama_peserta, a.nama_aspek, n.skor " +
+    //                             "FROM nilai n " +
+    //                             "JOIN peserta p ON n.id_peserta = p.id_peserta " +
+    //                             "JOIN aspek_penilaian a ON n.id_aspek = a.id_aspek " +
+    //                             "WHERE n.id_lomba = ?";
     
-            PreparedStatement ps = conn.prepareStatement(sqlPeserta);
-            ps.setInt(1, idLomba);
-            ResultSet rs = ps.executeQuery();
+    //         PreparedStatement ps = conn.prepareStatement(sqlPeserta);
+    //         ps.setInt(1, idLomba);
+    //         ResultSet rs = ps.executeQuery();
     
-            // Map: nama_peserta -> Map<nama_aspek, skor>
-            Map<String, Map<String, Integer>> dataMap = new LinkedHashMap<>();
+    //         // Map: nama_peserta -> Map<nama_aspek, skor>
+    //         Map<String, Map<String, Integer>> dataMap = new LinkedHashMap<>();
     
-            while (rs.next()) {
-                String namaPeserta = rs.getString("nama_peserta");
-                String aspek = rs.getString("nama_aspek");
-                int skor = rs.getInt("skor");
+    //         while (rs.next()) {
+    //             String namaPeserta = rs.getString("nama_peserta");
+    //             String aspek = rs.getString("nama_aspek");
+    //             int skor = rs.getInt("skor");
     
-                dataMap.putIfAbsent(namaPeserta, new HashMap<>());
-                dataMap.get(namaPeserta).put(aspek, skor);
-            }
+    //             dataMap.putIfAbsent(namaPeserta, new HashMap<>());
+    //             dataMap.get(namaPeserta).put(aspek, skor);
+    //         }
     
-            // Bangun baris tabel
-            for (String namaPeserta : dataMap.keySet()) {
-                Map<String, Integer> nilaiAspek = dataMap.get(namaPeserta);
-                Object[] row = new Object[kolomAspek.size() + 1];
-                row[0] = namaPeserta;
-                for (int i = 0; i < kolomAspek.size(); i++) {
-                    row[i + 1] = nilaiAspek.getOrDefault(kolomAspek.get(i), null);
-                }
-                model.addRow(row);
-            }
+    //         // Bangun baris tabel
+    //         for (String namaPeserta : dataMap.keySet()) {
+    //             Map<String, Integer> nilaiAspek = dataMap.get(namaPeserta);
+    //             Object[] row = new Object[kolomAspek.size() + 1];
+    //             row[0] = namaPeserta;
+    //             for (int i = 0; i < kolomAspek.size(); i++) {
+    //                 row[i + 1] = nilaiAspek.getOrDefault(kolomAspek.get(i), null);
+    //             }
+    //             model.addRow(row);
+    //         }
     
-            rs.close(); ps.close(); conn.close();
+    //         rs.close(); ps.close(); conn.close();
     
-        } catch (SQLException e) {
-            System.out.println("Gagal ambil data peserta: " + e.getMessage());
-        }
+    //     } catch (SQLException e) {
+    //         System.out.println("Gagal ambil data peserta: " + e.getMessage());
+    //     }
     
-        tabelJuri.setModel(model);
-    }
+    //     tabelJuri.setModel(model);
+    // }
     
     
     
@@ -867,11 +1072,15 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel headerTxt;
     private javax.swing.JLabel inputNilaiLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<LombaItem> jComboBoxPilihLombaPenilaian;
+    private javax.swing.JComboBox<model.AspekPenilaian> jComboBoxPilihAspek;
+    private javax.swing.JComboBox<model.Lomba> jComboBoxPilihLomba;
+    private javax.swing.JComboBox<model.Peserta> jComboBoxPilihPeserta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -894,9 +1103,9 @@ public class DashboardJuri_fix extends javax.swing.JFrame {
     private javax.swing.JButton refreshBtnStatistik1;
     private javax.swing.JPanel rightPanelPenilaian;
     private javax.swing.JPanel rightpanelStatistik;
-    private javax.swing.JScrollPane scrollTabeljuri;
+    private javax.swing.JScrollPane scrollTabelPenilaianPeserta;
     private javax.swing.JPanel statistikPeserta;
-    private javax.swing.JTable tabelJuri;
+    private javax.swing.JTable tabelPenilaianPeserta;
     private javax.swing.JTable tabelStatistikLomba;
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel totalJuritxt;

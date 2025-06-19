@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
+import config.dbConnection;
 import config.*;
 import java.sql.*;
 import java.util.*;

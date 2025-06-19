@@ -64,6 +64,12 @@ public class AspekPenilaian {
         this.presentase = presentase;
     }
 
+    @Override
+    public String toString() {
+        return nama_aspek + " (" + presentase + "%)";
+    }
+
+
 
     
     

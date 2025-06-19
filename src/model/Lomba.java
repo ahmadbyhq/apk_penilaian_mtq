@@ -52,6 +52,12 @@ public class Lomba {
         this.kuota = kuota;
     }
 
+    @Override
+    public String toString() {
+        return nama_lomba;
+    }
+
+
     public static Lomba getLombaByName(String nama_lomba) {
         try {
             Connection conn = database.getConnection();
